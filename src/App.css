@@ -168,16 +168,21 @@ section {
 .section-title {
     text-align: center;
     margin-bottom: 30px;
+    background-color: rgba(27, 114, 43, 0.8);
 }
 
-.section-title h2 {
+.section-title2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title2 h2 {
     font-size: 36px;
     font-weight: 800;
-    color: #121e14;
     margin-bottom: 15px;
 }
 
-.section-title p {
+.section-title2 p {
     font-size: 16px;
     color: var(--text-muted);
     max-width: 600px;
@@ -335,7 +340,7 @@ section {
    [2] 회사 소개
 ---------------------------------- */
 #about-us { background-color: #ffffff; }
-.about-hero-inner { position: relative; max-width: 1100px; margin: 0 auto; padding: 90px 44px 84px; background-color: black;}
+.about-hero-inner { position: relative; max-width: 1100px; margin: 0 auto; padding: 50px 40px 70px;}
 .about-hero-inner h1 { margin: 22px 0 0; font-size: 56px; line-height: 1.12; font-weight: 800; letter-spacing: -.03em; color: #ffffff; }
 .about-hero-inner p {
     margin-top: 20px;
@@ -344,12 +349,86 @@ section {
     color: #aeb8b2;
 }
 .about-eyebrow {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: .22em;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+/* 섹션 공통 헤더 */
+.about-section-head {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 44px 20px;
+}
+.about-section-head h2 {
+    margin: 10px 0 0;
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #0a1612;
+}
+.about-section-head p {
+    margin: 10px 0 0;
+    max-width: 560px;
+    font-size: 15px;
+    color: #5b6660;
+}
+.about-eyebrow-green {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .18em;
     color: #29A640;
     text-transform: uppercase;
 }
+/* 회사 정보 */
+.about-info-wrap { max-width: 1100px; margin: 0 auto; padding: 15px 44px 0; }
+.about-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 60px;
+    border-top: 2px solid #0a1612;
+}
+.about-info-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 22px 4px;
+    border-bottom: 1px solid #eef1ef;
+}
+.about-info-row dt { font-size: 15px; font-weight: 700; color: #29A640; }
+.about-info-row dd { font-size: 16px; line-height: 1.55; color: #2c3631; margin: 0; }
+/* 연혁 */
+.about-history { background: #f7faf8; margin-top: 50px; padding: 2px 0 20px; }
+/* .about-history-head { max-width: 1100px; margin: 0 auto; padding: 74px 44px 20px; } */
+.about-history-list { max-width: 1100px; margin: 0 auto; padding: 24px 44px 60px; }
+.about-history-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 34px 0;
+    border-top: 1px solid #e3e9e5;
+}
+.about-history-year { font-size: 44px; font-weight: 800; letter-spacing: -.03em; color: #29A640; }
+.about-history-tag { font-size: 14px; color: #8a948f; font-weight: 600; margin-top: 2px; }
+.about-history-events { display: grid; gap: 12px; }
+.about-history-event { display: grid; grid-template-columns: 20px 1fr; gap: 14px; align-items: start; }
+.about-history-dot { width: 9px; height: 9px; border-radius: 50%; background: #29A640; margin-top: 7px; }
+.about-history-event span { font-size: 16px; line-height: 1.5; color: #2c3631; }
+
+/* 인증 & 자격 */
+.about-certs-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5px 40px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+.about-cert-card { background: #fff; border: 2px solid #eef3f0; border-radius: 18px; padding: 25px 26px; }
+.about-cert-card .cert-title { font-size: 20px; font-weight: 700; color: #29A640; letter-spacing: -.01em; }
+.about-cert-card .cert-desc { margin-top: 6px; font-size: 15px; line-height: 1.3; color: #5b6660; }
 
 /* ----------------------------------
    [3] 컨설팅 메뉴

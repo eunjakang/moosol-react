@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  companyInfo,
+  history,
+  certifications,
+  partners,
+  clients,
+} from "../data/aboutData";
 
 function AboutUs() {
   return (
@@ -13,45 +20,61 @@ function AboutUs() {
           </p>
         </div>
       </div>
-      <div className="about-grid">
-        <div className="about-content">
-          <h3>인프라 설계부터 보안까지 단 하나의 파트너</h3>
-          <p>
-            무솔은 다양한 네트워크 물리적 구성요소와 정보보안 솔루션을
-            최적화하여 조율하는 통합 네트워크 SI 전문 파트너입니다. 급변하는
-            비즈니스 컴플라이언스를 완벽히 준수하며 비즈니스의 영속성을
-            확보합니다.
-          </p>
-          <div className="about-features">
-            <div className="about-feature-card">
-              <i className="fas fa-user-group"></i>
-              <h4>전문 엔지니어 직접 설계</h4>
-              <p>컨설팅부터 구축까지 전문 엔지니어가 책임집니다.</p>
-            </div>
-            <div className="about-feature-card">
-              <i className="fas fa-handshake"></i>
-              <h4>멀티 벤더 공식 파트너십</h4>
-              <p>다양한 최정상 제조사 제품군의 최적 구성을 보장합니다.</p>
-            </div>
-          </div>
-        </div>
-        <div className="about-img">
-          <i className="fas fa-building-shield"></i>
-        </div>
+      <div id="greeting" className="about-section-head">
+        <div className="about-eyebrow-green">Company Profile</div>
+        <h2>회사 정보</h2>
       </div>
-      <div id="greeting">
-        <h3>인사말</h3>
-        <p>여기에 인사말 내용을 채워주세요.</p>
+      <div className="about-info-wrap">
+        <dl className="about-info-grid">
+          {companyInfo.map((row) => (
+            <div className="about-info-row" key={row.k}>
+              <dt>{row.k}</dt>
+              <dd>{row.v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      <div id="history">
-        <h3>연혁</h3>
-        <p>여기에 연혁 내용을 채워주세요.</p>
+      <div id="history" className="about-history">
+        <div className="about-section-head">
+          <div className="about-eyebrow-green">History</div>
+          <h2>무솔의 발자취</h2>
+          <p>설립 이후 짧은 기간 동안 인증·파트너십·구축 실적을 빠르게 쌓아왔습니다.</p>
+        </div>
+
+        <div className="about-history-list">
+          {history.map((yr) => (
+            <div className="about-history-item" key={yr.year}>
+              <div>
+                <div className="about-history-year">{yr.year}</div>
+                <div className="about-history-tag">{yr.tag}</div>
+              </div>
+              <div className="about-history-events">
+                {yr.items.map((ev, idx) => (
+                  <div className="about-history-event" key={idx}>
+                    <div className="about-history-dot"></div>
+                    <span>{ev}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div id="location">
-        <h3>오시는 길</h3>
-        <p>여기에 오시는 길 내용을 채워주세요.</p>
+      <div id="certified">
+        <div className="about-section-head">
+          <div className="about-eyebrow-green">Certifications</div>
+          <h2>인증 &amp; 자격</h2>
+        </div>
+        <div className="about-certs-grid">
+          {certifications.map((c) => (
+            <div className="about-cert-card" key={c.t}>
+              <div className="cert-title">{c.t}</div>
+              <div className="cert-desc">{c.d}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

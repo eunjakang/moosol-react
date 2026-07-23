@@ -85,7 +85,7 @@ function Contact() {
     <section id="contact-section">
       <div className="contact-grid">
         <div className="contact-info">
-          <div className="section-title" style={{ textAlign: "left", marginBottom: "25px" }}>
+          <div className="section-title2" style={{ textAlign: "left", marginBottom: "25px" }}>
             <h2>
               기술 상담 / 견적 문의 하기
             </h2>
