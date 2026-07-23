@@ -54,14 +54,14 @@ export const certifications = [
 ];
 
 export const partners = [
-  { name: "에스원", role: "정보보안 솔루션", tier: "프리미엄 파트너" },
-  { name: "파이오링크", role: "TiFront 보안 스위치", tier: "플래티넘 파트너" },
-  { name: "시큐아이", role: "NGF 차세대 방화벽", tier: "실버 파트너" },
-  { name: "지니언스", role: "Genians NAC", tier: "프리미엄 파트너(PP)" },
-  { name: "소프트캠프", role: "Document Security DRM", tier: "기술 총판" },
-  { name: "지란지교시큐리티", role: "DocuONE 문서중앙화", tier: "파트너" },
-  { name: "웨어밸리", role: "Chakra Max DB 접근제어", tier: "파트너" },
-  { name: "블루맥스", role: "보안 솔루션", tier: "파트너" },
+  { name: "에스원", role: "정보보안 솔루션", tier: "프리미엄 파트너", img: "/images/partners/s1.png" },
+  { name: "파이오링크", role: "TiFront 보안 스위치", tier: "플래티넘 파트너", img: "/images/partners/pio.png" },
+  { name: "시큐아이", role: "NGF 차세대 방화벽", tier: "실버 파트너", img: "/images/partners/secui.png" },
+  { name: "지니언스", role: "Genians NAC", tier: "프리미엄 파트너(PP)", img: "/images/partners/nac.png" },
+  { name: "소프트캠프", role: "Document Security DRM", tier: "기술 총판", img: "/images/partners/softcamp.png" },
+  { name: "지란지교시큐리티", role: "DocuONE 문서중앙화", tier: "파트너", img: "/images/partners/jiran.png" },
+  { name: "웨어밸리", role: "Chakra Max DB 접근제어", tier: "파트너", img: "/images/partners/ware.png" },
+  { name: "SQI소프트", role: "망연계 솔루션", tier: "파트너", img: "/images/partners/sqi.png" },
 ];
 
 export const clients = [

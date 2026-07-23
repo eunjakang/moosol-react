@@ -23,11 +23,11 @@ function Header() {
   {
     to: "/server",
     label: "서버유통",
-    children: [
-      { to: "/server", label: "AI GPU" },
-      { to: "/server", label: "서버 메모리" },
-      { to: "/server", label: "서버 스토리지" },
-    ],
+    // children: [
+    //   { to: "/server", label: "AI GPU" },
+    //   { to: "/server", label: "서버 메모리" },
+    //   { to: "/server", label: "서버 스토리지" },
+    // ],
   },
 ];
 

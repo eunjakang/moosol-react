@@ -7,7 +7,7 @@ const initialForm = {
   phone: "",
   message: "",
   email: '',
-  service: ['fw'], // 기본으로 '방화벽' 선택 혹은 빈 배열 []
+  service: [], // 기본으로 '방화벽' 선택 혹은 빈 배열 []
 };
 
 // 관심 영역 옵션

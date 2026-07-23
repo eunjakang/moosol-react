@@ -34,7 +34,7 @@ function AboutUs() {
           ))}
         </dl>
       </div>
-
+      
       <div id="history" className="about-history">
         <div className="about-section-head">
           <div className="about-eyebrow-green">History</div>
@@ -60,22 +60,56 @@ function AboutUs() {
             </div>
           ))}
         </div>
-      </div>
-
+      </div> 
+      
       <div id="certified">
-        <div className="about-section-head">
+          <div className="about-section-head">
           <div className="about-eyebrow-green">Certifications</div>
           <h2>인증 &amp; 자격</h2>
-        </div>
-        <div className="about-certs-grid">
+          </div>
+          <div className="about-certs-grid">
           {certifications.map((c) => (
             <div className="about-cert-card" key={c.t}>
               <div className="cert-title">{c.t}</div>
               <div className="cert-desc">{c.d}</div>
             </div>
           ))}
+          </div>
+      </div>
+      
+      <div id="partners">
+        <div className="about-section-head">
+        <div className="about-eyebrow-green">Partners</div>
+        <h2>파트너사</h2>
+      </div>
+      <div className="about-partners-grid">
+        {partners.map((p) => (
+          <div className="about-partner-card" key={p.name}>
+            <div className="about-partner-img">
+              <img src={p.img} alt={p.name} />
+            </div>
+            <div className="about-partner-name">{p.name}</div>
+            <div className="about-partner-role">{p.role}</div>
+            <div className="about-partner-tier">{p.tier}</div>
+          </div>
+        ))}
         </div>
       </div>
+      
+      <div id="clients">
+        <div className="about-section-head">
+        <div className="about-eyebrow-green">Clients</div>
+        <h2>주 고객사</h2>
+      </div>
+      <div className="about-clients-grid">
+        {clients.map((c) => (
+          <div className="about-client-card" key={c}>
+            {c}
+          </div>
+        ))}
+      </div>
+      </div>
+
     </section>
   );
 }
