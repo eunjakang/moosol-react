@@ -1,0 +1,220 @@
+import React, { useState } from "react";
+
+// 초기값 설정
+const initialForm = {
+  company: "",
+  name: "",
+  phone: "",
+  message: "",
+  email: '',
+  service: ['fw'], // 기본으로 '방화벽' 선택 혹은 빈 배열 []
+};
+
+// 관심 영역 옵션
+const SOLUTIONS = [
+  { id: 'fw', label: '방화벽' },
+  { id: 'ips', label: 'IPS' },
+  { id: 'nac', label: 'NAC' },
+  { id: 'dlp', label: 'DLP' },
+  { id: 'drm', label: 'DRM (문서보안)' },
+  { id: 'doc', label: '문서중앙화' },
+  { id: 'network', label: '망분리·망연계' },
+  { id: 'server', label: '서버견적' },
+  { id: 'etc', label: '기타' },
+];
+
+function Contact() {
+  const [form, setForm] = useState(initialForm);
+  // const [errors, setErrors] = useState({});
+
+  // 유효성 검사 함수
+  const validate = () => {
+
+    // 이메일 정규식 (abc@domain.com 형식)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(form.email)) {
+      alert("유효한 이메일 주소를 입력해주세요.");
+      return false;
+    }
+
+    // setErrors(newErrors);
+    
+    // return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+
+    // if (errors[name]) {
+    //   setErrors((prev) => ({ ...prev, [name]: '' }));
+    // }
+  };
+
+  // 다중 선택 처리
+  const handleToggleService = (id) => {
+    setForm((prev) => {
+      const currentServices = Array.isArray(prev.service) ? prev.service : [];
+      
+      const updatedServices = currentServices.includes(id)
+        ? currentServices.filter((item) => item !== id) // 이미 있으면 제거
+        : [...currentServices, id];                     // 없으면 추가
+
+      return {
+        ...prev,
+        service: updatedServices,
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // 유효성 검사
+    if (!validate()) {
+      return ; 
+    }
+    //console.log("제출 데이터:", form);
+    alert("문의가 정상 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
+
+    setForm(initialForm);
+    // setErrors({});
+  };
+
+  return (
+    <section id="contact-section">
+      <div className="contact-grid">
+        <div className="contact-info">
+          <div className="section-title" style={{ textAlign: "left", marginBottom: "25px" }}>
+            <h2>
+              기술 상담 / 견적 문의 하기
+            </h2>
+            <p>
+              1~2영업일 이내 담당자가 연락드리며, <br />문의 내용에 따라 신속한 기술 상담과 견적 안내가 가능합니다.
+            </p>
+          </div>
+          <div className="info-item">
+            <i className="fas fa-phone"></i>
+            <div className="info-details">
+              <h4>Tel</h4>
+              <p>010-4924-6706 (평일 09:00 ~ 18:00)</p>
+            </div>
+          </div>
+          <div className="info-item">
+            <i className="fas fa-envelope"></i>
+            <div className="info-details">
+              <h4>Mail</h4>
+              <p>info@moosol.co.kr</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="form-group">
+                <label>
+                  회사/기관명 <span style={{ color: 'red' }}>*</span>
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="예: 무솔"
+                  value={form.company}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>
+                  담당자 이름 <span style={{ color: 'red' }}>*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="예: 홍길동"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label>
+                  이메일 <span style={{ color: 'red' }}>*</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="예: info@moosol.co.kr"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>연락처</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="예: 010-1234-5678"
+                  value={form.phone}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+              <div className="form-group">
+                <label>
+                  관심 영역 <span style={{ opacity: 0.7 }}>(다중선택 가능)</span>
+                </label>
+                <div className="solution-tags">
+                {SOLUTIONS.map((item) => {
+                  // 현재 항목이 선택되어 있는지 확인
+                  const isSelected = form.service?.includes(item.id);
+
+                  return (
+                    <button
+                      key={item.id}
+                      type="button" 
+                      className={`tag-btn ${isSelected ? 'active' : ''}`}
+                      onClick={() => handleToggleService(item.id)}
+                    >
+                      {isSelected && <span style={{ color: 'var(--light-green)', fontWeight: 'bold' }} className="check-icon">✓</span>}
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+              </div>
+            <div className="form-group">
+              <label>문의 사항</label>
+              <textarea
+                rows="4"
+                name="message"
+                placeholder="구축 현황, 요구사항, 문의 내용 등을 상세히 작성해주시면 보다 정확한 상담이 가능합니다."
+                value={form.message}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <div className="">
+              <input 
+                type="checkbox"
+                name="privacy"
+                required
+              />
+              <span style={{ marginLeft: '8px', fontSize: '14px' }}>
+                개인정보 수집 및 이용에 동의합니다.
+              </span>
+            </div>
+            <button type="submit" className="btn-submit">
+              기술 상담 / 견적 접수하기
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Contact;
