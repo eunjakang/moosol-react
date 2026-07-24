@@ -17,13 +17,17 @@ export const nodeDatabase = {
     graphicRightText: "보안 게이트웨이",
   },
   firewall: {
-    title: "Firewall (차세대 방화벽)",
-    subtitle: "외부 공격으로부터 완벽히 통제되는 관문 보안",
+    title: "Firewall (방화벽)",
+    subtitle: "진화하는 사이버 위협에 대응하는 차세대 방화벽",
     badge: "EDGE SECURITY",
     icon: "fa-shield-halved",
     features: [
-      "외부 위협 및 비정상 트래픽 실시간 정밀 차단",
-      "IPS 엔진 바인딩으로 정교한 침입 판별",
+      "외부 위협 및 비정상 트래픽 실시간 차단",
+      "IPS 엔진 기반 정교한 침입 탐지",
+    ],
+    effect: [
+      "애플리케이션/사용자 단위 정책 제어",
+      "최신 사이버 공격 선제 대응"
     ],
     paths: ["path-net-fw"],
     graphicLeftIcon: "fa-skull-crossbones",
@@ -63,12 +67,16 @@ export const nodeDatabase = {
   },
   nac: {
     title: "NAC (네트워크 접근제어)",
-    subtitle: "사내 인트라넷 환경의 단말 보안 통제 표준화",
+    subtitle: "인가된 사용자와 단말만 연결",
     badge: "ACCESS CONTROL",
     icon: "fa-user-shield",
     features: [
-      "미승인 사용자 및 불법 등록 단말기 완벽 격리",
-      "사용자 권한 등급별 세그먼트 스위칭 제어",
+      "사용자/단말 기반 네트워크 접근 제어",
+      "접속 전후 보안 상태 실시간 점검",
+    ],
+    effect: [
+      "비인가 단말 접속 원천 차단",
+      "내부 보안 정책 준수 및 관리 자동화"
     ],
     paths: ["path-net-fw", "path-fw-l3", "path-fw-nac"],
     graphicLeftIcon: "fa-laptop-code",

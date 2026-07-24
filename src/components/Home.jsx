@@ -102,30 +102,27 @@ function Home() {
         <div className="left-panel">
           <div className="intro-text">
             <h1>
-              기술로 연결하고
+              보안의 시작과 끝,
               <br />
-              <span>안전으로 지키는 미래</span>
+              <span>무솔이 설계합니다.</span>
             </h1>
             <p>
-              네트워크 · 보안 · 인프라를 하나로 연결하여 더 안전하고 스마트한
-              디지털 환경을 완성도 높은 트리 아키텍처로 구현합니다.
+              네트워크 인프라부터 통합보안솔루션까지, <br />
+              처음부터 끝까지 책임집니다.
             </p>
+            <span
+              style={{
+                fontSize: "12px",
+                color: "var(--text-muted)",
+              }}
+            >
+              <i className="fas fa-computer-mouse"></i> 노드를 클릭하여 경로 연결 및 인터랙티브 방어 애니메이션을 경험하세요.
+            </span>
+
           </div>
 
           <div className="topology-tree">
-            <span
-              style={{
-                position: "absolute",
-                top: "15px",
-                fontSize: "12px",
-                color: "var(--text-muted)",
-                zIndex: 100,
-              }}
-            >
-              <i className="fas fa-computer-mouse"></i> 노드를 클릭하여 경로
-              연결 및 인터랙티브 방어 애니메이션을 경험하세요.
-            </span>
-
+            
             <div
               id="effect-fw"
               className={`effect-element ${activeNode === "firewall" ? "active-firewall-effect" : ""}`}

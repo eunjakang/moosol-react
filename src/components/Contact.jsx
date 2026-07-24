@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 // 초기값 설정
 const initialForm = {
@@ -12,19 +13,21 @@ const initialForm = {
 
 // 관심 영역 옵션
 const SOLUTIONS = [
-  { id: 'fw', label: '방화벽' },
-  { id: 'ips', label: 'IPS' },
-  { id: 'nac', label: 'NAC' },
-  { id: 'dlp', label: 'DLP' },
-  { id: 'drm', label: 'DRM (문서보안)' },
-  { id: 'doc', label: '문서중앙화' },
-  { id: 'network', label: '망분리·망연계' },
-  { id: 'server', label: '서버견적' },
-  { id: 'etc', label: '기타' },
+  { id: 'FW', label: '방화벽' },
+  { id: 'SW', label: '스위치' },
+  { id: 'NAC', label: 'NAC' },
+  { id: 'DAC', label: 'DAC' },
+  { id: 'DLP', label: 'DLP' },
+  { id: 'DRM', label: 'DRM (문서보안)' },
+  { id: 'ECM', label: '문서중앙화' },
+  { id: 'NETWORK', label: '망분리·망연계' },
+  { id: 'SERVER', label: '서버견적' },
+  { id: 'ETC', label: '기타' },
 ];
 
 function Contact() {
   const [form, setForm] = useState(initialForm);
+  const [sending, setSending] = useState(false);
   // const [errors, setErrors] = useState({});
 
   // 유효성 검사 함수
@@ -71,14 +74,38 @@ function Contact() {
     e.preventDefault();
 
     // 유효성 검사
-    if (!validate()) {
-      return ; 
-    }
-    //console.log("제출 데이터:", form);
-    alert("문의가 정상 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
+    // if (!validate()) {
+    //   return ; 
+    // }
+    // alert("문의가 정상 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
 
-    setForm(initialForm);
-    // setErrors({});
+    // setForm(initialForm);
+    setSending(true);
+
+    const templateParams = {
+      name: form.name,                                  
+      email: form.email,                                 
+      title: form.company,        
+      time: new Date().toLocaleString("ko-KR"),            
+      message: `회사/기관명: ${form.company}\n연락처: ${form.phone}\n관심 서비스: ${form.service}\n\n${form.message}`, 
+    };
+
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        alert("소중한 문의가 정상 접수되었습니다. 담당 엔지니어가 신속하게 연락드리겠습니다!");
+        setForm(initialForm);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
+      })
+      .finally(() => setSending(false));
   };
 
   return (
@@ -96,15 +123,15 @@ function Contact() {
           <div className="info-item">
             <i className="fas fa-phone"></i>
             <div className="info-details">
-              <h4>Tel</h4>
-              <p>010-4924-6706 (평일 09:00 ~ 18:00)</p>
+              <h4>Tel (담당자 : 김지형 팀장)</h4>
+              <p>010-4904-6706 (평일 09:00 ~ 18:00)</p>
             </div>
           </div>
           <div className="info-item">
             <i className="fas fa-envelope"></i>
             <div className="info-details">
               <h4>Mail</h4>
-              <p>info@moosol.co.kr</p>
+              <p>thmvhu@moosol.co.kr</p>
             </div>
           </div>
         </div>

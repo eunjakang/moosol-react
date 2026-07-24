@@ -26,9 +26,9 @@ const roadmapSteps = [
 const wheelItems = [
   { label: "스토리지", angle: 0 },
   { label: "서버", angle: 60 },
-  { label: "백업", angle: 120 },
-  { label: "소프트웨어", angle: 180 },
-  { label: "보안", angle: 240 },
+  { label: "백업 · 복구", angle: 120 },
+  { label: "보안솔루션", angle: 180 },
+  { label: "DB", angle: 240 },
   { label: "네트워크", angle: 300 },
 ];
 
