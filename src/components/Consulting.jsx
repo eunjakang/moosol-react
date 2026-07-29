@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { quizSteps } from "../data/ConsultingData";
-// import { solutions } from "../data/solutionsData";
+import { solutions } from "../data/solutionsData";
 import { getRecommendation } from "../data/solutionRecommend";
+import SubmitSuccessModal from "./SubmitModal";
 
 // 별점 렌더링 (5개 중 채워진 개수만큼 ★)
 function Stars({ count }) {
@@ -20,7 +21,11 @@ function RecommendationModal({ recommendation, onClose, onRequestConsult }) {
 
   return (
     <div className="consult-modal-backdrop" onClick={onClose}>
-      <div className="consult-modal recommend-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="consult-modal recommend-modal drop-down-anim" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-mascot-header">
+          <img src="/images/moosol.png" alt="마스코트" className="mascot-img" />
+        </div>
+
         <button className="consult-modal-close" onClick={onClose}>
           <i className="fas fa-times"></i>
         </button>
@@ -107,7 +112,7 @@ function ConsultRequestModal({ onClose, recommendation, answers }) {
       name: form.name,
       email: form.email,
       notes: form.notes || "",
-      title: "[1분 보안 진단] - 상담 신청",
+      title: "[5-Step 보안 진단] - 상담 신청",
       time: new Date().toLocaleString("ko-KR"),
       message: [buildAnswersText(), buildRecommendationText()].filter(Boolean).join("\n\n"),
     };
@@ -120,8 +125,9 @@ function ConsultRequestModal({ onClose, recommendation, answers }) {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
-        alert("상담 신청이 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
-        onClose();
+        // alert("상담 신청이 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
+        // onClose();
+        onSuccess();
       })
       .catch((err) => {
         console.error(err);
@@ -187,6 +193,7 @@ function Consulting() {
   const [answers, setAnswers] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showRecommend, setShowRecommend] = useState(false);
+   const [showSuccess, setShowSuccess] = useState(false);
 
   const currentStep = quizSteps[currentIndex];
   const isLastStep = currentIndex === quizSteps.length - 1;
@@ -267,7 +274,7 @@ function Consulting() {
             <div className="consulting-panel-icon">
               <i className="fas fa-comments"></i>
             </div>
-            <h3>🔒 1분 보안 진단</h3>
+            <h3>🔒 5-Step 보안 진단</h3>
             <p>
               5개의 간단한 질문으로 <br />
               우리 회사에 필요한 보안 솔루션을 확인해보세요. <br />
@@ -290,22 +297,24 @@ function Consulting() {
             무솔이 제공하는 모든 솔루션을 한눈에 확인하세요.
           </p>
         </div>
-          {/* <div className="solutions-grid">
-            {solutions.map((s) => (
-              <div className="solution-card" key={s.title}>
-                <div className="sol-header">
-                  <i className={`fas ${s.img}`}></i>
-                  <h4>{s.title}</h4>
-                </div>
-                <div className="sol-body">
-                  <p>{s.desc}</p>
-                </div>
+          <div className="solutions-grid">
+          {solutions.map((s) => (
+            <div className="photo-card" key={s.title}>
+              <div
+                className="photo-card-bg"
+                style={{ backgroundImage: `url(${s.img})` }}
+              ></div>
+              <div className="photo-card-overlay"></div>
+              <div className="photo-card-content">
+                <h4 className="photo-card-title">{s.title}</h4>
+                <p className="photo-card-desc">{s.desc}</p>
               </div>
-            ))}
-          </div> */}
-          <div className="solutions-img">
-            <img src="/images/solutions.png" alt="솔루션 이미지" /> 
+            </div>
+          ))}
           </div>
+          {/* <div className="solutions-img">
+            <img src="/images/solutions.png" alt="솔루션 이미지" /> 
+          </div> */}
         </div>
       )}
 
@@ -400,6 +409,18 @@ function Consulting() {
           recommendation={recommendation}
           answers={answers}
           onClose={() => setShowModal(false)}
+          onSuccess={() => {
+            setShowModal(false);
+            setShowSuccess(true);
+          }}
+        />
+      )}
+
+      {showSuccess && (
+        <SubmitSuccessModal
+          onClose={() => setShowSuccess(false)}
+          title="상담 신청이 접수됐어요!"
+          message="입력하신 이메일로 추천 솔루션을 보내드렸어요. 담당 엔지니어가 곧 연락드리겠습니다!"
         />
       )}
 

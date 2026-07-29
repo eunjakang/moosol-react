@@ -6,6 +6,7 @@ import AboutUs from "./components/AboutUs"; // 회사소개
 import Consulting from "./components/Consulting"; // 컨설팅
 import System from "./components/System"; // 시스템구축
 import Server from "./components/Server"; // 서버유통
+import Ai from "./components/Ai"; // AI 비즈니스
 import Contact from "./components/Contact"; // 문의하기
 import "./App.css"; 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="consulting" element={<Consulting />} />
           <Route path="system" element={<System />} />
           <Route path="server" element={<Server />} />
+          <Route path="ai" element={<Ai />} />
           <Route path="contact-section" element={<Contact />} />
         </Route>
       </Routes>

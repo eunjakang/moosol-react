@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import emailjs from "@emailjs/browser";
+import SubmitSuccessModal from "./SubmitModal";
 
 // 초기값 설정
 const initialForm = {
@@ -22,13 +24,36 @@ const SOLUTIONS = [
   { id: 'ECM', label: '문서중앙화' },
   { id: 'NETWORK', label: '망분리·망연계' },
   { id: 'SERVER', label: '서버견적' },
+  { id: 'AI', label: 'AI' },
   { id: 'ETC', label: '기타' },
 ];
 
 function Contact() {
+  const location = useLocation();
+  // console.log("현재 location.state:", location.state);
+  // 넘겨받은 state가 있는지 확인
+  const initialSolutionId = location.state?.initialSolutionId;
+
   const [form, setForm] = useState(initialForm);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [sending, setSending] = useState(false);
   // const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (initialSolutionId) {
+      setForm((prevForm) => {
+        const currentServices = prevForm.service || [];
+        // 이미 선택된 항목이 아니라면 배열에 추가
+        if (!currentServices.includes(initialSolutionId)) {
+          return {
+            ...prevForm,
+            service: [...currentServices, initialSolutionId]
+          };
+        }
+        return prevForm;
+      });
+    }
+  }, [initialSolutionId]);
 
   // 유효성 검사 함수
   const validate = () => {
@@ -98,7 +123,7 @@ function Contact() {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
-        alert("소중한 문의가 정상 접수되었습니다. 담당 엔지니어가 신속하게 연락드리겠습니다!");
+        setShowSuccess(true);
         setForm(initialForm);
       })
       .catch((err) => {
@@ -196,23 +221,30 @@ function Contact() {
                   관심 영역 <span style={{ opacity: 0.7 }}>(다중선택 가능)</span>
                 </label>
                 <div className="solution-tags">
-                {SOLUTIONS.map((item) => {
-                  // 현재 항목이 선택되어 있는지 확인
-                  const isSelected = form.service?.includes(item.id);
+                  {SOLUTIONS.map((item) => {
+                    const isSelected = form.service?.includes(item.id);
 
-                  return (
-                    <button
-                      key={item.id}
-                      type="button" 
-                      className={`tag-btn ${isSelected ? 'active' : ''}`}
-                      onClick={() => handleToggleService(item.id)}
-                    >
-                      {isSelected && <span style={{ color: 'var(--light-green)', fontWeight: 'bold' }} className="check-icon">✓</span>}
-                      {item.label}
-                    </button>
-                  );
-                })}
-              </div>
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className={`tag-btn ${isSelected ? 'active' : ''}`}
+                        onClick={() => handleToggleService(item.id)}
+                      >
+                        {isSelected && (
+                          <span
+                            style={{ color: 'var(--light-green)', fontWeight: 'bold' }}
+                            className="check-icon"
+                          >
+                            ✓
+                          </span>
+                        )}
+                        {item.label}
+                      </button>
+                    );
+                  })}
+                
+                </div>
               </div>
             <div className="form-group">
               <label>문의 사항</label>
@@ -240,6 +272,19 @@ function Contact() {
           </form>
         </div>
       </div>
+      {showSuccess && (
+        <SubmitSuccessModal
+          onClose={() => setShowSuccess(false)}
+          title="문의가 접수됐어요!"
+          message={
+            <>
+              소중한 문의가 정상 접수되었습니다.
+              <br />
+              담당 엔지니어가 신속하게 연락드리겠습니다!
+            </>
+          }
+        />
+      )}
     </section>
   );
 }

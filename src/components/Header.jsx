@@ -29,6 +29,7 @@ function Header() {
     //   { to: "/server", label: "서버 스토리지" },
     // ],
   },
+  { to: "/ai", label: "AI 솔루션" },
 ];
 
 return (
@@ -36,6 +37,12 @@ return (
     <div className="header-container">
       <Link to="/" className="logo">
         <img src="/images/logo.png" alt="MOOSOL" />
+        <img
+          src="/images/face2.png"
+          alt=""
+          className="logo-mascot"
+          aria-hidden="true"
+        />
       </Link>
       <nav>
         {navItems.map((item) => (

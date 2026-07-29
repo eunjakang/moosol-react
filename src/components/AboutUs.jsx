@@ -75,6 +75,21 @@ function AboutUs() {
             </div>
           ))}
           </div>
+          {/* 인증서 이미지 (*/}
+          <div className="about-cert-gallery">
+            <div className="about-gallery-card">
+              <img src="/images/c1.png" alt="" />
+            </div>
+            <div className="about-gallery-card">
+              <img src="/images/c2.png" alt="" />
+            </div>
+            <div className="about-gallery-card">
+              <img src="/images/c3.png" alt="" />
+            </div>
+            <div className="about-gallery-card">
+              <img src="/images/c4.png" alt="" />
+            </div>
+          </div>
       </div>
       
       <div id="partners">

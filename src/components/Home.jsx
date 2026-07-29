@@ -7,19 +7,21 @@ import {
 } from "../data/nodeDatabase";
 
 // 트리 노드 좌표(CSS의 #node-xxx 포지셔닝을 컴포넌트 내부 스타일로 이동)
+//calc(50% - 36px) : 가운데 노드
 const nodePositions = {
   internet: { top: 20, left: "calc(50% - 36px)" },
   firewall: { top: 140, left: "calc(50% - 36px)" },
   ips: { top: 110, left: "16%" },
   vpn: { top: 110, right: "16%" },
-  nac: { top: 230, left: "10%" },
-  dlp: { top: 230, right: "10%" },
-  l3: { top: 270, left: "calc(50% - 36px)" },
-  l2: { top: 390, left: "calc(50% - 36px)" },
-  edr: { top: 390, left: "18%" },
-  drm: { top: 390, right: "18%" },
-  server: { top: 450, left: "32%" },
-  client: { top: 450, right: "32%" },
+  network: { top: 270, left: "calc(50% - 36px)" },
+  server: { top: 390, left: "calc(50% - 36px)" },
+  nac: { top: 450, left: "10%" },
+  edr: { top: 510, left: "20%" },
+  dac: { top: 530, left: "33%" },
+  drm: { top: 530, right: "33%" },
+  dlp: { top: 510, right: "20%" },
+  ecm: { top: 450, right: "10%" },
+  client: { top: 560, left: "calc(50% - 36px)" },
 };
 
 const nodeIcons = {
@@ -27,13 +29,14 @@ const nodeIcons = {
   firewall: "fa-shield-halved",
   ips: "fa-shield-virus",
   vpn: "fa-key",
-  nac: "fa-user-shield",
-  dlp: "fa-file-shield",
-  l3: "fa-network-wired",
-  edr: "fa-laptop-medical",
-  drm: "fa-lock",
-  l2: "fa-server",
+  network: "fa-network-wired",
   server: "fa-database",
+  nac: "fa-user-shield",
+  dac: "fa-table-list",
+  drm: "fa-lock",
+  dlp: "fa-file-shield",
+  edr: "fa-laptop-medical",
+  ecm: "fa-sitemap",
   client: "fa-desktop",
 };
 
@@ -42,29 +45,47 @@ const nodeLabels = {
   firewall: "Firewall",
   ips: "IPS",
   vpn: "VPN",
-  nac: "NAC",
-  dlp: "DLP",
-  l3: "L3 Switch",
-  edr: "EDR",
-  drm: "DRM",
-  l2: "L2 Switch",
+  network: "Network",
   server: "Server",
+  nac: "NAC",
+  dac: "DAC",
+  drm: "DRM",
+  dlp: "DLP",
+  edr: "EDR",
+  ecm: "ECM",
   client: "Client PC",
 };
 
+// 노드 들끼리 연결되어 있는 선
 const allPaths = [
   { id: "path-net-fw", d: "M 500 45 L 500 130" },
   { id: "path-fw-ips", d: "M 500 165 L 160 135" },
   { id: "path-fw-vpn", d: "M 500 165 L 840 135" },
-  { id: "path-fw-nac", d: "M 500 165 L 100 255" },
-  { id: "path-fw-dlp", d: "M 500 165 L 900 255" },
-  { id: "path-fw-l3", d: "M 500 165 L 500 260" },
-  { id: "path-l3-edr", d: "M 500 295 L 180 415" },
-  { id: "path-l3-drm", d: "M 500 295 L 820 415" },
-  { id: "path-l3-l2", d: "M 500 295 L 500 380" },
-  { id: "path-l2-server", d: "M 500 415 L 320 475" },
-  { id: "path-l2-client", d: "M 500 415 L 680 475" },
+  { id: "path-fw-network", d: "M 500 165 L 500 260" },
+  { id: "path-network-server", d: "M 500 295 L 500 380" },
+  { id: "path-server-nac", d: "M 500 415 L 110 470" },
+  { id: "path-server-edr", d: "M 500 415 L 210 540" },
+  { id: "path-server-dac", d: "M 500 415 L 360 545" }, 
+  { id: "path-server-drm", d: "M 500 415 L 650 545" }, // dac랑 대칭
+  { id: "path-server-dlp", d: "M 500 415 L 790 540" }, // edr이랑 대칭
+  { id: "path-server-ecm", d: "M 500 415 L 900 470" }, // nac랑 대칭
+  { id: "path-server-client", d: "M 500 415 L 500 600" },
 ];
+
+// 1. activeNode ID -> 문의 페이지 SOLUTIONS ID 매핑
+const NODE_TO_SOLUTION_MAP = {
+  firewall: 'FW',
+  ips: 'ETC',    
+  vpn: 'ETC',      
+  network: 'NETWORK',
+  server: 'SERVER',
+  nac: 'NAC',
+  dac: 'DAC',
+  drm: 'DRM',
+  dlp: 'DLP',
+  edr: 'ETC',      
+  ecm: 'ECM'
+};
 
 function Home() {
   const [activeNode, setActiveNode] = useState(null);
@@ -76,12 +97,14 @@ function Home() {
 
   const closePanel = () => setActiveNode(null);
 
-  // 활성화될 노드 목록 계산 (원본 focusNode() 로직 그대로 이식)
+  // 활성화될 노드 목록 계산
   const getActiveNodes = () => {
     if (!activeNode) return defaultActiveNodes;
     const set = new Set(["internet", "firewall", activeNode]);
-    if (activeNode !== "ips" && activeNode !== "vpn") set.add("l3");
-    if (["server", "client", "l2"].includes(activeNode)) set.add("l2");
+    if (activeNode !== "ips" && activeNode !== "vpn") set.add("network");
+    if (["server", "client", "nac", "dac", "drm", "dlp", "edr", "ecm"].includes(activeNode)) {
+      set.add("server");
+    }
     return [...set];
   };
 
@@ -96,11 +119,12 @@ function Home() {
   // 패널에 표시할 데이터 (기본값은 원본 HTML 초기 마크업과 동일하게 Firewall)
   const panelData = nodeDatabase[activeNode || "firewall"];
 
+  const hideInquiryButton = activeNode === "internet" || activeNode === "client";
+  const targetSolutionId = NODE_TO_SOLUTION_MAP[activeNode];
+
   return (
     <section id="home">
-      <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
-        <div className="left-panel">
-          <div className="intro-text">
+      <div className="intro-text">
             <h1>
               보안의 시작과 끝,
               <br />
@@ -110,19 +134,17 @@ function Home() {
               네트워크 인프라부터 통합보안솔루션까지, <br />
               처음부터 끝까지 책임집니다.
             </p>
-            <span
-              style={{
-                fontSize: "12px",
-                color: "var(--text-muted)",
-              }}
-            >
-              <i className="fas fa-computer-mouse"></i> 노드를 클릭하여 경로 연결 및 인터랙티브 방어 애니메이션을 경험하세요.
-            </span>
+            <div className="hero-hint">
+              <img src="/images/mascot-face.png" alt="가이드 캐릭터" className="hero-hint-mascot" />
+              <span className="hero-hint-bubble">
+                <i className="fas fa-computer-mouse"></i> 노드를 클릭하여 경로 연결 및 인터랙티브 방어 애니메이션을 경험하세요.
+              </span>
+            </div>
 
-          </div>
-
+      </div>
+      <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
+        <div className="left-panel">
           <div className="topology-tree">
-            
             <div
               id="effect-fw"
               className={`effect-element ${activeNode === "firewall" ? "active-firewall-effect" : ""}`}
@@ -139,7 +161,7 @@ function Home() {
               id="effect-nac"
               className={`effect-element ${activeNode === "nac" ? "active-nac-effect" : ""}`}
             >
-              <i className="fas fa-laptop-code"></i>
+              <i className="fas fa-desktop"></i>
             </div>
             <div
               id="nac-barrier"
@@ -151,17 +173,18 @@ function Home() {
               id="effect-dlp"
               className={`effect-element ${activeNode === "dlp" ? "active-dlp-effect" : ""}`}
             >
-              <i className="fas fa-usb"></i>
+              <i className="fas fa-hard-drive"></i>
             </div>
             <div
               id="dlp-barrier"
               className="shield-barrier"
               style={{ display: activeNode === "dlp" ? "block" : "none" }}
-            ></div>
+            >
+            </div>
 
             <svg
               className="connection-svg"
-              viewBox="0 0 1000 520"
+              viewBox="0 0 1000 650"
               preserveAspectRatio="none"
             >
               {allPaths.map((path) => (
@@ -192,7 +215,7 @@ function Home() {
         </div>
 
         {/* 우측 상세 정보 패널 */}
-        <div className="right-panel-wrapper" id="detail-panel-wrapper">
+         <div className="right-panel-wrapper" id="detail-panel-wrapper">
           <div className="right-panel">
             <button className="btn-close-panel" onClick={closePanel}>
               <i className="fas fa-times"></i>
@@ -229,10 +252,27 @@ function Home() {
                   </li>
                 ))}
               </ul>
+              <ul className="detail-effects">
+                {panelData?.effects?.length > 0 && (
+                  <p style={{ fontSize: "15px" }}>
+                    <b>[도입 효과]</b>
+                  </p>
+                )}
+                {/* <spn>{panelData.effect}</spn> */}
+                {panelData.effects.map((effect, idx) => (
+                  <li className="effect-item" key={idx}>
+                    <i className="fas fa-bolt-lightning"></i> {effect}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <Link to="/consulting" className="btn-more" onClick={closePanel}>
-              자세히 알아보기 <i className="fas fa-arrow-right"></i>
-            </Link>
+            {!hideInquiryButton && (
+              <Link to="/contact-section"
+              state={{ initialSolutionId: targetSolutionId }}
+              className="btn-more" onClick={closePanel}>
+              문의 하기 <i className="fas fa-arrow-right"></i>
+              </Link>
+            )}
           </div>
         </div>
       </div>

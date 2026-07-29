@@ -24,7 +24,9 @@ function Server() {
           <br />
           서버 견적이 필요하신 경우 아래 문의하기를 통해 연락 주십시오.
         </p>
-        <Link to="/contact-section" className="coming-soon-btn">
+        <Link to="/contact-section"
+        state={{ initialSolutionId: "SERVER" }}
+        className="coming-soon-btn">
           문의하기 <i className="fas fa-arrow-right"></i>
         </Link>
       </div>

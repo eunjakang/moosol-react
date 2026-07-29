@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 const roadmapSteps = [
   {
@@ -24,23 +24,114 @@ const roadmapSteps = [
 ];
 
 const wheelItems = [
-  { label: "스토리지", angle: 0 },
-  { label: "서버", angle: 60 },
-  { label: "백업 · 복구", angle: 120 },
-  { label: "보안솔루션", angle: 180 },
-  { label: "DB", angle: 240 },
-  { label: "네트워크", angle: 300 },
+  {
+    label: "스토리지",
+    angle: 0,
+    desc: "중요한 데이터를 안전하게 저장하고 안정적으로 운영합니다.",
+    etc: [
+      "용량 관리 및 증설",
+      "RAID 상태 점검",
+      "스토리지 장애 대응",
+      "성능 분석"
+    ]
+  },
+  {
+    label: "서버",
+    angle: 60,
+    desc: "기업의 핵심 서비스를 안정적으로 운영하기 위한 서버 환경을 관리합니다.",
+    etc: [
+      "Windows / Linux 서버 운영",
+      "OS 및 보안 패치 관리",
+      "장애 분석 및 복구 지원",
+      "성능 튜닝 및 최적화"
+    ]
+  },
+  {
+    label: "백업 · 복구",
+    angle: 120,
+    desc: "장애 발생 시 신속한 복구를 통해 업무 연속성을 확보합니다.",
+    etc: [
+      "정기 백업 관리",
+      "복구 테스트",
+      "백업 정책 수립",
+      "장애 복구 지원",
+      "데이터 무결성 확인"
+    ]
+  },
+  {
+    label: "보안솔루션",
+    angle: 180,
+    desc: "다양한 보안 솔루션을 통합 운영하여 위협에 대응합니다.",
+    etc: [
+      "방화벽 정책 관리",
+      "VPN 운영",
+      "NAC 운영",
+      "EDR / DRM / DLP 관리",
+      "로그 분석 및 보안 점검"
+    ]
+  },
+  {
+    label: "DB",
+    angle: 240,
+    desc: "데이터베이스의 안정성과 성능을 지속적으로 관리합니다.",
+    etc: [
+      "백업 및 복구 지원",
+      "성능 튜닝",
+      "장애 분석",
+      "운영 정책 관리"
+    ]
+  },
+  {
+    label: "네트워크",
+    angle: 300,
+    desc: "끊임없이 안정적인 네트워크 환경을 유지하고 장애를 최소화 합니다.",
+    etc: [
+      "L2 / L3 / 백본 운영",
+      "라우팅 및 VLAN 관리",
+      "네트워크 장애 분석",
+      "회선 상태 점검",
+      "구성 변경 및 최적화"
+    ]
+  },
 ];
+
+const POP_DISTANCE = 14; // 호버/선택 시 조각이 밀려나는 거리
 
 // 구분선(spoke)은 항목 사이 경계선 → 6개, 60도 간격
 const spokeAngles = [30, 90, 150, 210, 270, 330];
 
 function System() {
+  const [hoveredLabel, setHoveredLabel] = useState(null);
+  const [activeLabel, setActiveLabel] = useState(null);
+
+  const [waveLabel, setWaveLabel] = useState(null);
+  const waveIntervalRef = useRef(null);
+
+// 2. 더블클릭 시 실행될 파도타기 함수
+const triggerWaveAnimation = () => {
+  if (waveIntervalRef.current) clearInterval(waveIntervalRef.current);
+
+  setActiveLabel(null);
+
+  let index = 0;
+  waveIntervalRef.current = setInterval(() => {
+    if (index < wheelItems.length) {
+      setWaveLabel(wheelItems[index].label);
+      index++;
+    } else {
+      setWaveLabel(null);
+      clearInterval(waveIntervalRef.current);
+    }
+  }, 250);
+};
 
   const size = 300;      // SVG 캔버스 크기
+  const padding = 10;
+  const svgSize = size + padding * 2; 
   const cx = size / 2;
   const cy = size / 2;
   const outerR = 140;    // 바깥 원 반지름
+  const innerR = 48;
   const labelR = 95;    // 라벨이 배치될 반지름
 
   // 각도를 라디안으로 변환해 (x, y) 좌표 계산
@@ -51,6 +142,33 @@ function System() {
       y: cy - r * Math.sin(rad), // svg는 y가 아래로 증가하므로 반전
     };
   };
+
+  const wedgePath = (startAngle, endAngle) => {
+    const outerStart = toXY(startAngle, outerR);
+    const outerEnd = toXY(endAngle, outerR);
+    const innerEnd = toXY(endAngle, innerR);
+    const innerStart = toXY(startAngle, innerR);
+    const largeArc = Math.abs(endAngle - startAngle) > 180 ? 1 : 0;
+
+    return [
+      `M ${outerStart.x} ${outerStart.y}`,
+      `A ${outerR} ${outerR} 0 ${largeArc} 0 ${outerEnd.x} ${outerEnd.y}`,
+      `L ${innerEnd.x} ${innerEnd.y}`,
+      `A ${innerR} ${innerR} 0 ${largeArc} 1 ${innerStart.x} ${innerStart.y}`,
+      "Z",
+    ].join(" ");
+  };
+
+  // 조각이 바깥으로 밀려나는 방향(중심 각도) 벡터
+  const popOffset = (angleDeg) => {
+    const rad = (angleDeg * Math.PI) / 180;
+    return {
+      x: POP_DISTANCE * Math.cos(rad),
+      y: -POP_DISTANCE * Math.sin(rad),
+    };
+  };
+
+  const activeItem = wheelItems.find((item) => item.label === activeLabel);
 
   return (
     <section id="system">
@@ -106,53 +224,78 @@ function System() {
             (주)무솔을 통해 체계적으로 통합 관리 · 운영합니다.
           </p>
         </div>
-        <div className="wheel-wrap">
-          <svg
-            className="wheel-svg"
-            viewBox={`0 0 ${size} ${size}`}
-          >
-            {/* 바깥 배경 원 */}
-            <circle cx={cx} cy={cy} r={outerR} className="wheel-outer-circle" />
+        <div className="wheel-section-container">
+          {/* 클릭한 조각의 설명이 휠 위쪽에 표시됨 */}
+          <div className={`wheel-desc-panel ${activeItem ? "visible" : ""}`}>
+            {activeItem && (
+              <>
+                <div className="wheel-desc-title">
+                  <i className="fas fa-circle-check"></i> {activeItem.label}
+                </div>
+                <p className="wheel-desc-text">{activeItem.desc}</p>
+                {activeItem.etc.map((e) => (
+                  <div key={e}>
+                    <i className="fas fa-circle"></i> {e}
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
 
-            {/* 구분선(스포크) */}
-            {spokeAngles.map((angle) => {
-              const outer = toXY(angle, outerR);
-              const inner = toXY(angle, 48); 
-              return (
-                <line
-                  key={angle}
-                  x1={inner.x}
-                  y1={inner.y}
-                  x2={outer.x}
-                  y2={outer.y}
-                  className="wheel-spoke"
-                />
-              );
-            })}
+          <div className="wheel-wrap">
+            <svg className="wheel-svg" viewBox={`0 0 ${svgSize} ${svgSize}`}>
+              {/* 조각(도넛 세그먼트) */}
+              {wheelItems.map((item) => {
+                const startAngle = item.angle - 30;
+                const endAngle = item.angle + 30;
+                const isPopped = hoveredLabel === item.label || activeLabel === item.label || waveLabel === item.label;
+                const offset = isPopped ? popOffset(item.angle) : { x: 0, y: 0 };
+                const labelPos = toXY(item.angle, labelR);
 
-            {/* 라벨 */}
-            {wheelItems.map((item) => {
-              const pos = toXY(item.angle, labelR);
-              return (
+                return (
+                  <g
+                    key={item.label}
+                    className={`wheel-segment ${isPopped ? "popped" : ""}`}
+                    style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
+                    onMouseEnter={() => setHoveredLabel(item.label)}
+                    onMouseLeave={() => setHoveredLabel(null)}
+                    onClick={() =>
+                      setActiveLabel((prev) => (prev === item.label ? null : item.label))
+                    }
+                  >
+                    <path d={wedgePath(startAngle, endAngle)} className="wheel-wedge" />
+                    <text
+                      x={labelPos.x}
+                      y={labelPos.y}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="wheel-label"
+                    >
+                      {item.label}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* 가운데 원 (클릭 시 선택 해제) */}
+              <g
+                onClick={() => setActiveLabel(null)}
+                onDoubleClick={triggerWaveAnimation}
+                style={{ cursor: activeLabel ? "pointer" : "default" }}
+              >
+                <circle cx={cx} cy={cy} r={innerR} className="wheel-center-circle" />
                 <text
-                  key={item.label}
-                  x={pos.x}
-                  y={pos.y}
+                  x={cx}
+                  y={cy}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  className="wheel-label"
+                  className="wheel-center-text"
                 >
-                  {item.label}
+                  통합유지보수
                 </text>
-              );
-            })}
-
-            {/* 가운데 원 */}
-            <circle cx={cx} cy={cy} r="48" className="wheel-center-circle" />
-            <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" className="wheel-center-text">
-              통합유지보수
-            </text>
-          </svg>
+              </g>
+            </svg>
+          </div>
         </div>
       </div> 
     </section>

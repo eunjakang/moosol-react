@@ -2,7 +2,7 @@ export const quizSteps = [
   {
     id: 1,
     type: "single",
-    question: "회사 직원은 몇 명인가요?",
+    question: "회사 규모는 어느정도 인가요?",
     options: ["10명 이하", "50명 이하", "100명 이하", "100명 이상"],
   },
   {
