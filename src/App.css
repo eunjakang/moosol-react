@@ -219,10 +219,312 @@ section {
     vertical-align: 2px;
     opacity: 0.6;
 }
+.mobile-submenu-toggle {
+  display: none;
+}
+
+/* ==========================================
+   모바일 전용 스타일 (768px 이하)
+========================================== */
+
+/* 1. 모바일 햄버거 버튼 (기본 숨김 -> 모바일에서 노출) */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1002;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-dark, #333);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* 햄버거 버튼 X자 변환 애니메이션 */
+.hamburger-btn.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 2. 모바일 미디어 쿼리 적용 */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 15px 20px;
+  }
+
+  /* 햄버거 버튼 노출 */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* 모바일 내비게이션 드로어 (우측 슬라이드) */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 290px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 90px 24px 30px;
+    gap: 0;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+
+  nav.active {
+    right: 0; /* 메뉴 열림 */
+  }
+
+  /* 메뉴 아이템 행 레이아웃 */
+  .nav-item {
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-item::after {
+    display: none; /* 모바일에서는 브릿지 제거 */
+  }
+
+  .nav-link-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: 14px 0;
+    font-size: 16px;
+  }
+
+  /* 모바일 서브메뉴 토글 화살표 버튼 */
+  .mobile-submenu-toggle {
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 10px;
+    color: var(--text-dark, #333);
+    cursor: pointer;
+    font-size: 12px;
+    transition: transform 0.25s ease;
+    position: static;     
+    transform: none;     
+    opacity: 1;          
+  }
+  .nav-item.open .mobile-submenu-toggle {
+    transform: rotate(180deg);
+  }
+
+  /* 모바일 드롭다운 (상위 메뉴 아래 아코디언 펼침 방식) */
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    border: none;
+    background: #f8faf9;
+    border-radius: 10px;
+    padding: 6px 12px;
+    margin: 4px 0 12px 0;
+    display: none; /* 기본 숨김 */
+  }
+
+  /* 서브메뉴가 열렸을 때 (open 클래스 부착 시) */
+  .nav-item.open .dropdown-menu {
+    display: flex;
+    transform: none;
+  }
+
+  .dropdown-link {
+    padding: 8px 10px;
+    font-size: 13.5px;
+  }
+
+  /* 모바일 문의하기 버튼 (하단 고정 및 인라인에서 블록으로) */
+  .btn-contact {
+    margin-top: 24px;
+    text-align: center;
+    padding: 12px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 모바일 메뉴 배경 어둡게 오버레이 */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+  }
+}
 
 /* ----------------------------------
    [1] 홈 (인터랙티브 대형 메인 트리)
 ---------------------------------- */
+/* ----------------------------------
+   홈 - 모바일 전용 세로 아코디언
+   (700px 이하에서 토폴로지 트리 대신 렌더링)
+---------------------------------- */
+.mobile-node-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-node-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin: 10px 4px 0;
+}
+.mobile-node-section-label i { color: var(--primary-green); }
+
+.mobile-node-item {
+    background: #ffffff;
+    border: 1px solid #e2ece4;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+.mobile-node-item.open {
+    border-color: var(--primary-green);
+}
+
+.mobile-node-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mobile-node-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eaf3ed;
+    color: var(--primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.mobile-node-item.open .mobile-node-icon {
+    background: var(--primary-green);
+    color: #ffffff;
+}
+
+.mobile-node-title {
+    flex: 1;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.mobile-node-chevron {
+    color: var(--text-muted);
+    font-size: 12px;
+    transition: transform 0.25s ease;
+}
+.mobile-node-item.open .mobile-node-chevron {
+    transform: rotate(180deg);
+    color: var(--primary-green);
+}
+
+.mobile-node-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.mobile-node-item.open .mobile-node-body {
+    max-height: 400px;
+}
+
+.mobile-node-body-inner {
+    padding: 0 18px 18px 66px;
+}
+
+.mobile-node-badge {
+    display: inline-block;
+    background: #eaf3ed;
+    color: var(--primary-green);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+}
+
+.mobile-node-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.mobile-node-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.mobile-node-features li {
+    font-size: 12.5px;
+    color: #2c3631;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+.mobile-node-features li i {
+    color: var(--primary-green);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.mobile-node-cta {
+    margin-top: 6px;
+    text-align: center;
+}
+
 #home {
     padding-top: 140px;
     min-height: 100vh;
@@ -533,7 +835,7 @@ section {
 }
 .about-section-head p {
     margin: 10px 0 0;
-    max-width: 560px;
+    /* max-width: 560px; */
     font-size: 15px;
     color: #5b6660;
 }
@@ -599,7 +901,7 @@ section {
 }
 .about-gallery-card {
     background: #fff;
-    border: 2px solid #eef3f0;
+    border: 1px solid #eef3f0;
     border-radius: 18px;
     height: 240px;
     display: flex;
@@ -730,7 +1032,146 @@ section {
     opacity: 1;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+    .about-section-head h2 {
+    font-size: 22px !important;
+  }
+
+  .about-section-head p {
+    font-size: 14px !important;
+    word-break: keep-all;
+  }
+
+  /* 4. 회사 정보 (Table/Grid 세로 1열 변경) */
+  .about-info-wrap {
+    padding: 0;
+  }
+
+  .about-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .about-info-row {
+    display: flex;
+    flex-direction: column; /* 항목(dt)과 내용(dd)을 세로로 배치하여 안 잘리게 함 */
+    align-items: flex-start;
+    padding: 12px 16px;
+    background: #f8faf9;
+    border-radius: 10px;
+    gap: 4px;
+  }
+
+  .about-info-row dt {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary-green, #29A640);
+  }
+
+  .about-info-row dd {
+    font-size: 14px;
+    color: #333333;
+    margin: 0;
+    word-break: break-all;
+  }
+
+  /* 5. 발자취 (History) 타임라인 최적화 */
+  .about-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* 1. 각 연도별 아이템을 상하 배치 구조로 변경 */
+  .about-history-item {
+    display: flex;
+    flex-direction: column; /* 년도(위) -> 세부내용(아래) 세로 정렬 */
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #eef3f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  /* 2. 상단: 년도 + 태그 가로 나란히 배치 */
+  .about-history-item > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f4f1; /* 구분선 */
+  }
+
+  .about-history-year {
+    font-size: 22px !important;
+    font-weight: 800;
+    color: var(--primary-green, #29A640);
+    line-height: 1;
+  }
+
+  .about-history-tag {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #666666;
+    background: #f0f7f2;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* 3. 하단: 연혁 세부 이벤트 리스트 (전체 너비 활용) */
+  .about-history-events {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 4px;
+  }
+
+  .about-history-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px !important;
+    line-height: 1.5;
+    color: #333333;
+    word-break: keep-all; /* 단어 단위로 자연스러운 줄바꿈 */
+  }
+
+  .about-history-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-green, #29A640);
+    border-radius: 50%;
+    margin-top: 7px; /* 글자 첫 줄 높이에 맞춰 초록 점 맞춤 */
+    flex-shrink: 0;
+  }
+
+  /* 6. 인증 & 자격 카드리스트 (1열 변경) */
+  .about-certs-grid {
+    grid-template-columns: 1fr !important; /* 모바일에서 1열 배치 */
+    gap: 12px;
+  }
+
+  .about-cert-card {
+    padding: 16px;
+  }
+
+  /* 인증서 이미지 갤러리 (2열 2행 배치) */
+  .about-cert-gallery {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+  }
+
+  .about-gallery-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
     .marquee-track { gap: 36px; }
     .marquee-logo { height: 44px; }
     .marquee-logo img { max-width: 110px; }
@@ -1208,7 +1649,7 @@ section {
 }
 .consult-modal .btn-submit:hover { background: #1b5e20; }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .consulting-landing { grid-template-columns: 1fr; }
     .quiz-options { grid-template-columns: 1fr; }
 }
@@ -1330,27 +1771,39 @@ section {
 /* 클릭 시 나타나는 상세 패널 (휠 위치에 영향 주지 않음) */
 .wheel-desc-panel {
   position: absolute;
-  left: calc(40% - 450px);   /* 휠(중앙) 기준으로 좌측 적절한 위치에 고정 */
-  width: 300px;
+  top: 50%;
+  width: 280px;
   background: #ffffff;
-  padding: 28px 24px;
+  padding: 24px 20px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   border: 1px solid #f0f0f0;
-  
-  /* 숨김 처리 및 애니메이션 */
+
+  /* 애니메이션 기본 세팅 */
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-20px);
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
-/* activeItem이 존재하여 visible 클래스가 붙었을 때 */
-.wheel-desc-panel.visible {
+/* 왼쪽 배치 스타일 */
+.wheel-desc-panel.pos-left {
+  left: 5%;
+  transform: translateY(-50%) translateX(-20px);
+}
+
+/* 오른쪽 배치 스타일 */
+.wheel-desc-panel.pos-right {
+  right: 5%;
+  transform: translateY(-50%) translateX(20px);
+}
+
+/* active 상태로 창이 보일 때 */
+.wheel-desc-panel.visible.pos-left,
+.wheel-desc-panel.visible.pos-right {
   opacity: 1;
   visibility: visible;
-  transform: translateX(0);
+  transform: translateY(-50%) translateX(0);
 }
 
 /* 타이틀 스타일 */
@@ -1468,6 +1921,52 @@ section {
     fill: #ffffff;
     font-size: 15px;
     font-weight: 700;
+}
+
+/* ==========================================
+   모바일
+========================================== */
+@media (max-width: 768px) {
+  .wheel-section-container {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .wheel-wrap {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .wheel-svg {
+    max-width: 340px; /* 모바일 화면 크기에 맞춰 원 크기 축소 */
+  }
+
+  /* 모바일용 패널: 휠 하단에 카드 형태로 배치 */
+  .wheel-desc-panel,
+  .wheel-desc-panel.pos-left,
+  .wheel-desc-panel.pos-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-width: 340px; /* 휠 직경과 맞춰 안정감 제공 */
+    margin-top: 10px;
+    box-sizing: border-box;
+
+    /* 모바일 애니메이션: 아래에서 위로 살짝 떠오름 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+  }
+
+  .wheel-desc-panel.visible.pos-left,
+  .wheel-desc-panel.visible.pos-right {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 }
 
 /* ----------------------------------
@@ -1810,32 +2309,90 @@ section {
   color: var(--text-muted);
   margin-bottom: 32px;
 }
+.mobile-ui-preview {
+  display: none;
+}
 
-/* Responsive Design */
+
 @media (max-width: 900px) {
-  .sticky-wrapper {
-    flex-direction: column;
-    gap: 40px;
+  .mobile-ui-preview {
+    display: block;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   }
-
-  .sticky-left {
-    position: relative;
-    top: 0;
-    width: 100%;
-  }
-
-  .scroll-step-item {
-    min-height: auto;
-    padding: 40px 0;
-    opacity: 1;
-  }
-
   .value-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .hero-title {
-    font-size: 32px;
+  /* 2. Sticky 구조 해제 */
+  .sticky-section {
+    padding: 10px 20px;
+  }
+
+  .sticky-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* 왼쪽 고정박스 및 오른쪽 스크롤 영역 기본 레이아웃 리셋 */
+  .sticky-left,
+  .sticky-right {
+    width: 100%;
+    position: static;
+  }
+
+  /* 좌측 UI 고정 박스를 숨기고 step-item 내부로 세트화 */
+  .sticky-left {
+    display: none; /* 모바일에서는 개별 카드 형태로 전환되므로 기존 좌측 상자 숨김 */
+  }
+
+  /* 3. 모바일용 스크롤 step 아이템 카드 스타일 */
+  .scroll-step-item {
+    min-height: auto;
+    opacity: 1; /* 투명도 고정 */
+    padding: 24px;
+    margin-bottom: 32px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #eef3f0;
+    box-shadow: var(--card-shadow, 0 8px 24px rgba(0, 0, 0, 0.04));
+  }
+
+  .scroll-step-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 4. 폰트 및 간격 최적화 */
+  .step-tag {
+    font-size: 12px;
+  }
+
+  .step-title {
+    font-size: 26px;
+    margin-bottom: 4px;
+  }
+
+  .step-subtitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* CTA 버튼 및 타이틀 모바일 대응 */
+  .cta-section {
+    padding: 60px 20px;
+  }
+
+  .cta-content h2 {
+    font-size: 24px;
+    word-break: keep-all;
   }
 }
 
@@ -1953,7 +2510,66 @@ footer { background: #111e14; color: #728c77; padding: 20px 20px; border-top: 1p
     background: #1f7d31;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+
+    #contact-section {
+        padding: 80px 16px;
+    }
+
+    .contact-grid {
+        gap: 32px;
+    }
+
+    .contact-info h3,
+    #contact-section .section-title2 h2,
+    #contact-section .section-title h2 {
+        font-size: 22px;
+    }
+    #contact-section .section-title2 p,
+    #contact-section .section-title p {
+        font-size: 14px;
+    }
+
+    .info-item {
+        gap: 14px;
+    }
+    .info-item i {
+        font-size: 17px;
+        padding: 12px;
+    }
+    .info-details h4 { font-size: 14.5px; }
+    .info-details p { font-size: 13.5px; }
+
+    .contact-form {
+        padding: 22px 18px;
+        border-radius: 18px;
+        gap: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 11px 14px;
+        font-size: 13.5px;
+    }
+
+    .solution-tags {
+        gap: 6px;
+    }
+    .tag-btn {
+        padding: 7px 12px;
+        font-size: 12.5px;
+    }
+
+    .btn-submit {
+        padding: 13px;
+        font-size: 14.5px;
+    }
     .scroll-top-btn { right: 16px; bottom: 16px; width: 54px; height: 54px; }
     .scroll-top-arrow { width: 18px; height: 18px; font-size: 8px; }
 }
@@ -1975,6 +2591,8 @@ footer { background: #111e14; color: #728c77; padding: 20px 20px; border-top: 1p
 .submit-success-modal h3 { margin-bottom: 10px; color: #0a1612;}
 .submit-success-modal p { line-height: 1.6; }
 .submit-success-modal .btn-submit { width: 100%; }
+
+
 
 /* 개인정보 처리방침 */
 .privacy-container {
@@ -2047,6 +2665,8 @@ footer { background: #111e14; color: #728c77; padding: 20px 20px; border-top: 1p
   border: 1px solid #e0e0e0;
   padding: 10px 12px;
   text-align: left;
+  word-break: break-all; 
+  overflow-wrap: break-word; 
 }
 
 .privacy-table th {

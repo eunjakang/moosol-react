@@ -225,23 +225,6 @@ const triggerWaveAnimation = () => {
           </p>
         </div>
         <div className="wheel-section-container">
-          {/* 클릭한 조각의 설명이 휠 위쪽에 표시됨 */}
-          <div className={`wheel-desc-panel ${activeItem ? "visible" : ""}`}>
-            {activeItem && (
-              <>
-                <div className="wheel-desc-title">
-                  <i className="fas fa-circle-check"></i> {activeItem.label}
-                </div>
-                <p className="wheel-desc-text">{activeItem.desc}</p>
-                {activeItem.etc.map((e) => (
-                  <div key={e}>
-                    <i className="fas fa-circle"></i> {e}
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-
           <div className="wheel-wrap">
             <svg className="wheel-svg" viewBox={`0 0 ${svgSize} ${svgSize}`}>
               {/* 조각(도넛 세그먼트) */}
@@ -295,6 +278,31 @@ const triggerWaveAnimation = () => {
                 </text>
               </g>
             </svg>
+          </div>
+          <div
+            className={`wheel-desc-panel ${activeItem ? "visible" : ""} ${
+              activeItem
+                ? activeItem.angle > 90 && activeItem.angle < 270
+                  ? "pos-left"
+                  : "pos-right"
+                : ""
+            }`}
+          >
+            {activeItem && (
+              <>
+                <div className="wheel-desc-title">
+                  <i className="fas fa-circle-check"></i> {activeItem.label}
+                </div>
+                <p className="wheel-desc-text">{activeItem.desc}</p>
+                <div className="wheel-desc-list">
+                  {activeItem.etc.map((e) => (
+                    <div key={e}>
+                      <i className="fas fa-circle"></i> {e}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div> 

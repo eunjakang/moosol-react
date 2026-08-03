@@ -79,7 +79,7 @@ function Privacy() {
           회사는 이용자의 동의 없이 개인정보를 외부에 제공하지 않습니다. 단,
           효율적인 상담 및 메일 발송 서비스를 위해 아래와 같이 위탁하고 있습니다.
         </p>
-        <table class="privacy-table">
+        <table className="privacy-table">
           <thead>
             <tr>
               <th>수탁업체</th>
@@ -119,7 +119,7 @@ function Privacy() {
           상담 신청 시 발생할 수 있는 개인정보 관련 문의사항은 아래의
           관리책임자에게 문의해 주시기 바랍니다.
         </p>
-        <table class="privacy-table">
+        <table className="privacy-table">
           <thead>
             <tr>
               <th>구분</th>

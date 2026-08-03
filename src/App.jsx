@@ -9,7 +9,7 @@ import Server from "./components/Server"; // 서버유통
 import Ai from "./components/Ai"; // AI 비즈니스
 import Contact from "./components/Contact"; // 문의하기
 import Privacy from "./components/Privacy"; // 개인정보 처리방침
-import MobileBlocker from "./components/MobileBlocker";
+// import MobileBlocker from "./components/MobileBlocker";
 import "./App.css"; 
 
 // 페이지(라우트)가 바뀔 때마다 스크롤을 맨 위로 올려줍니다.
@@ -52,9 +52,9 @@ function App() {
   }, []);
 
   // 🚫 모바일이면 차단 화면만 렌더링
-  if (isMobile) {
-    return <MobileBlocker />;
-  }
+  // if (isMobile) {
+  //   return <MobileBlocker />;
+  // }
 
   return (
     <>

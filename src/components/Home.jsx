@@ -5,6 +5,8 @@ import {
   defaultActiveNodes,
   defaultActivePaths,
 } from "../data/nodeDatabase";
+import useIsMobile from "../hooks/useIsMobile";
+import HomeMobileList from "./HomeMobileList";
 
 // 트리 노드 좌표(CSS의 #node-xxx 포지셔닝을 컴포넌트 내부 스타일로 이동)
 //calc(50% - 36px) : 가운데 노드
@@ -89,6 +91,7 @@ const NODE_TO_SOLUTION_MAP = {
 
 function Home() {
   const [activeNode, setActiveNode] = useState(null);
+  const isMobile = useIsMobile(700);
 
   const treeRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -160,8 +163,10 @@ function Home() {
                 <i className="fas fa-computer-mouse"></i> 무솔이 구축·운영하는 기업 IT 인프라를 클릭하여 서비스를 확인해보세요.
               </span>
             </div>
-
       </div>
+      {isMobile ? (
+            <HomeMobileList />
+          ) : (
       <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
         <div className="left-panel">
           <div className={`topology-tree ${isVisible ? "in-view" : ""}`} ref={treeRef}>
@@ -238,7 +243,8 @@ function Home() {
         </div>
 
         {/* 우측 상세 정보 패널 */}
-         <div className="right-panel-wrapper" id="detail-panel-wrapper">
+        {!isMobile && (
+          <div className="right-panel-wrapper" id="detail-panel-wrapper">
           <div className="right-panel">
             <button className="btn-close-panel" onClick={closePanel}>
               <i className="fas fa-times"></i>
@@ -297,8 +303,11 @@ function Home() {
               </Link>
             )}
           </div>
-        </div>
+          </div>
+        )}
       </div>
+      )}
+      
     </section>
   );
 }

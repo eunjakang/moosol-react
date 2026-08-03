@@ -91,22 +91,23 @@ function AboutUs() {
             </div>
           </div>
       </div>
-      
-      <div className="about-section-head">
-        <div className="about-eyebrow-green">Partners</div>
-        <h2>파트너사</h2>
-        <p>
-          기술적으로 뛰어난 솔루션을 보유한 여러 파트너사와 협업하여, 고객사의
-          환경에 맞춘 보안 솔루션을 제공합니다.
-        </p>
-      </div>
-      <div className="marquee-wrap">
-        <div className="marquee-track marquee-left">
-          {[...partners, ...partners].map((p, idx) => (
-            <div className="marquee-logo" key={`${p.name}-${idx}`}>
-              <img src={p.img} alt={p.name} />
-            </div>
-          ))}
+      <div id="partners">
+        <div className="about-section-head">
+          <div className="about-eyebrow-green">Partners</div>
+            <h2>파트너사</h2>
+            <p>
+              기술적으로 뛰어난 솔루션을 보유한 여러 파트너사와 협업하여, 고객사의
+              환경에 맞춘 보안 솔루션을 제공합니다.
+            </p>
+        </div>
+        <div className="marquee-wrap">
+          <div className="marquee-track marquee-left">
+            {[...partners, ...partners].map((p, idx) => (
+              <div className="marquee-logo" key={`${p.name}-${idx}`}>
+                <img src={p.img} alt={p.name} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       
@@ -114,6 +115,9 @@ function AboutUs() {
         <div className="about-section-head">
         <div className="about-eyebrow-green">Clients</div>
         <h2>주 고객사</h2>
+        <p>
+          고객사의 비즈니스 성장, 무솔이 가장 가까운 곳에서 함께합니다.
+        </p>
       </div>
       <div className="marquee-wrap">
         <div className="marquee-track marquee-right">

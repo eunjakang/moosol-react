@@ -250,7 +250,7 @@ function Consulting() {
     <section id="consulting">
       <div className="section-title">
         <div className="about-hero-inner">
-          <div className="about-eyebrow">Consulting · 컨설팅</div>
+          <div className="about-eyebrow">IT Consulting · IT 컨설팅</div>
           <h1>네트워크 분리부터 솔루션 구축까지, <br />무솔이 함께합니다.</h1>
           <p>
             물리적·논리적 네트워크 분리부터 기업 환경에 최적화된 보안 솔루션 설계까지 원스톱으로 제공합니다. <br />
