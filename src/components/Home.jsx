@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   nodeDatabase,
@@ -53,7 +53,7 @@ const nodeLabels = {
   dlp: "DLP",
   edr: "EDR",
   ecm: "ECM",
-  client: "Client PC",
+  client: "User PC",
 };
 
 // 노드 들끼리 연결되어 있는 선
@@ -89,6 +89,26 @@ const NODE_TO_SOLUTION_MAP = {
 
 function Home() {
   const [activeNode, setActiveNode] = useState(null);
+
+  const treeRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 } // 트리가 20% 이상 보일 때 발동
+    );
+
+    if (treeRef.current) {
+      observer.observe(treeRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const focusNode = (nodeKey) => {
     if (!nodeDatabase[nodeKey]) return;
@@ -126,25 +146,25 @@ function Home() {
     <section id="home">
       <div className="intro-text">
             <h1>
-              보안의 시작과 끝,
+              기업 IT 인프라부터 AI까지
               <br />
-              <span>무솔이 설계합니다.</span>
+              <span>무솔이 설계하고 구축하고 운영합니다.</span>
             </h1>
             <p>
-              네트워크 인프라부터 통합보안솔루션까지, <br />
-              처음부터 끝까지 책임집니다.
+              기업 규모와 환경에 맞는 최적의 인프라와 보안 체계를 설계합니다.<br />
+              IT 컨설팅 │ 네트워크 구축 │ 서버 구축 │ 보안 솔루션 │ 통합 유지보수 │ AI
             </p>
             <div className="hero-hint">
               <img src="/images/mascot-face.png" alt="가이드 캐릭터" className="hero-hint-mascot" />
               <span className="hero-hint-bubble">
-                <i className="fas fa-computer-mouse"></i> 노드를 클릭하여 경로 연결 및 인터랙티브 방어 애니메이션을 경험하세요.
+                <i className="fas fa-computer-mouse"></i> 무솔이 구축·운영하는 기업 IT 인프라를 클릭하여 서비스를 확인해보세요.
               </span>
             </div>
 
       </div>
       <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
         <div className="left-panel">
-          <div className="topology-tree">
+          <div className={`topology-tree ${isVisible ? "in-view" : ""}`} ref={treeRef}>
             <div
               id="effect-fw"
               className={`effect-element ${activeNode === "firewall" ? "active-firewall-effect" : ""}`}
@@ -197,12 +217,15 @@ function Home() {
               ))}
             </svg>
 
-            {Object.keys(nodePositions).map((key) => (
+            {Object.keys(nodePositions).map((key, index) => (
               <div
                 key={key}
                 className={`node ${activeNodes.includes(key) ? "active" : ""}`}
                 id={`node-${key}`}
-                style={nodePositions[key]}
+                style={{
+                  ...nodePositions[key],
+                  "--node-index": index,
+                }}
                 onClick={() => focusNode(key)}
               >
                 <div className="node-platform">
@@ -270,7 +293,7 @@ function Home() {
               <Link to="/contact-section"
               state={{ initialSolutionId: targetSolutionId }}
               className="btn-more" onClick={closePanel}>
-              문의 하기 <i className="fas fa-arrow-right"></i>
+              구축 상담하기 <i className="fas fa-arrow-right"></i>
               </Link>
             )}
           </div>

@@ -18,18 +18,23 @@ function Header() {
       { to: "/about-us#partners", label: "파트너사" },
     ],
   },
-  { to: "/consulting", label: "컨설팅" },
+   {
+    label: "클로바인",
+    href: "https://clovine.com/kr",
+    external: true,
+  },
+  { to: "/consulting", label: "IT컨설팅" },
   { to: "/system", label: "시스템구축" },
   {
     to: "/server",
-    label: "서버유통",
+    label: "서버공급",
     // children: [
     //   { to: "/server", label: "AI GPU" },
     //   { to: "/server", label: "서버 메모리" },
     //   { to: "/server", label: "서버 스토리지" },
     // ],
   },
-  { to: "/ai", label: "AI 솔루션" },
+  { to: "/ai", label: "LLM · REG 솔루션" },
 ];
 
 return (
@@ -46,13 +51,25 @@ return (
       </Link>
       <nav>
         {navItems.map((item) => (
-          <div className="nav-item" key={item.to}>
-            <NavLink
-              to={item.to}
-              className={({ isActive }) => (isActive ? "active" : "")}
+          <div className="nav-item" key={item.label}>
+            {item.external ? (
+              <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-external-link"
             >
               {item.label}
-            </NavLink>
+              <i className="fas fa-arrow-up-right-from-square"></i>
+            </a>
+            ) : (
+              <NavLink
+                to={item.to}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                {item.label}
+              </NavLink>
+              )}
 
             {item.children && (
               <div className="dropdown-menu">

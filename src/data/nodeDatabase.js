@@ -23,7 +23,7 @@ export const nodeDatabase = {
   firewall: {
     title: "Firewall (방화벽)",
     subtitle: "진화하는 사이버 위협에 대응하는 차세대 방화벽",
-    badge: "EDGE SECURITY",
+    badge: "MOOSOL SERVICE",
     icon: "fa-shield-halved",
     features: [
       "외부 위협 및 비정상 트래픽 실시간 차단",
@@ -44,7 +44,7 @@ export const nodeDatabase = {
   ips: {
     title: "IPS (침입 방지 시스템)",
     subtitle: "네트워크 심층 패킷 정밀 분석 및 방어",
-    badge: "DEEP PACKET INSPECTION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-shield-virus",
     features: [
       "제로데이 공격 및 타깃형 Exploit 실시간 차단",
@@ -63,7 +63,7 @@ export const nodeDatabase = {
   vpn: {
     title: "VPN (가상 사설망)",
     subtitle: "터널링 기술 기반의 초안전 원격 패킷 전송망",
-    badge: "SECURE TUNNELING",
+    badge: "MOOSOL SERVICE",
     icon: "fa-key",
     features: [
       "AES-256 비트 강력한 데이터 암호화 설계",
@@ -83,7 +83,7 @@ export const nodeDatabase = {
   network: {
     title: "Network (스위치 · 망분리)",
     subtitle: "고속 스위칭과 물리적 망분리로 안전하게 재구성된 내부망",
-    badge: "SWITCHING & SEGMENTATION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-network-wired",
     features: [
       "L2/L3 스위칭을 통한 지연 없는 초고속 내부 통신",
@@ -103,7 +103,7 @@ export const nodeDatabase = {
   server: {
     title: "Secure Server Zone",
     subtitle: "데이터 자산 및 업무 애플리케이션 보안 보관소",
-    badge: "DATACENTER SECURITY",
+    badge: "MOOSOL SERVICE",
     icon: "fa-database",
     features: [
       "주요 데이터베이스 암호화 및 완전 격리 가동",
@@ -122,7 +122,7 @@ export const nodeDatabase = {
   nac: {
     title: "NAC (네트워크 접근제어)",
     subtitle: "인가된 사용자와 단말만 연결",
-    badge: "ACCESS CONTROL",
+    badge: "MOOSOL SERVICE",
     icon: "fa-user-shield",
     features: [
       "사용자/단말 기반 네트워크 접근 제어",
@@ -143,7 +143,7 @@ export const nodeDatabase = {
   dac: {
     title: "DAC (데이터베이스 접근 통제)",
     subtitle: "중요 데이터 접근을 통제하고 안전하게 보호하는 DB보안",
-    badge: "DB ACCESS CONTROL",
+    badge: "MOOSOL SERVICE",
     icon: "fa-table-list",
     features: [
       "DB 접근 권한 및 SQL 실행 통제",
@@ -164,7 +164,7 @@ export const nodeDatabase = {
   drm: {
     title: "DRM (문서 암호화)",
     subtitle: "문서 생성부터 폐기까지 보호하는 문서보안",
-    badge: "DOCUMENT ENCRYPTION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-lock",
     features: [
       "중요 문서 자동 암호화 및 권한 기반 접근 제어",
@@ -186,7 +186,7 @@ export const nodeDatabase = {
   dlp: {
     title: "DLP (데이터 유출 방지)",
     subtitle: "중요 정보의 유출을 사전에 차단",
-    badge: "DATA PROTECTION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-file-shield",
     features: [
       "중요 데이터 유출 경로 실시간 통제",
@@ -207,7 +207,7 @@ export const nodeDatabase = {
   edr: {
     title: "EDR (엔드포인트 실시간 탐지)",
     subtitle: "엔드포인트 위협을 실시간 탐지하고 신속하게 대응",
-    badge: "ENDPOINT DETECTION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-laptop-medical",
     features: [
       "엔드포인트 위협 실시간 탐지 및 대응",
@@ -228,7 +228,7 @@ export const nodeDatabase = {
   ecm: {
     title: "ECM (문서중앙화)",
     subtitle: "기업 문서를 중앙에서 안전하고 효율적으로 관리",
-    badge: "ENDPOINT DETECTION",
+    badge: "MOOSOL SERVICE",
     icon: "fa-sitemap",
     features: [
       "기업 문서 중앙 저장 및 통합 관리",
@@ -247,7 +247,7 @@ export const nodeDatabase = {
     graphicRightText: "엔드포인트 보호",
   },
   client: {
-    title: "Secure Client PC",
+    title: "Secure User PC",
     subtitle: "업무 인력이 상주하는 최종 실사용 업무 단말",
     badge: "USER SYSTEM",
     icon: "fa-desktop",

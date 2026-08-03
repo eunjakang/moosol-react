@@ -1,0 +1,58 @@
+export const gpuPackages = [
+  {
+    tag: "ENTRY",
+    title: "2GPU 서버",
+    desc: "AI 입문자 및 소규모 모델 개발자 추천",
+    spec: "L40S / A5000 / A4000",
+    recommended: false,
+    features: [
+      { text: "소규모 LLM 파인튜닝", included: true },
+      { text: "이미지·영상 생성 AI", included: true },
+      { text: "3D 렌더링 · 시각화", included: true },
+      { text: "365일 기술지원", included: true },
+      { text: "멀티노드 학습", included: false },
+    ],
+  },
+  {
+    tag: "DEV",
+    title: "4GPU 서버",
+    desc: "개발자 및 중규모 AI 프로젝트 추천",
+    spec: "A100 / L40S / A6000",
+    recommended: false,
+    features: [
+      { text: "중규모 LLM 훈련", included: true },
+      { text: "멀티 GPU 병렬 처리", included: true },
+      { text: "고성능 AI 추론 서비스", included: true },
+      { text: "365일 기술지원", included: true },
+      { text: "NVLink 지원", included: true },
+    ],
+  },
+  {
+    tag: "RESEARCH",
+    title: "8GPU 서버",
+    desc: "연구기관 및 대규모 AI 모델 연구자 추천",
+    spec: "H100 / A100 / H200",
+    recommended: true,
+    features: [
+      { text: "대규모 LLM 사전학습", included: true },
+      { text: "8-way NVLink 풀 메시", included: true },
+      { text: "HPC · 슈퍼컴퓨팅", included: true },
+      { text: "전담 기술지원 배정", included: true },
+      { text: "InfiniBand 네트워크", included: true },
+    ],
+  },
+  {
+    tag: "ENTERPRISE",
+    title: "10GPU 서버",
+    desc: "기업 전용 AI 인프라 맞춤 설계 구성",
+    spec: "H100 / B200 / 커스텀",
+    recommended: false,
+    features: [
+      { text: "기업 맞춤 설계·구성", included: true },
+      { text: "전용 운영 컨설팅", included: true },
+      { text: "클러스터 확장 지원", included: true },
+      { text: "온사이트 기술지원", included: true },
+      { text: "SLA 보장 계약", included: true },
+    ],
+  },
+];

@@ -11,18 +11,18 @@ export const quizSteps = [
     question: "사내 서버가 있나요?",
     options: ["예", "아니오"],
   },
-  {
-    id: 3,
-    type: "single",
-    question: "중요 문서를 보호해야 하나요?",
-    options: ["예", "아니오"],
-  },
-  {
-    id: 4,
-    type: "single",
-    question: "외부 협력사와 파일을 자주 주고받나요?",
-    options: ["예", "아니오"],
-  },
+  // {
+  //   id: 3,
+  //   type: "single",
+  //   question: "중요 문서를 보호해야 하나요?",
+  //   options: ["예", "아니오"],
+  // },
+  // {
+  //   id: 4,
+  //   type: "single",
+  //   question: "외부 협력사와 파일을 자주 주고받나요?",
+  //   options: ["예", "아니오"],
+  // },
   {
     id: 5,
     type: "multi",

@@ -66,8 +66,9 @@ function RecommendationModal({ recommendation, onClose, onRequestConsult }) {
 }
 
 // 상담 신청 팝업 (이름 / 이메일만 입력받아 메일로 상담 요청)
-function ConsultRequestModal({ onClose, recommendation, answers }) {
-  const [form, setForm] = useState({ name: "", email: "", notes: "" });
+function ConsultRequestModal({ onClose, onSuccess, recommendation, answers }) {
+  const initialForm = { name: "", email: "", notes: "" };
+  const [form, setForm] = useState(initialForm);
   const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
@@ -112,7 +113,7 @@ function ConsultRequestModal({ onClose, recommendation, answers }) {
       name: form.name,
       email: form.email,
       notes: form.notes || "",
-      title: "[5-Step 보안 진단] - 상담 신청",
+      title: "[3-Step 보안 진단] - 상담 신청",
       time: new Date().toLocaleString("ko-KR"),
       message: [buildAnswersText(), buildRecommendationText()].filter(Boolean).join("\n\n"),
     };
@@ -127,7 +128,8 @@ function ConsultRequestModal({ onClose, recommendation, answers }) {
       .then(() => {
         // alert("상담 신청이 접수되었습니다. 담당자가 확인 후 신속하게 연락드리겠습니다!");
         // onClose();
-        onSuccess();
+        setForm(initialForm); // 폼 입력값 초기화
+        if (onSuccess) onSuccess();
       })
       .catch((err) => {
         console.error(err);
@@ -193,7 +195,7 @@ function Consulting() {
   const [answers, setAnswers] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showRecommend, setShowRecommend] = useState(false);
-   const [showSuccess, setShowSuccess] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const currentStep = quizSteps[currentIndex];
   const isLastStep = currentIndex === quizSteps.length - 1;
@@ -274,9 +276,9 @@ function Consulting() {
             <div className="consulting-panel-icon">
               <i className="fas fa-comments"></i>
             </div>
-            <h3>🔒 5-Step 보안 진단</h3>
+            <h3>🔒 3-Step 보안 진단</h3>
             <p>
-              5개의 간단한 질문으로 <br />
+              3개의 간단한 질문으로 <br />
               우리 회사에 필요한 보안 솔루션을 확인해보세요. <br />
             </p>
             <span className="consulting-panel-arrow">
@@ -420,7 +422,9 @@ function Consulting() {
         <SubmitSuccessModal
           onClose={() => setShowSuccess(false)}
           title="상담 신청이 접수됐어요!"
-          message="입력하신 이메일로 추천 솔루션을 보내드렸어요. 담당 엔지니어가 곧 연락드리겠습니다!"
+          message={
+              "담당 엔지니어가 신속하게 연락드리겠습니다!"
+          }
         />
       )}
 

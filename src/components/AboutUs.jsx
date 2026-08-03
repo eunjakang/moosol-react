@@ -92,22 +92,21 @@ function AboutUs() {
           </div>
       </div>
       
-      <div id="partners">
-        <div className="about-section-head">
+      <div className="about-section-head">
         <div className="about-eyebrow-green">Partners</div>
         <h2>파트너사</h2>
+        <p>
+          기술적으로 뛰어난 솔루션을 보유한 여러 파트너사와 협업하여, 고객사의
+          환경에 맞춘 보안 솔루션을 제공합니다.
+        </p>
       </div>
-      <div className="about-partners-grid">
-        {partners.map((p) => (
-          <div className="about-partner-card" key={p.name}>
-            <div className="about-partner-img">
+      <div className="marquee-wrap">
+        <div className="marquee-track marquee-left">
+          {[...partners, ...partners].map((p, idx) => (
+            <div className="marquee-logo" key={`${p.name}-${idx}`}>
               <img src={p.img} alt={p.name} />
             </div>
-            <div className="about-partner-name">{p.name}</div>
-            <div className="about-partner-role">{p.role}</div>
-            <div className="about-partner-tier">{p.tier}</div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
       
@@ -116,12 +115,14 @@ function AboutUs() {
         <div className="about-eyebrow-green">Clients</div>
         <h2>주 고객사</h2>
       </div>
-      <div className="about-clients-grid">
-        {clients.map((c) => (
-          <div className="about-client-card" key={c}>
-            {c}
-          </div>
-        ))}
+      <div className="marquee-wrap">
+        <div className="marquee-track marquee-right">
+          {[...clients, ...clients].map((c, idx) => (
+            <div className="marquee-logo" key={`${c.name}-${idx}`}>
+              <img src={c.img} alt={c.name} />
+            </div>
+          ))}
+        </div>
       </div>
       </div>
 
