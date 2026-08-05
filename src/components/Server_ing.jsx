@@ -5,6 +5,10 @@ import { gpuServer } from "../data/gpuServer";
 import { SERVER_PRODUCTS } from "../data/serverProducts";
 import { GUIDE_DATA } from "../data/serverGuide"; // 선택 가이드 데이터
 import ServerFinder from "./ServerFinder";
+import StorageGuide from "./StorageGuide";
+import { STORAGE_PRODUCTS } from "../data/storageProducts";
+import usePagination from "../hooks/usePagination";
+import Pagination from "./Pagination";
 
 // 상단 탭
 const TABS = [
@@ -31,16 +35,29 @@ const SERVER_FILTER_TABS = [
   // { key: "MID_LARGE", label: "중대형 서버형" },
 ];
 
+// 하단 스토리지 필터 탭 
+const STORAGE_FILTER_TABS = [
+  // { key: "ALL", label: "전체" },
+  { key: "SYN", label: "SYNOLOGY" },
+  { key: "QNAP", label: "QNAP" },
+];
+
 // GPU/AI 탭 컴포넌트
 function GpuAiTab() {
   const [selectedGpuFilter, setSelectedGpuFilter] = useState("ALL");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
   const listRef = useRef(null);
+
+  const filteredProducts =
+    selectedGpuFilter === "ALL"
+      ? gpuServer
+      : gpuServer.filter((item) => item.tag === selectedGpuFilter);
+
+  const { currentPage, totalPages, currentItems, goToPage, goPrev, goNext, resetPage } =
+    usePagination(filteredProducts, 4);
 
   const handleDetailClick = (tag) => {
     setSelectedGpuFilter(tag);
-    setCurrentPage(1);
+    resetPage();
 
     if (listRef.current) {
       listRef.current.scrollIntoView({ behavior: "smooth" });
@@ -49,18 +66,8 @@ function GpuAiTab() {
 
   const handleFilterTabChange = (key) => {
     setSelectedGpuFilter(key);
-    setCurrentPage(1);
+    resetPage();
   };
-
-  const filteredProducts =
-    selectedGpuFilter === "ALL"
-      ? gpuServer
-      : gpuServer.filter((item) => item.tag === selectedGpuFilter);
-
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="gpu-section">
@@ -130,8 +137,8 @@ function GpuAiTab() {
 
         {/* 제품 리스트 */}
         <div className="product-list">
-          {currentProducts.length > 0 ? (
-            currentProducts.map((prod) => (
+          {currentItems.length > 0 ? (
+            currentItems.map((prod) => (
               <div key={prod.id} className="product-card">
                 <div className="product-info-group">
                   <img src={prod.image} alt={prod.name} className="product-img" />
@@ -151,34 +158,13 @@ function GpuAiTab() {
           )}
         </div>
 
-        {/* 3. 페이지네이션 UI */}
-        {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            className="page-btn"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            &lt;
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-            <button
-              key={pageNum}
-              className={`page-btn ${currentPage === pageNum ? "active" : ""}`}
-              onClick={() => setCurrentPage(pageNum)}
-            >
-              {pageNum}
-            </button>
-          ))}
-          <button
-            className="page-btn"
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
-            &gt;
-          </button>
-        </div>
-      )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={goPrev}
+          onNext={goNext}
+          onPageChange={goToPage}
+        />
       </div>
     </div>
   );
@@ -187,16 +173,23 @@ function GpuAiTab() {
 // 서버 탭 컴포넌트
 export function ServerTab() {
   const [selectedFilter, setSelectedFilter] = useState("ALL");
-  const [currentPage, setCurrentPage] = useState(1);
   const [guideTab, setGuideTab] = useState("scale");
-  const itemsPerPage = 4; // 페이지 당 4개 출력
 
   const listRef = useRef(null);
+
+  // 필터링 목록
+  const filteredProducts =
+    selectedFilter === "ALL"
+      ? SERVER_PRODUCTS
+      : SERVER_PRODUCTS.filter((item) => item.tag === selectedFilter);
+
+  const { currentPage, totalPages, currentItems, goToPage, goPrev, goNext, resetPage } =
+    usePagination(filteredProducts, 4);
 
   // 상단 카드 [자세히 보기] 클릭 핸들러
   const handleDetailClick = (tag) => {
     setSelectedFilter(tag);
-    setCurrentPage(1);
+    resetPage();
 
     if (listRef.current) {
       listRef.current.scrollIntoView({ behavior: "smooth" });
@@ -206,20 +199,8 @@ export function ServerTab() {
   // 필터 탭 클릭 핸들러
   const handleFilterChange = (key) => {
     setSelectedFilter(key);
-    setCurrentPage(1);
+    resetPage();
   };
-
-  // 필터링 목록
-  const filteredProducts =
-    selectedFilter === "ALL"
-      ? SERVER_PRODUCTS
-      : SERVER_PRODUCTS.filter((item) => item.tag === selectedFilter);
-
-  // 페이지네이션 계산
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="gpu-section">
@@ -318,8 +299,8 @@ export function ServerTab() {
 
         {/* 제품 리스트 */}
         <div className="product-list">
-          {currentProducts.length > 0 ? (
-            currentProducts.map((prod) => (
+          {currentItems.length > 0 ? (
+            currentItems.map((prod) => (
               <div key={prod.id} className="product-card">
                 <div className="product-info-group">
                   <img src={prod.image} alt={prod.name} className="product-img" />
@@ -339,40 +320,96 @@ export function ServerTab() {
           )}
         </div>
 
-        {/* 3. 페이지네이션 UI */}
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button
-              className="page-btn"
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              &lt;
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-              <button
-                key={pageNum}
-                className={`page-btn ${currentPage === pageNum ? "active" : ""}`}
-                onClick={() => setCurrentPage(pageNum)}
-              >
-                {pageNum}
-              </button>
-            ))}
-            <button
-              className="page-btn"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              &gt;
-            </button>
-          </div>
-        )}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={goPrev}
+          onNext={goNext}
+          onPageChange={goToPage}
+        />
       </div>
     </div>
   );
 }
 
-// 아직 틀만 잡아둔 탭 (서버 / 스토리지)
+
+// 스토리지 탭 컴포넌트
+export function StorageTab() {
+  const [selectedFilter, setSelectedFilter] = useState("SYN");
+  const listRef = useRef(null);
+
+  const filteredProducts = STORAGE_PRODUCTS.filter((item) => item.tag === selectedFilter);
+
+  const { currentPage, totalPages, currentItems, goToPage, goPrev, goNext, resetPage } =
+    usePagination(filteredProducts, 4);
+
+  const handleFilterChange = (key) => {
+    setSelectedFilter(key);
+    resetPage();
+  };
+
+  return (
+    <div className="gpu-section">
+      <StorageGuide />
+
+      <hr className="gpu-divider" style={{ margin: "60px 0 40px", border: "0", borderTop: "1px solid #eee" }} />
+
+      {/* 하단 스토리지 상품 목록 영역 */}
+      <div className="gpu-product-section" ref={listRef}>
+        <div className="filter-header" style={{ marginBottom: "20px" }}>
+          <div className="gpu-filter-tabs" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+            {STORAGE_FILTER_TABS.map((tab) => (
+              <button
+                key={tab.key}
+                className={`gpu-filter-tab ${selectedFilter === tab.key ? "active" : ""}`}
+                onClick={() => handleFilterChange(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
+            전체상품 <strong>{filteredProducts.length}</strong>개
+          </div>
+        </div>
+
+        {/* 제품 리스트 */}
+        <div className="product-list">
+          {currentItems.length > 0 ? (
+            currentItems.map((prod) => (
+              <div key={prod.id} className="product-card">
+                <div className="product-info-group">
+                  <img src={prod.image} alt={prod.name} className="product-img" />
+                  <div className="product-details">
+                    <h4 className="product-name">{prod.name}</h4>
+                    <p className="product-specs">{prod.specs}</p>
+                  </div>
+                </div>
+                <div className="product-action-group">
+                  <div className="product-price">{prod.price}</div>
+                  <button className="quote-btn">견적요청</button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-product">해당하는 스토리지 상품이 없습니다.</div>
+          )}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={goPrev}
+          onNext={goNext}
+          onPageChange={goToPage}
+        />
+      </div>
+    </div>
+  );
+}
+
+// 아직 틀만 잡아둔 탭
 function PlaceholderTab({ label }) {
   return (
     <div className="server-tab-placeholder">
@@ -412,7 +449,7 @@ function Server() {
 
       {activeTab === "gpu-ai" && <GpuAiTab />}
       {activeTab === "server" && <ServerTab />}
-      {activeTab === "storage" && <PlaceholderTab label="스토리지" />}
+      {activeTab === "storage" && <StorageTab />}
     </section>
   );
 }

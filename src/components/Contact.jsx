@@ -33,6 +33,7 @@ function Contact() {
   // console.log("현재 location.state:", location.state);
   // 넘겨받은 state가 있는지 확인
   const initialSolutionId = location.state?.initialSolutionId;
+  const initialMessage = location.state?.initialMessage;
 
   const [form, setForm] = useState(initialForm);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,21 +41,34 @@ function Contact() {
   // const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (initialSolutionId) {
+    if (initialSolutionId || initialMessage) {
       setForm((prevForm) => {
         const currentServices = prevForm.service || [];
-        // 이미 선택된 항목이 아니라면 배열에 추가
-        if (!currentServices.includes(initialSolutionId)) {
-          return {
-            ...prevForm,
-            service: [...currentServices, initialSolutionId]
-          };
-        }
-        return prevForm;
+
+        // 서비스 배열 업데이트 (기존 로직 유지)
+        const shouldAddService =
+          initialSolutionId && !currentServices.includes(initialSolutionId);
+        const updatedServices = shouldAddService
+          ? [...currentServices, initialSolutionId]
+          : currentServices;
+
+        // 문의 사항(message) 업데이트
+        // 이미 message에 해당 사양이 들어있지 않고 initialMessage가 존재할 때만 자동 삽입
+        const shouldUpdateMessage =
+          initialMessage && !prevForm.message.includes(initialMessage);
+        
+        const updatedMessage = shouldUpdateMessage
+          ? `[선택한 사양 정보]\n${initialMessage}\n\n[추가 문의 사항]\n${prevForm.message}`
+          : prevForm.message;
+
+        return {
+          ...prevForm,
+          service: updatedServices,
+          message: updatedMessage,
+        };
       });
     }
-  }, [initialSolutionId]);
-
+}, [location.state]);
   // 유효성 검사 함수
   const validate = () => {
 
@@ -249,7 +263,7 @@ function Contact() {
             <div className="form-group">
               <label>문의 사항</label>
               <textarea
-                rows="4"
+                rows="6"
                 name="message"
                 placeholder="구축 현황, 요구사항, 문의 내용 등을 상세히 작성해주시면 보다 정확한 상담이 가능합니다."
                 value={form.message}

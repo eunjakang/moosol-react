@@ -2827,7 +2827,7 @@ section {
 ---------------------------------- */
 .core-value-section {
   background-color: var(--bg-light);
-  padding: 80px 20px;
+  padding: 30px 20px;
 }
 
 .section-inner {

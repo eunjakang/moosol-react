@@ -59,10 +59,10 @@ export const GUIDE_DATA = {
     },
     {
         type: "DAC",
-        server: "W-L4/W-L8",
+        server: "HPE DL320 Gen11",
         desc: "DB 접근제어 및 로그 수집을 위한 저전력 전용 어플라이언스",
-        serverBadgeColor: "#e8f0fe",
-        serverTextColor: "#1a73e8",
+        serverBadgeColor: "#e6f4ea",
+        serverTextColor: "#137333",
     },
     {
         type: "SAC",

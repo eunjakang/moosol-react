@@ -27,9 +27,9 @@ function ServerFinder() {
   const getOption = (step) => step.options.find((o) => o.id === answers[step.key]);
 
   const summaryState = {
-    initialMessage: FINDER_STEPS.map((s) => `${s.label}: ${getOption(s)?.label || "-"}`).join(
-      " / "
-    ),
+    initialMessage: FINDER_STEPS.map(
+        (s) => `- ${s.label}: ${getOption(s)?.label || "-"}`
+    ).join("\n"),
   };
 
   return (

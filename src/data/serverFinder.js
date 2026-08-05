@@ -62,7 +62,7 @@ export const FINDER_STEPS = [
   {
     key: "disk",
     label: "디스크 용량",
-    title: "추가 장착하실 디스크(SSD/HDD) 용량을 선택해 주세요.",
+    title: "추가 디스크(SSD/HDD) 용량을 선택해 주세요.",
     desc: "저장할 데이터 양에 맞춰 디스크 용량을 정해보세요.",
     options: [
       {
