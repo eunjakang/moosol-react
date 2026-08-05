@@ -180,11 +180,11 @@ function Ai() {
                 data-step={idx}
                 ref={(el) => (stepRefs.current[idx] = el)}
               >
-                <div className="mobile-ui-preview">{step.uiContent}</div>
                 <span className="step-tag">{step.stepLabel}</span>
                 <h2 className="step-title">{step.title}</h2>
                 <h3 className="step-subtitle">{step.subTitle}</h3>
                 <p className="step-desc">{step.description}</p>
+                <div className="mobile-ui-preview">{step.uiContent}</div>
               </div>
             ))}
           </div>
