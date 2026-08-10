@@ -7,6 +7,7 @@ import {
 } from "../data/nodeDatabase";
 import useIsMobile from "../hooks/useIsMobile";
 import HomeMobileList from "./HomeMobileList";
+import HomeNoticePopup from "./HomeNoticePopup";
 
 // 트리 노드 좌표(CSS의 #node-xxx 포지셔닝을 컴포넌트 내부 스타일로 이동)
 //calc(50% - 36px) : 가운데 노드
@@ -147,6 +148,7 @@ function Home() {
 
   return (
     <section id="home">
+      <HomeNoticePopup />
       <div className="intro-text">
             <h1>
               기업 IT 인프라부터 AI까지

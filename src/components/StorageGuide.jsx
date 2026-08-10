@@ -5,9 +5,9 @@ const storageGuideData = {
   synology: [
     {
       id: 1,
-      scale: "소호 / 부서용 (10인 이하)",
+      scale: "소규모 / 부서용 (10인 이하)",
       recommended: "DS224+ / DS423+",
-      desc: "직관적인 DSM OS 기반으로 부서 단위 문서 자동 백업 및 보안 공유에 최적화",
+      desc: "파일 공유 및 협업 환경 구축에 적합, DSM 기반 중앙 관리 지원",
       serverBadgeColor: "#e6f4ea",
       serverTextColor: "#137333",
     },
@@ -15,41 +15,42 @@ const storageGuideData = {
       id: 2,
       scale: "중소기업 (10~50인)",
       recommended: "DS923+ / DS1821+",
-      desc: "랜섬웨어 예방 Snapshot 및 Active Backup을 통한 PC·서버 통합 백업 제공",
-      serverBadgeColor: "#e8f0fe", // 연파랑
-      serverTextColor: "#1a73e8",
-    },
-    {
-      id: 3,
-      scale: "중견·대기업 (50인 이상)",
-      recommended: "SA3610 / HD6500",
-      desc: "초고용량 데이터 센터용 인프라, 페타바이트(PB)급 확장성 및 무중단 이중화 구축",
-      serverBadgeColor: "#fef7e0", // 연노랑
-      serverTextColor: "#b06000",
-    },
-  ],
-  qnap: [
-    {
-      id: 1,
-      scale: "소호 / 부서용 (10인 이하)",
-      recommended: "TS-264 / TS-464",
-      desc: "고성능 쿼드코어 CPU와 M.2 NVMe 캐싱 지원으로 빠른 파일 응답속도 제공",
-      serverBadgeColor: "#e6f4ea",
-      serverTextColor: "#137333",
-    },
-    {
-      id: 2,
-      scale: "중소기업 (10~50인)",
-      recommended: "TVS-h874 / TS-873A",
-      desc: "기본 2.5GbE/10GbE 포트 지원 및 ZFS 파일 시스템으로 데이터 오류 자동 복구",
+      desc: "랜섬웨어 대응 환경 구축에 적합, Snapshot 및 Active Backup 지원",
       serverBadgeColor: "#e8f0fe",
       serverTextColor: "#1a73e8",
     },
     {
       id: 3,
       scale: "중견·대기업 (50인 이상)",
-      recommended: "TDS-h2489FU / QuTS hero",
-      desc: "올플래시(All-Flash) NVMe 전용 구성으로 고성능 가상화 및 초고속 데이터베이스 지원",
+      recommended: "SA3610 / HD6500",
+      desc: "대용량 데이터 저장 환경에 적합, 고가용성(HA) 및 확장성 제공",
+      serverBadgeColor: "#fef7e0",
+      serverTextColor: "#b06000",
+    },
+  ],
+
+  qnap: [
+    {
+      id: 1,
+      scale: "소규모 / 부서용 (10인 이하)",
+      recommended: "TS-264 / TS-464",
+      desc: "고속 파일 서버 구축에 적합, 2.5GbE 및 NVMe 캐시 지원",
+      serverBadgeColor: "#e6f4ea",
+      serverTextColor: "#137333",
+    },
+    {
+      id: 2,
+      scale: "중소기업 (10~50인)",
+      recommended: "TS-873A / TVS-h874",
+      desc: "가상화 환경 구축에 적합, QuTS hero(ZFS) 및 ECC 메모리 지원",
+      serverBadgeColor: "#e8f0fe",
+      serverTextColor: "#1a73e8",
+    },
+    {
+      id: 3,
+      scale: "중견·대기업 (50인 이상)",
+      recommended: "TDS-h2489FU",
+      desc: "엔터프라이즈 스토리지 구축에 적합, All-Flash NVMe 및 고성능 데이터 처리 지원",
       serverBadgeColor: "#fef7e0",
       serverTextColor: "#b06000",
     },

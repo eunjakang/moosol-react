@@ -15,6 +15,7 @@ const TABS = [
   { key: "gpu-ai", label: "GPU/AI" },
   { key: "server", label: "서버" },
   { key: "storage", label: "스토리지" },
+  { key: "etc", label: "기타" },
 ];
 
 // 하단 GPU 필터 탭 (전체 + GPU별)
@@ -368,10 +369,15 @@ export function StorageTab() {
               </button>
             ))}
           </div>
-
+          <div style={{ fontSize: "12px", fontWeight: "bold" }}> 
+            <p>※ 표시된 가격은 NAS 본체 기준 시작가입니다. <br />
+              HDD 용량, RAID 구성 및 설치 환경에 따라 가격이 달라질 수 있으며, 고객 환경에 맞는 최적의 구성으로 견적을 제공합니다.
+            </p>
+          </div>
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
             전체상품 <strong>{filteredProducts.length}</strong>개
           </div>
+          
         </div>
 
         {/* 제품 리스트 */}
@@ -450,6 +456,7 @@ function Server() {
       {activeTab === "gpu-ai" && <GpuAiTab />}
       {activeTab === "server" && <ServerTab />}
       {activeTab === "storage" && <StorageTab />}
+      {activeTab === "etc" && < PlaceholderTab label="기타" />}
     </section>
   );
 }

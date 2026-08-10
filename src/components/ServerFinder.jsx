@@ -86,11 +86,11 @@ function ServerFinder() {
                   <span className="finder-option-label">{opt.label}</span>
                 </div>
                 <p className="finder-option-desc">{opt.desc}</p>
-                <div className="finder-option-stats">
+                {/* <div className="finder-option-stats">
                   <span>
                     <i className="fas fa-tag"></i> 예상가격 {formatPrice(opt.priceMin)} ~ {formatPrice(opt.priceMax)}
                   </span>
-                </div>
+                </div> */}
               </button>
             );
           })}
