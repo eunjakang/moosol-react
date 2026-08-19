@@ -7,6 +7,7 @@ import { GUIDE_DATA } from "../data/serverGuide"; // 선택 가이드 데이터
 import ServerFinder from "./ServerFinder";
 import StorageGuide from "./StorageGuide";
 import { STORAGE_PRODUCTS } from "../data/storageProducts";
+import { ETC_PRODUCTS } from "../data/etcProducts";
 import usePagination from "../hooks/usePagination";
 import Pagination from "./Pagination";
 
@@ -43,6 +44,13 @@ const STORAGE_FILTER_TABS = [
   { key: "QNAP", label: "QNAP" },
 ];
 
+// 하단 기타 필터 탭 
+const ETC_FILTER_TABS = [
+  // { key: "ALL", label: "전체" },
+  { key: "RACK", label: "RACK(서버랙)" },
+  { key: "UPS", label: "UPS" },
+];
+
 // GPU/AI 탭 컴포넌트
 function GpuAiTab() {
   const [selectedGpuFilter, setSelectedGpuFilter] = useState("ALL");
@@ -70,7 +78,10 @@ function GpuAiTab() {
     resetPage();
   };
 
+  
+
   return (
+    
     <div className="gpu-section">
       <div className="gpu-header">
         <span className="gpu-eyebrow">GPU 패키지</span>
@@ -145,12 +156,26 @@ function GpuAiTab() {
                   <img src={prod.image} alt={prod.name} className="product-img" />
                   <div className="product-details">
                     <h4 className="product-name">{prod.name}</h4>
-                    <p className="product-specs">{prod.specs}</p>
+                    <p className="product-specs">
+                      {Array.isArray(prod.specs)
+                        ? prod.specs.map((line, idx) => (
+                            <span className="product-spec-line" key={idx}>
+                              {line}
+                            </span>
+                          ))
+                        : prod.specs}
+                    </p>
                   </div>
                 </div>
                 <div className="product-action-group">
                   <div className="product-price">{prod.price}</div>
-                  <button className="quote-btn">견적요청</button>
+                  <Link
+                    to="/contact-section"
+                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                    className="quote-btn finder-result-cta"
+                  >
+                    견적요청
+                  </Link>
                 </div>
               </div>
             ))
@@ -312,7 +337,13 @@ export function ServerTab() {
                 </div>
                 <div className="product-action-group">
                   <div className="product-price">{prod.price} <span style={{ fontSize: "12px", color: "#888", fontWeight: "normal" }}>(VAT별도)</span></div>
-                  <button className="quote-btn">견적요청</button>
+                  <Link
+                    to="/contact-section"
+                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                    className="quote-btn finder-result-cta"
+                  >
+                    견적요청
+                  </Link>
                 </div>
               </div>
             ))
@@ -394,12 +425,99 @@ export function StorageTab() {
                 </div>
                 <div className="product-action-group">
                   <div className="product-price">{prod.price}</div>
-                  <button className="quote-btn">견적요청</button>
+                  <Link
+                    to="/contact-section"
+                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                    className="quote-btn finder-result-cta"
+                  >
+                    견적요청
+                  </Link>
                 </div>
               </div>
             ))
           ) : (
             <div className="no-product">해당하는 스토리지 상품이 없습니다.</div>
+          )}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={goPrev}
+          onNext={goNext}
+          onPageChange={goToPage}
+        />
+      </div>
+    </div>
+  );
+}
+
+// 기타 탭 컴포넌트
+export function EtcTab() {
+  const [selectedFilter, setSelectedFilter] = useState("RACK");
+  const listRef = useRef(null);
+
+  const filteredProducts = ETC_PRODUCTS.filter((item) => item.tag === selectedFilter);
+
+  const { currentPage, totalPages, currentItems, goToPage, goPrev, goNext, resetPage } =
+    usePagination(filteredProducts, 4);
+
+  const handleFilterChange = (key) => {
+    setSelectedFilter(key);
+    resetPage();
+  };
+
+  return (
+    <div className="gpu-section">
+      {/* 하단 기타 상품 목록 영역 */}
+      <div className="gpu-product-section" ref={listRef}>
+        <div className="filter-header" style={{ marginBottom: "20px" }}>
+          <div className="gpu-filter-tabs" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+            {ETC_FILTER_TABS.map((tab) => (
+              <button
+                key={tab.key}
+                className={`gpu-filter-tab ${selectedFilter === tab.key ? "active" : ""}`}
+                onClick={() => handleFilterChange(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
+            전체상품 <strong>{filteredProducts.length}</strong>개
+          </div>
+          
+        </div>
+
+        {/* 제품 리스트 */}
+        <div className="product-list">
+          {currentItems.length > 0 ? (
+            currentItems.map((prod) => (
+              <div key={prod.id} className="product-card">
+                <div className="product-info-group">
+                  <img src={prod.image} alt={prod.name} className="product-img" />
+                  <div className="product-details">
+                    <span className="guide-pill-badge" style={{ width: "90px", backgroundColor: "#29A640", color: "#f7faf8", fontSize: "12px", padding: "2px 6px", borderRadius: "4px" }}>
+                      {prod.unitBadge}
+                    </span>
+                    <h4 className="product-name">{prod.name}</h4>
+                    <p className="product-specs">{prod.specs}</p>
+                  </div>
+                </div>
+                <div className="product-action-group">
+                  <div className="product-price">{prod.price}</div>
+                  <Link
+                    to="/contact-section"
+                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                    className="quote-btn finder-result-cta"
+                  >
+                    견적요청
+                  </Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="no-product">해당하는 상품이 없습니다.</div>
           )}
         </div>
 
@@ -456,7 +574,7 @@ function Server() {
       {activeTab === "gpu-ai" && <GpuAiTab />}
       {activeTab === "server" && <ServerTab />}
       {activeTab === "storage" && <StorageTab />}
-      {activeTab === "etc" && < PlaceholderTab label="기타" />}
+      {activeTab === "etc" && <EtcTab />}
     </section>
   );
 }

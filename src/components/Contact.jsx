@@ -34,6 +34,7 @@ function Contact() {
   // 넘겨받은 state가 있는지 확인
   const initialSolutionId = location.state?.initialSolutionId;
   const initialMessage = location.state?.initialMessage;
+  const productName = location.state?.productName;
 
   const [form, setForm] = useState(initialForm);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -65,6 +66,20 @@ function Contact() {
           ...prevForm,
           service: updatedServices,
           message: updatedMessage,
+        };
+      });
+    }
+
+    if (productName) {
+      const productTag = `[견적 문의 상품] ${productName}`;
+
+      setForm((prevForm) => {
+        if (prevForm.message.includes(productTag)) {
+          return prevForm; // 이미 들어있으면 그대로 두기 (중복 방지)
+        }
+        return {
+          ...prevForm,
+          message: `${productTag}\n\n${prevForm.message}`,
         };
       });
     }

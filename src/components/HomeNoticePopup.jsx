@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 // 이미지나 링크가 바뀌면 이 부분만 수정하면 됩니다.
 const NOTICE = {
   id: "2026-jeonbuk-bm", // 공지가 바뀌면 이 id도 바꿔주세요 (안 바꾸면 '오늘 하루 보지 않기' 설정이 새 공지에도 적용됨)
-  image: "/images/notices/popup.jpg",
+  image: "/images/notices/popup.png",
   alt: "충남 정보보호 신규 비즈니스 모델 발굴 지원사업 안내",
   link: null, // 이미지를 클릭했을 때 이동할 페이지 (없으면 null)
+  size: { width: 500, height: 600 }, // 팝업 이미지 크기 (px)
 };
 
 const STORAGE_KEY = `noticePopupHideUntil:${NOTICE.id}`;
