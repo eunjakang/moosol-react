@@ -14,7 +14,7 @@ function Layout() {
       <Outlet />
       <Footer />
       <ScrollToTopButton />
-      {/* <ExternalChatWidget /> */}
+      <ExternalChatWidget />
     </>
   );
 }

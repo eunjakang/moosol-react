@@ -497,9 +497,9 @@ export function EtcTab() {
                 <div className="product-info-group">
                   <img src={prod.image} alt={prod.name} className="product-img" />
                   <div className="product-details">
-                    <span className="guide-pill-badge" style={{ width: "90px", backgroundColor: "#29A640", color: "#f7faf8", fontSize: "12px", padding: "2px 6px", borderRadius: "4px" }}>
+                    {/* <span className="guide-pill-badge" style={{ width: "90px", backgroundColor: "#29A640", color: "#f7faf8", fontSize: "12px", padding: "2px 6px", borderRadius: "4px" }}>
                       {prod.unitBadge}
-                    </span>
+                    </span> */}
                     <h4 className="product-name">{prod.name}</h4>
                     <p className="product-specs">{prod.specs}</p>
                   </div>

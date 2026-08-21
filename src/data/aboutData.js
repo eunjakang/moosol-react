@@ -79,6 +79,7 @@ export const partners = [
   { name: "충남", role: "총판", tier: "파트너", img: "/images/partners/cva.png" },
   { name: "대신", role: "", tier: "파트너", img: "/images/partners/dasin.png" },
   { name: "빔", role: "", tier: "파트너", img: "/images/partners/veeam.png" },
+  { name: "포티넷", role: "", tier: "파트너", img: "/images/partners/fortinet.png" },
 ];
 
 export const clients = [

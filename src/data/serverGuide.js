@@ -2,8 +2,8 @@ export const GUIDE_DATA = {
   // 1. 규모별 가이드 데이터
   scale: [
     {
-      type: "소호 / 소규모 사무실 (10인 이하)",
-      server: "Dell PowerEdge T150 / R250",
+      type: "소규모 사무실 (10인 이하)",
+      server: "Supermicro SYS-510P / HPE ProLiant MicroServer Gen10 Plus",
       storage: "NAS (2-Bay)",
       desc: "비용 효율적, 저소음, 파일 공유 및 기초 인프라용",
       serverBadgeColor: "#e6f4ea", // 연초록
@@ -23,7 +23,7 @@ export const GUIDE_DATA = {
     },
     {
       type: "중견·대기업 (50인 이상)",
-      server: "Dell R640 / HPE DL380 Gen10",
+      server: "HPE ProLiant DL380 Gen10 / Supermicro SYS-1029U",
       storage: "SAN / High-End NAS",
       desc: "고성능 이중화, 대규모 가상화 및 통합 DB 구축",
       serverBadgeColor: "#fef7e0", // 연노랑
