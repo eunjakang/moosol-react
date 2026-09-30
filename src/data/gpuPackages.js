@@ -1,8 +1,8 @@
 export const gpuPackages = [
   {
     tag: "ENTRY",
-    title: "2GPU 서버",
-    desc: "AI 입문 및 경량화 모델 개발용",
+    title: "2GPU",
+    desc: "AI 추론 / 개발용",
     spec: "L40S / A5000 / A4000",
     recommended: false,
     features: [
@@ -15,8 +15,8 @@ export const gpuPackages = [
   },
   {
     tag: "DEV",
-    title: "4GPU 서버",
-    desc: "중소규모 AI 워크로드 및 추론 최적화",
+    title: "4GPU",
+    desc: "LLM 파인튜닝 / 딥러닝",
     spec: "A100 / L40S / A6000",
     recommended: false,
     features: [
@@ -29,8 +29,8 @@ export const gpuPackages = [
   },
   {
     tag: "RESEARCH",
-    title: "8GPU 서버",
-    desc: "초거대 AI 사전학습 및 고성능 연구용",
+    title: "8GPU",
+    desc: "대규모 AI 학습 / HPC",
     spec: "H100 / A100 / H200",
     recommended: true,
     features: [
@@ -43,8 +43,8 @@ export const gpuPackages = [
   },
   {
     tag: "ENTERPRISE",
-    title: "10GPU+ 서버",
-    desc: "기업 전용 맞춤형 AI 인프라 구축",
+    title: "10GPU+",
+    desc: "엔터프라이즈 맞춤 구축",
     spec: "H100 / B200 / 맞춤 구성",
     recommended: false,
     features: [

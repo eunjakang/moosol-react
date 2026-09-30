@@ -148,7 +148,7 @@ function Home() {
 
   return (
     <section id="home">
-      <HomeNoticePopup />
+      {/* <HomeNoticePopup /> */}
       <div className="intro-text">
             <h1>
               기업 IT 인프라부터 AI까지

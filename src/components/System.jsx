@@ -26,71 +26,86 @@ const roadmapSteps = [
 const wheelItems = [
   {
     label: "스토리지",
+    title: "Storage",
+    icon: "fas fa-database",
     angle: 0,
     desc: "중요한 데이터를 안전하게 저장하고 안정적으로 운영합니다.",
     etc: [
-      "용량 관리 및 증설",
-      "RAID 상태 점검",
+      "스토리지 운영 및 관리",
+      "실시간 용량 모니터링",
+      "RAID 구성 및 성능 최적화",
       "스토리지 장애 대응",
-      "성능 분석"
+      "I/O 병목 구간 및 성능 분석/최적화"
     ]
   },
   {
     label: "서버",
+    title: "Server",
+    icon: "fas fa-server",
     angle: 60,
     desc: "기업의 핵심 서비스를 안정적으로 운영하기 위한 서버 환경을 관리합니다.",
     etc: [
-      "Windows / Linux 서버 운영",
-      "OS 및 보안 패치 관리",
-      "장애 분석 및 복구 지원",
-      "성능 튜닝 및 최적화"
+      "Windows / Linux 서버 전반 운영 관리",
+      "OS 최신 패치, 보안 업데이트",
+      "HW/SW 장애 원인 분석 및 신속 복구 지원",
+      "CPU, RAM, DISK 릴소스 성능 튜닝 및 최적화",
+      "서버 가상화 및 클라우드 환경 관리"
     ]
   },
   {
     label: "백업 · 복구",
+    title: "Backup & Recovery",
+    icon: "fas fa-shield-virus",
     angle: 120,
     desc: "장애 발생 시 신속한 복구를 통해 업무 연속성을 확보합니다.",
     etc: [
-      "정기 백업 관리",
-      "복구 테스트",
-      "백업 정책 수립",
-      "장애 복구 지원",
-      "데이터 무결성 확인"
+      "일일/주간/월간 정기 데이터 백업 스케줄 관리",
+      "백업 무결성 검증 및 복구 테스트 수행",
+      "기업 맞춤형 백업 정책 수립",
+      "데이터 즉시 복구 지원",
+      "랜섬웨어 전용 백업 솔루션 운영"
     ]
   },
   {
     label: "보안솔루션",
+    title: "Security",
+    icon: "fas fa-user-shield",
     angle: 180,
     desc: "다양한 보안 솔루션을 통합 운영하여 위협에 대응합니다.",
     etc: [
       "방화벽 정책 관리",
-      "VPN 운영",
-      "NAC 운영",
-      "EDR / DRM / DLP 관리",
-      "로그 분석 및 보안 점검"
+      "안전한 원격 접속을 위한 SSL-VPN 운영",
+      "NAC 정책 모니터링",
+      "엔드포인트 보안(EDR / DRM / DLP) 관리",
+      "로그 실시간 분석 및 정기 점검 리포트"
     ]
   },
   {
     label: "DB",
+    title: "Database",
+    icon: "fas fa-coins",
     angle: 240,
     desc: "데이터베이스의 안정성과 성능을 지속적으로 관리합니다.",
     etc: [
-      "백업 및 복구 지원",
-      "성능 튜닝",
-      "장애 분석",
-      "운영 정책 관리"
+      "Oracle / MS-SQL / MySQL 운영 지원",
+      "트랜잭션 백업 및 장애 복구",
+      "슬로우 쿼리 및 락 성능 튜닝",
+      "데이터 무결성 점검",
+      "접근 제어 및 암호화 등 보안 정책 운영"
     ]
   },
   {
     label: "네트워크",
+    title: "Network",
+    icon: "fas fa-network-wired",
     angle: 300,
     desc: "끊임없이 안정적인 네트워크 환경을 유지하고 장애를 최소화 합니다.",
     etc: [
-      "L2 / L3 / 백본 운영",
-      "라우팅 및 VLAN 관리",
-      "네트워크 장애 분석",
-      "회선 상태 점검",
-      "구성 변경 및 최적화"
+      "L2 / L3 스위치, 백본 운영",
+      "VLAN 설정 및 효율적인 라우팅 정책 관리",
+      "네트워크 병목 및 장애 트래픽 정밀 분석",
+      "전용 회선 상태 및 대역폭 실시간 점검",
+      "장비 구성 변경 및 토폴로지 최적화"
     ]
   },
 ];
@@ -220,9 +235,28 @@ const triggerWaveAnimation = () => {
           <div className="about-eyebrow-green">Maintenance</div>
           <h2>통합 유지보수</h2>
           <p>
-            하드웨어와 소프트웨어를 개별적으로 관리하지 않고,  <br />
-            (주)무솔을 통해 체계적으로 통합 관리 · 운영합니다.
+            서버, 스토리지부터 백업, 보안 솔루션까지-  <br />
+            다양한 IT자산을 단일 창구로 일괄 관리하여 운영 효율을 높이고 장애 위험을 최소화합니다.
           </p>
+        </div>
+        <div className="section-inner2">
+          <div className="value-grid">
+            <div className="value-card">
+              <div className="icon"><i className="fas fa-headset"></i></div>
+              <h3>단일 창구 통합 관리</h3>
+              <p>제조사마다 제각각인 문의 창구를 하나로 통합하여 장애 발생 시 빠른 원인 파악 및 원스톱 처리</p>
+            </div>
+            <div className="value-card">
+              <div className="icon"><i className="fas fa-bolt"></i></div>
+              <h3>24/7 지원 & 긴급 장애 대응</h3>
+              <p>전문 기술 엔지니어의 실시간 모니터링, 원격 지원 및 필요시 신속한 현장방문 지원</p>
+            </div>
+            <div className="value-card">
+              <div className="icon"><i className="fas fa-wrench"></i></div>
+              <h3>정기 점검 & 예방 정비</h3>
+              <p>주기적인 시스템 점검, OS/부품 패치 관리, 기술 리포트 발행으로 장애 사전 예방</p>
+            </div>
+          </div>
         </div>
         <div className="wheel-section-container">
           <div className="wheel-wrap">
@@ -291,9 +325,9 @@ const triggerWaveAnimation = () => {
             {activeItem && (
               <>
                 <div className="wheel-desc-title">
-                  <i className="fas fa-circle-check"></i> {activeItem.label}
+                  <i className={`${activeItem.icon}`}></i> {activeItem.label} ({activeItem.title})
                 </div>
-                <p className="wheel-desc-text">{activeItem.desc}</p>
+                {/* <p className="wheel-desc-text">{activeItem.desc}</p> */}
                 <div className="wheel-desc-list">
                   {activeItem.etc.map((e) => (
                     <div key={e}>

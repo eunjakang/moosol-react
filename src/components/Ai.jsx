@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { GUIDE_DATA } from "../data/aiGuide";
 
 function Ai() {
   const [activeStep, setActiveStep] = useState(0);
   const stepRefs = useRef([]);
+  const [guideTab, setGuideTab] = useState("scale");
 
   useEffect(() => {
     const observerOptions = {
@@ -154,6 +156,65 @@ function Ai() {
               <p>기존 ERP/CRM 및 사내 시스템과 완벽히 연동되는 자동화 에이전트를 구축합니다.</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="ai-guide">
+        <div className="selection-guide-section">
+              <div className="gpu-header">
+                <span className="gpu-eyebrow">SELECTION GUIDE</span>
+                <h2 className="gpu-title">AI 도입 <span className="highlight">선택 가이드</span></h2>
+                <p className="gpu-subtitle">기업의 규모와 데이터 보안, 예산 환경에 맞는 최적의 AI 모델 및 구축 방식을 안내해 드립니다.</p>
+              </div>
+      
+              {/* 규모별 / 솔루션별 탭 스위치 */}
+              <div className="guide-tab-toggle">
+                <button
+                  className={`guide-toggle-btn ${guideTab === "scale" ? "active" : ""}`}
+                  onClick={() => setGuideTab("scale")}
+                >
+                  규모/보안 환경별
+                </button>
+                <button
+                  className={`guide-toggle-btn ${guideTab === "usage" ? "active" : ""}`}
+                  onClick={() => setGuideTab("usage")}
+                >
+                  도입 목적별
+                </button>
+              </div>
+      
+              {/* 가이드 테이블 */}
+              <div className="guide-table-wrapper">
+                <table className="guide-table">
+                  <thead>
+                    <tr>
+                      <th>{guideTab === "scale" ? "구분" : "도입 목적"}</th>
+                      <th>추천 서버</th>
+                      {/* <th>추천 스토리지</th> */}
+                      <th>설명</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {GUIDE_DATA[guideTab].map((item, index) => (
+                      <tr key={index}>
+                        <td className="guide-type-cell">{item.type}</td>
+                        <td>
+                          <span
+                            className="guide-pill-badge"
+                            style={{
+                              backgroundColor: item.serverBadgeColor,
+                              color: item.serverTextColor,
+                            }}
+                          >
+                            {item.model}
+                          </span>
+                        </td>
+                        <td className="guide-desc-cell">{item.desc}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
         </div>
       </div>
 

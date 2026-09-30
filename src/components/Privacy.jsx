@@ -73,7 +73,7 @@ function Privacy() {
         </div>
       </div>
 
-      <div className="privacy-section">
+      {/* <div className="privacy-section">
         <h2>제 4 조 (개인정보의 제공 및 위탁)</h2>
         <p>
           회사는 이용자의 동의 없이 개인정보를 외부에 제공하지 않습니다. 단,
@@ -95,10 +95,10 @@ function Privacy() {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
 
       <div className="privacy-section">
-        <h2>제 5 조 (개인정보 파기절차 및 방법)</h2>
+        <h2>제 4 조 (개인정보 파기절차 및 방법)</h2>
         <p>개인정보 처리 목적이 달성된 경우 지체 없이 파기합니다.</p>
         <div className="privacy-card">
           <ul>
@@ -114,7 +114,7 @@ function Privacy() {
       </div>
 
       <div className="privacy-section">
-        <h2>제 6 조 (개인정보 관리책임자 및 담당자)</h2>
+        <h2>제 5 조 (개인정보 관리책임자 및 담당자)</h2>
         <p>
           상담 신청 시 발생할 수 있는 개인정보 관련 문의사항은 아래의
           관리책임자에게 문의해 주시기 바랍니다.
@@ -143,7 +143,7 @@ function Privacy() {
       </div>
 
       <div className="privacy-section">
-        <h2>제 7 조 (권익침해 구제방법)</h2>
+        <h2>제 6 조 (권익침해 구제방법)</h2>
         <p>
           기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에
           문의하시기 바랍니다.

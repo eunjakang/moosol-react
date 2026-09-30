@@ -40,8 +40,9 @@ const SERVER_FILTER_TABS = [
 // 하단 스토리지 필터 탭 
 const STORAGE_FILTER_TABS = [
   // { key: "ALL", label: "전체" },
-  { key: "SYN", label: "SYNOLOGY" },
-  { key: "QNAP", label: "QNAP" },
+  { key: "SYN", label: "SYNOLOGY NAS" },
+  { key: "QNAP", label: "QNAP NAS" },
+  { key: "HPE", label: "HPE Storage" },
 ];
 
 // 하단 기타 필터 탭 
@@ -121,7 +122,7 @@ function GpuAiTab() {
               className="gpu-cta-btn"
               onClick={() => handleDetailClick(pkg.tag)}
             >
-              자세히 보기
+              상품 보기
             </button>
           </div>
         ))}
@@ -140,6 +141,11 @@ function GpuAiTab() {
                 {tab.label}
               </button>
             ))}
+          </div>
+
+          <div style={{ fontSize: "12px", fontWeight: "bold" }}> 
+            <p>※ 완제품 서버 임대뿐만 아니라 GPU 단품 대여 및 맞춤 구성도 가능합니다. <br />
+            </p>
           </div>
 
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
@@ -402,7 +408,7 @@ export function StorageTab() {
           </div>
           <div style={{ fontSize: "12px", fontWeight: "bold" }}> 
             <p>※ 표시된 가격은 NAS 본체 기준 시작가입니다. <br />
-              HDD 용량, RAID 구성 및 설치 환경에 따라 가격이 달라질 수 있으며, 고객 환경에 맞는 최적의 구성으로 견적을 제공합니다.
+              HDD 용량, RAID 구성 및 설치 환경에 따라 가격이 달라질 수 있으며, <br />고객 환경에 맞는 최적의 구성으로 견적을 제공합니다.
             </p>
           </div>
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
@@ -550,11 +556,11 @@ function Server() {
     <section id="server">
       <div className="section-title">
         <div className="about-hero-inner">
-          <div className="about-eyebrow">GPU & Memory & Server · 유통</div>
+          <div className="about-eyebrow">GPU & Memory & Server · 유통 & 임대</div>
           <h1>AI와 IT인프라의 핵심, <br />무솔이 가장 확실하게 공급합니다.</h1>
           <p>
             급변하는 IT·AI 수요에 맞춰 최신 GPU, 메모리, 정품 서버를 신속하게 공급합니다. <br />
-            고객사 환경에 최적화된 부품 조합과 합리적인 견적으로 성공적인 구축을 지원합니다.
+            LLM, AI 딥러닝, 렌더링에 최적화된 최신 GPU 인프라를 월/년 단위로 제공합니다.
           </p>
         </div>
       </div>

@@ -49,7 +49,7 @@ function Header() {
     { to: "/system", label: "시스템구축" },
     {
       to: "/server",
-      label: "서버공급",
+      label: "서버공급 · 임대",
     },
     { to: "/ai", label: "LLM · RAG 솔루션" },
   ];

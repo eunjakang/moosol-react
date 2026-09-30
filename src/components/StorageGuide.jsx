@@ -69,7 +69,7 @@ const StorageGuide = () => {
             스토리지 <span className="highlight">선택 가이드</span>
             </h2>
             <p className="gpu-subtitle">
-            브랜드와 규모에 따라 최적의 NAS 스토리지 구성을 안내해 드립니다.
+            브랜드와 규모에 따라 최적의 스토리지 구성을 안내해 드립니다.
             </p>
         </div>
 

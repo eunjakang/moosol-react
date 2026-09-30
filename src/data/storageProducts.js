@@ -66,4 +66,38 @@ export const STORAGE_PRODUCTS = [
     price: "3,600,000원~",
     image: "/images/server/q-4.png",
   },
+
+  // HPE
+  {
+    id: "msa 1060/2060",
+    tag: "HPE",
+    name: "MSA 1060/2060",
+    specs: "2U Base (12 Bay LFF / 24 Bay SFF) | 최대 9개 확장 셸프 지원",
+    price: "견적 문의",
+    image: "/images/server/h1.png",
+  },
+  {
+    id: "alletra mp",
+    tag: "HPE",
+    name: "Alletra MP",
+    specs: "2U Base (24 Bay NVMe SFF) | 차세대 모듈형 Block/File",
+    price: "견적 문의",
+    image: "/images/server/h2.png",
+  },
+  {
+    id: "alletra 9000",
+    tag: "HPE",
+    name: "Alletra 9000",
+    specs: "4U Base Chassis (48 Bay NVMe SFF) | High-End Mission Critical",
+    price: "견적 문의",
+    image: "/images/server/h3.png",
+  },
+  {
+    id: "storeonce",
+    tag: "HPE",
+    name: "StoreOnce",
+    specs: "2U Base (12 Bay LFF) | 대용량 백업 & 중복제거 전용 스토리지",
+    price: "견적 문의",
+    image: "/images/server/h4.png",
+  },
 ];

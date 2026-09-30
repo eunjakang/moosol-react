@@ -1836,6 +1836,9 @@ section {
 }
 
 #maintenance {margin-top: 40px; padding: 10px 20px 40px;}
+.section-inner2 {
+    max-width: 1100px; margin: 0 auto; padding: 10px 44px 10px;
+}
 /* 전체 레이아웃 컨테이너 */
 .wheel-section-container {
   position: relative;
@@ -1844,14 +1847,14 @@ section {
   align-items: center;
   /* width: 100%; */
   /* min-height: 550px; */
-  padding: 40px 0;
+  padding: 10px 0;
 }
 
 /* 클릭 시 나타나는 상세 패널 (휠 위치에 영향 주지 않음) */
 .wheel-desc-panel {
   position: absolute;
   top: 50%;
-  width: 280px;
+  width: 330px;
   background: #ffffff;
   padding: 24px 20px;
   border-radius: 16px;
@@ -1867,13 +1870,13 @@ section {
 
 /* 왼쪽 배치 스타일 */
 .wheel-desc-panel.pos-left {
-  left: 5%;
+  left: 2%;
   transform: translateY(-50%) translateX(-20px);
 }
 
 /* 오른쪽 배치 스타일 */
 .wheel-desc-panel.pos-right {
-  right: 5%;
+  right: 2%;
   transform: translateY(-50%) translateX(20px);
 }
 
@@ -1902,7 +1905,7 @@ section {
 
 /* 본문 설명글 */
 .wheel-desc-text {
-  font-size: 0.95rem;
+  font-size: 16px;
   color: #555555;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -1913,6 +1916,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-size: 14px;
 }
 
 /* etc 각각의 항목 */
@@ -2913,6 +2917,10 @@ section {
 .core-value-section {
   background-color: var(--bg-light);
   padding: 30px 20px;
+}
+
+.ai-guide {
+  padding: 30px 50px;
 }
 
 .section-inner {
