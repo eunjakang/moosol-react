@@ -1,153 +1,246 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const roadmapSteps = [
   {
     no: "01",
-    title: "컨설팅",
-    items: ["요구사항 분석", "도입 솔루션 검토"],
+    title: { ko: "컨설팅", en: "Consulting" },
+    items: {
+      ko: ["요구사항 분석", "도입 솔루션 검토"],
+      en: ["Requirements Analysis", "Solution Review"],
+    },
   },
   {
     no: "02",
-    title: "현장 실사",
-    items: ["네트워크 & 보안 현황 점검", "이슈/개선사항 도출"],
+    title: { ko: "현장 실사", en: "On-site Assessment" },
+    items: {
+      ko: ["네트워크 & 보안 현황 점검", "이슈/개선사항 도출"],
+      en: ["Network & Security Status Review", "Identify Issues & Improvements"],
+    },
   },
   {
     no: "03",
-    title: "현황 분석 및 설계",
-    items: ["목표 아키텍처 상세 설계", "단계별 이행 계획 및 자원 산출"],
+    title: { ko: "현황 분석 및 설계", en: "Analysis & Design" },
+    items: {
+      ko: ["목표 아키텍처 상세 설계", "단계별 이행 계획 및 자원 산출"],
+      en: ["Detailed Target Architecture Design", "Phased Implementation Plan & Resource Estimation"],
+    },
   },
   {
     no: "04",
-    title: "시스템 구축",
-    items: ["통합 테스트 및 안정화 지원"],
+    title: { ko: "시스템 구축", en: "System Build" },
+    items: {
+      ko: ["통합 테스트 및 안정화 지원"],
+      en: ["Integration Testing & Stabilization Support"],
+    },
   },
 ];
 
+// id: 조각 선택 상태(hover/active/wave) 추적용 고정 식별자 (언어 전환해도 안 바뀜)
+// nameKo/nameEn: 조각/패널에 보여줄 이름, desc/etc: 다국어 설명
 const wheelItems = [
   {
-    label: "스토리지",
-    title: "Storage",
+    id: "storage",
+    nameKo: "스토리지",
+    nameEn: "Storage",
     icon: "fas fa-database",
     angle: 0,
-    desc: "중요한 데이터를 안전하게 저장하고 안정적으로 운영합니다.",
-    etc: [
-      "스토리지 운영 및 관리",
-      "실시간 용량 모니터링",
-      "RAID 구성 및 성능 최적화",
-      "스토리지 장애 대응",
-      "I/O 병목 구간 및 성능 분석/최적화"
-    ]
+    desc: {
+      ko: "중요한 데이터를 안전하게 저장하고 안정적으로 운영합니다.",
+      en: "Safely stores important data and operates it reliably.",
+    },
+    etc: {
+      ko: [
+        "스토리지 운영 및 관리",
+        "실시간 용량 모니터링",
+        "RAID 구성 및 성능 최적화",
+        "스토리지 장애 대응",
+        "I/O 병목 구간 및 성능 분석/최적화",
+      ],
+      en: [
+        "Storage operation and management",
+        "Real-time capacity monitoring",
+        "RAID configuration and performance optimization",
+        "Storage incident response",
+        "I/O bottleneck analysis and performance optimization",
+      ],
+    },
   },
   {
-    label: "서버",
-    title: "Server",
+    id: "server",
+    nameKo: "서버",
+    nameEn: "Server",
     icon: "fas fa-server",
     angle: 60,
-    desc: "기업의 핵심 서비스를 안정적으로 운영하기 위한 서버 환경을 관리합니다.",
-    etc: [
-      "Windows / Linux 서버 전반 운영 관리",
-      "OS 최신 패치, 보안 업데이트",
-      "HW/SW 장애 원인 분석 및 신속 복구 지원",
-      "CPU, RAM, DISK 릴소스 성능 튜닝 및 최적화",
-      "서버 가상화 및 클라우드 환경 관리"
-    ]
+    desc: {
+      ko: "기업의 핵심 서비스를 안정적으로 운영하기 위한 서버 환경을 관리합니다.",
+      en: "Manages the server environment to reliably run your core business services.",
+    },
+    etc: {
+      ko: [
+        "Windows / Linux 서버 전반 운영 관리",
+        "OS 최신 패치, 보안 업데이트",
+        "HW/SW 장애 원인 분석 및 신속 복구 지원",
+        "CPU, RAM, DISK 릴소스 성능 튜닝 및 최적화",
+        "서버 가상화 및 클라우드 환경 관리",
+      ],
+      en: [
+        "Overall operation management of Windows / Linux servers",
+        "Latest OS patches and security updates",
+        "Root-cause analysis and rapid recovery for HW/SW failures",
+        "CPU, RAM, and disk resource performance tuning and optimization",
+        "Server virtualization and cloud environment management",
+      ],
+    },
   },
   {
-    label: "백업 · 복구",
-    title: "Backup & Recovery",
+    id: "backup",
+    nameKo: "백업 · 복구",
+    nameEn: "Backup & Recovery",
     icon: "fas fa-shield-virus",
     angle: 120,
-    desc: "장애 발생 시 신속한 복구를 통해 업무 연속성을 확보합니다.",
-    etc: [
-      "일일/주간/월간 정기 데이터 백업 스케줄 관리",
-      "백업 무결성 검증 및 복구 테스트 수행",
-      "기업 맞춤형 백업 정책 수립",
-      "데이터 즉시 복구 지원",
-      "랜섬웨어 전용 백업 솔루션 운영"
-    ]
+    desc: {
+      ko: "장애 발생 시 신속한 복구를 통해 업무 연속성을 확보합니다.",
+      en: "Ensures business continuity through rapid recovery in the event of a failure.",
+    },
+    etc: {
+      ko: [
+        "일일/주간/월간 정기 데이터 백업 스케줄 관리",
+        "백업 무결성 검증 및 복구 테스트 수행",
+        "기업 맞춤형 백업 정책 수립",
+        "데이터 즉시 복구 지원",
+        "랜섬웨어 전용 백업 솔루션 운영",
+      ],
+      en: [
+        "Daily / weekly / monthly scheduled backup management",
+        "Backup integrity verification and recovery testing",
+        "Custom backup policy design for each business",
+        "Immediate data recovery support",
+        "Dedicated ransomware backup solution operation",
+      ],
+    },
   },
   {
-    label: "보안솔루션",
-    title: "Security",
+    id: "security",
+    nameKo: "보안솔루션",
+    nameEn: "Security",
     icon: "fas fa-user-shield",
     angle: 180,
-    desc: "다양한 보안 솔루션을 통합 운영하여 위협에 대응합니다.",
-    etc: [
-      "방화벽 정책 관리",
-      "안전한 원격 접속을 위한 SSL-VPN 운영",
-      "NAC 정책 모니터링",
-      "엔드포인트 보안(EDR / DRM / DLP) 관리",
-      "로그 실시간 분석 및 정기 점검 리포트"
-    ]
+    desc: {
+      ko: "다양한 보안 솔루션을 통합 운영하여 위협에 대응합니다.",
+      en: "Operates multiple security solutions in an integrated way to respond to threats.",
+    },
+    etc: {
+      ko: [
+        "방화벽 정책 관리",
+        "안전한 원격 접속을 위한 SSL-VPN 운영",
+        "NAC 정책 모니터링",
+        "엔드포인트 보안(EDR / DRM / DLP) 관리",
+        "로그 실시간 분석 및 정기 점검 리포트",
+      ],
+      en: [
+        "Firewall policy management",
+        "SSL-VPN operation for secure remote access",
+        "NAC policy monitoring",
+        "Endpoint security (EDR / DRM / DLP) management",
+        "Real-time log analysis and periodic inspection reports",
+      ],
+    },
   },
   {
-    label: "DB",
-    title: "Database",
+    id: "database",
+    nameKo: "DB",
+    nameEn: "Database",
     icon: "fas fa-coins",
     angle: 240,
-    desc: "데이터베이스의 안정성과 성능을 지속적으로 관리합니다.",
-    etc: [
-      "Oracle / MS-SQL / MySQL 운영 지원",
-      "트랜잭션 백업 및 장애 복구",
-      "슬로우 쿼리 및 락 성능 튜닝",
-      "데이터 무결성 점검",
-      "접근 제어 및 암호화 등 보안 정책 운영"
-    ]
+    desc: {
+      ko: "데이터베이스의 안정성과 성능을 지속적으로 관리합니다.",
+      en: "Continuously manages database stability and performance.",
+    },
+    etc: {
+      ko: [
+        "Oracle / MS-SQL / MySQL 운영 지원",
+        "트랜잭션 백업 및 장애 복구",
+        "슬로우 쿼리 및 락 성능 튜닝",
+        "데이터 무결성 점검",
+        "접근 제어 및 암호화 등 보안 정책 운영",
+      ],
+      en: [
+        "Operational support for Oracle / MS-SQL / MySQL",
+        "Transaction backup and disaster recovery",
+        "Slow query and lock performance tuning",
+        "Data integrity checks",
+        "Security policy operations including access control and encryption",
+      ],
+    },
   },
   {
-    label: "네트워크",
-    title: "Network",
+    id: "network",
+    nameKo: "네트워크",
+    nameEn: "Network",
     icon: "fas fa-network-wired",
     angle: 300,
-    desc: "끊임없이 안정적인 네트워크 환경을 유지하고 장애를 최소화 합니다.",
-    etc: [
-      "L2 / L3 스위치, 백본 운영",
-      "VLAN 설정 및 효율적인 라우팅 정책 관리",
-      "네트워크 병목 및 장애 트래픽 정밀 분석",
-      "전용 회선 상태 및 대역폭 실시간 점검",
-      "장비 구성 변경 및 토폴로지 최적화"
-    ]
+    desc: {
+      ko: "끊임없이 안정적인 네트워크 환경을 유지하고 장애를 최소화 합니다.",
+      en: "Maintains a consistently stable network environment and minimizes downtime.",
+    },
+    etc: {
+      ko: [
+        "L2 / L3 스위치, 백본 운영",
+        "VLAN 설정 및 효율적인 라우팅 정책 관리",
+        "네트워크 병목 및 장애 트래픽 정밀 분석",
+        "전용 회선 상태 및 대역폭 실시간 점검",
+        "장비 구성 변경 및 토폴로지 최적화",
+      ],
+      en: [
+        "L2 / L3 switch and backbone operation",
+        "VLAN configuration and efficient routing policy management",
+        "In-depth analysis of network bottlenecks and failure traffic",
+        "Real-time monitoring of leased line status and bandwidth",
+        "Equipment configuration changes and topology optimization",
+      ],
+    },
   },
 ];
 
 const POP_DISTANCE = 14; // 호버/선택 시 조각이 밀려나는 거리
 
-// 구분선(spoke)은 항목 사이 경계선 → 6개, 60도 간격
-const spokeAngles = [30, 90, 150, 210, 270, 330];
-
 function System() {
-  const [hoveredLabel, setHoveredLabel] = useState(null);
-  const [activeLabel, setActiveLabel] = useState(null);
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
 
-  const [waveLabel, setWaveLabel] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);
+  const [activeId, setActiveId] = useState(null);
+
+  const [waveId, setWaveId] = useState(null);
   const waveIntervalRef = useRef(null);
 
-// 2. 더블클릭 시 실행될 파도타기 함수
-const triggerWaveAnimation = () => {
-  if (waveIntervalRef.current) clearInterval(waveIntervalRef.current);
+  // 더블클릭 시 실행될 파도타기 함수
+  const triggerWaveAnimation = () => {
+    if (waveIntervalRef.current) clearInterval(waveIntervalRef.current);
 
-  setActiveLabel(null);
+    setActiveId(null);
 
-  let index = 0;
-  waveIntervalRef.current = setInterval(() => {
-    if (index < wheelItems.length) {
-      setWaveLabel(wheelItems[index].label);
-      index++;
-    } else {
-      setWaveLabel(null);
-      clearInterval(waveIntervalRef.current);
-    }
-  }, 250);
-};
+    let index = 0;
+    waveIntervalRef.current = setInterval(() => {
+      if (index < wheelItems.length) {
+        setWaveId(wheelItems[index].id);
+        index++;
+      } else {
+        setWaveId(null);
+        clearInterval(waveIntervalRef.current);
+      }
+    }, 250);
+  };
 
-  const size = 300;      // SVG 캔버스 크기
+  const size = 300; // SVG 캔버스 크기
   const padding = 10;
-  const svgSize = size + padding * 2; 
+  const svgSize = size + padding * 2;
   const cx = size / 2;
   const cy = size / 2;
-  const outerR = 140;    // 바깥 원 반지름
+  const outerR = 140; // 바깥 원 반지름
   const innerR = 48;
-  const labelR = 95;    // 라벨이 배치될 반지름
+  const labelR = 95; // 라벨이 배치될 반지름
 
   // 각도를 라디안으로 변환해 (x, y) 좌표 계산
   const toXY = (angleDeg, r) => {
@@ -183,28 +276,41 @@ const triggerWaveAnimation = () => {
     };
   };
 
-  const activeItem = wheelItems.find((item) => item.label === activeLabel);
+  const activeItem = wheelItems.find((item) => item.id === activeId);
+
+  // 현재 언어 기준 메인 이름 / 괄호 안 보조 이름 (ko면 "스토리지 (Storage)", en이면 "Storage (스토리지)")
+  const getNames = (item) => {
+    const primary = lang === "en" ? item.nameEn : item.nameKo;
+    const secondary = lang === "en" ? item.nameKo : item.nameEn;
+    return { primary, secondary };
+  };
 
   return (
     <section id="system">
       <div className="section-title">
         <div className="about-hero-inner">
-          <div className="about-eyebrow">System · 시스템 구축</div>
-          <h1>비즈니스의 뼈대를 세우고, <br />미래의 확장을 설계합니다.</h1>
+          <div className="about-eyebrow">{t("system.eyebrowMain")}</div>
+          <h1>
+            {t("system.heroTitle1")} <br />
+            {t("system.heroTitle2")}
+          </h1>
           <p>
-            단순히 프로그램을 설치하는 것을 넘어 기업의 성장과 안정성을 위한 기반을 마련합니다. <br />
-            안정적인 인프라 설계부터 맞춤형 솔루션 통합까지, 최적의 환경을 구현합니다.
+            {t("system.heroDesc1")} <br />
+            {t("system.heroDesc2")}
           </p>
         </div>
       </div>
       <div id="system-info">
         <div className="about-section-head">
           <div className="about-eyebrow-green">SI System</div>
-          <h2>SI 시스템 구축</h2>
+          <h2>{t("system.siTitle")}</h2>
           <p>
-            고객 IT 인프라에 대한 종합적인 구축과 체계적인 통합운영 서비스를 제공합니다. <br />
-            <span style={{ color: "#29a640", fontWeight: "bold" }}>세부 구축 방식 및 아키텍처는 사업장별 환경과 요구사항에 따라 상이하며,<br />
-            사전 컨설팅 및 별도 협의를 통해 맞춤형으로 진행됩니다.</span>
+            {t("system.siDesc1")} <br />
+            <span style={{ color: "#29a640", fontWeight: "bold" }}>
+              {t("system.siDesc2Line1")}
+              <br />
+              {t("system.siDesc2Line2")}
+            </span>
           </p>
         </div>
         <div className="roadmap">
@@ -219,9 +325,9 @@ const triggerWaveAnimation = () => {
           <div className="roadmap-columns">
             {roadmapSteps.map((step) => (
               <div className="roadmap-col" key={step.no}>
-                <h4>{step.title}</h4>
+                <h4>{step.title[lang]}</h4>
                 <ul>
-                  {step.items.map((item, idx) => (
+                  {step.items[lang].map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
@@ -229,32 +335,38 @@ const triggerWaveAnimation = () => {
             ))}
           </div>
         </div>
-      </div> 
+      </div>
       <div id="maintenance">
         <div className="about-section-head">
           <div className="about-eyebrow-green">Maintenance</div>
-          <h2>통합 유지보수</h2>
+          <h2>{t("system.maintenanceTitle")}</h2>
           <p>
-            서버, 스토리지부터 백업, 보안 솔루션까지-  <br />
-            다양한 IT자산을 단일 창구로 일괄 관리하여 운영 효율을 높이고 장애 위험을 최소화합니다.
+            {t("system.maintenanceDesc1")} <br />
+            {t("system.maintenanceDesc2")}
           </p>
         </div>
         <div className="section-inner2">
           <div className="value-grid">
             <div className="value-card">
-              <div className="icon"><i className="fas fa-headset"></i></div>
-              <h3>단일 창구 통합 관리</h3>
-              <p>제조사마다 제각각인 문의 창구를 하나로 통합하여 장애 발생 시 빠른 원인 파악 및 원스톱 처리</p>
+              <div className="icon">
+                <i className="fas fa-headset"></i>
+              </div>
+              <h3>{t("system.value1Title")}</h3>
+              <p>{t("system.value1Desc")}</p>
             </div>
             <div className="value-card">
-              <div className="icon"><i className="fas fa-bolt"></i></div>
-              <h3>24/7 지원 & 긴급 장애 대응</h3>
-              <p>전문 기술 엔지니어의 실시간 모니터링, 원격 지원 및 필요시 신속한 현장방문 지원</p>
+              <div className="icon">
+                <i className="fas fa-bolt"></i>
+              </div>
+              <h3>{t("system.value2Title")}</h3>
+              <p>{t("system.value2Desc")}</p>
             </div>
             <div className="value-card">
-              <div className="icon"><i className="fas fa-wrench"></i></div>
-              <h3>정기 점검 & 예방 정비</h3>
-              <p>주기적인 시스템 점검, OS/부품 패치 관리, 기술 리포트 발행으로 장애 사전 예방</p>
+              <div className="icon">
+                <i className="fas fa-wrench"></i>
+              </div>
+              <h3>{t("system.value3Title")}</h3>
+              <p>{t("system.value3Desc")}</p>
             </div>
           </div>
         </div>
@@ -265,20 +377,19 @@ const triggerWaveAnimation = () => {
               {wheelItems.map((item) => {
                 const startAngle = item.angle - 30;
                 const endAngle = item.angle + 30;
-                const isPopped = hoveredLabel === item.label || activeLabel === item.label || waveLabel === item.label;
+                const isPopped = hoveredId === item.id || activeId === item.id || waveId === item.id;
                 const offset = isPopped ? popOffset(item.angle) : { x: 0, y: 0 };
                 const labelPos = toXY(item.angle, labelR);
+                const { primary } = getNames(item);
 
                 return (
                   <g
-                    key={item.label}
+                    key={item.id}
                     className={`wheel-segment ${isPopped ? "popped" : ""}`}
                     style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
-                    onMouseEnter={() => setHoveredLabel(item.label)}
-                    onMouseLeave={() => setHoveredLabel(null)}
-                    onClick={() =>
-                      setActiveLabel((prev) => (prev === item.label ? null : item.label))
-                    }
+                    onMouseEnter={() => setHoveredId(item.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    onClick={() => setActiveId((prev) => (prev === item.id ? null : item.id))}
                   >
                     <path d={wedgePath(startAngle, endAngle)} className="wheel-wedge" />
                     <text
@@ -288,7 +399,7 @@ const triggerWaveAnimation = () => {
                       dominantBaseline="middle"
                       className="wheel-label"
                     >
-                      {item.label}
+                      {primary}
                     </text>
                   </g>
                 );
@@ -296,9 +407,9 @@ const triggerWaveAnimation = () => {
 
               {/* 가운데 원 (클릭 시 선택 해제) */}
               <g
-                onClick={() => setActiveLabel(null)}
+                onClick={() => setActiveId(null)}
                 onDoubleClick={triggerWaveAnimation}
-                style={{ cursor: activeLabel ? "pointer" : "default" }}
+                style={{ cursor: activeId ? "pointer" : "default" }}
               >
                 <circle cx={cx} cy={cy} r={innerR} className="wheel-center-circle" />
                 <text
@@ -308,7 +419,7 @@ const triggerWaveAnimation = () => {
                   dominantBaseline="middle"
                   className="wheel-center-text"
                 >
-                  통합유지보수
+                  {t("system.wheelCenter")}
                 </text>
               </g>
             </svg>
@@ -325,11 +436,11 @@ const triggerWaveAnimation = () => {
             {activeItem && (
               <>
                 <div className="wheel-desc-title">
-                  <i className={`${activeItem.icon}`}></i> {activeItem.label} ({activeItem.title})
+                  <i className={`${activeItem.icon}`}></i>{" "}
+                  {getNames(activeItem).primary} ({getNames(activeItem).secondary})
                 </div>
-                {/* <p className="wheel-desc-text">{activeItem.desc}</p> */}
                 <div className="wheel-desc-list">
-                  {activeItem.etc.map((e) => (
+                  {activeItem.etc[lang].map((e) => (
                     <div key={e}>
                       <i className="fas fa-circle"></i> {e}
                     </div>
@@ -339,7 +450,7 @@ const triggerWaveAnimation = () => {
             )}
           </div>
         </div>
-      </div> 
+      </div>
     </section>
   );
 }

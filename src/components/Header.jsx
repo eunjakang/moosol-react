@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function Header() {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
 
-  // 페이지 이동 시 모바일 메뉴 자동 닫기
   useEffect(() => {
     setIsMenuOpen(false);
     setExpandedMenu(null);
   }, [location.pathname]);
 
-  // 모바일 메뉴 열렸을 때 화면 스크롤 방지
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -32,41 +33,44 @@ function Header() {
   const navItems = [
     {
       to: "/about-us",
-      label: "회사소개",
+      label: t("header.nav.about"),
       children: [
-        { to: "/about-us#greeting", label: "회사 정보" },
-        { to: "/about-us#history", label: "회사 연혁" },
-        { to: "/about-us#certified", label: "인증/자격" },
-        { to: "/about-us#partners", label: "파트너사" },
+        { to: "/about-us#greeting", label: t("header.nav.aboutInfo") },
+        { to: "/about-us#history", label: t("header.nav.aboutHistory") },
+        { to: "/about-us#certified", label: t("header.nav.certified") },
+        { to: "/about-us#partners", label: t("header.nav.partners") },
       ],
     },
     {
-      label: "클로바인",
+      label: t("header.clovine"),
       href: "https://clovine.com/kr",
       external: true,
     },
-    { to: "/consulting", label: "IT컨설팅" },
-    { to: "/system", label: "시스템구축" },
+    { to: "/consulting", label: t("header.nav.consulting") },
+    { to: "/system", label: t("header.nav.system") },
     {
       to: "/server",
-      label: "서버공급 · 임대",
+      label: t("header.nav.server"),
     },
-    { to: "/ai", label: "LLM · RAG 솔루션" },
+    { to: "/ai", label: t("header.nav.ai") },
   ];
 
   return (
     <header>
       <div className="header-container">
         {/* 로고 영역 */}
-        <Link to="/" className="logo">
-          <img src="/images/logo.png" alt="MOOSOL" />
-          <img
-            src="/images/face2.png"
-            alt=""
-            className="logo-mascot"
-            aria-hidden="true"
-          />
-        </Link>
+        <div className="header-left">
+          <Link to="/" className="logo">
+            <img src="/images/logo.png" alt="MOOSOL" />
+            <img
+              src="/images/face2.png"
+              alt=""
+              className="logo-mascot"
+              aria-hidden="true"
+            />
+          </Link>
+          <LanguageSwitcher />
+        </div>
 
         {/* 모바일 햄버거 버튼 */}
         <button
@@ -108,7 +112,6 @@ function Header() {
                   </NavLink>
                 )}
 
-                {/* 모바일에서 서브메뉴가 있는 항목 펼침/접기 버튼 */}
                 {item.children && (
                   <button
                     className="mobile-submenu-toggle"
@@ -120,7 +123,6 @@ function Header() {
                 )}
               </div>
 
-              {/* 드롭다운 메뉴 */}
               {item.children && (
                 <div className="dropdown-menu">
                   {item.children.map((child) => (
@@ -139,7 +141,7 @@ function Header() {
 
           {/* 문의하기 버튼 */}
           <Link to="/contact-section" className="btn-contact">
-            문의하기
+            {t("header.contact")}
           </Link>
         </nav>
 

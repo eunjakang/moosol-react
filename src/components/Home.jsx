@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   nodeDatabase,
   defaultActiveNodes,
@@ -68,29 +69,30 @@ const allPaths = [
   { id: "path-network-server", d: "M 500 295 L 500 380" },
   { id: "path-server-nac", d: "M 500 415 L 110 470" },
   { id: "path-server-edr", d: "M 500 415 L 210 540" },
-  { id: "path-server-dac", d: "M 500 415 L 360 545" }, 
-  { id: "path-server-drm", d: "M 500 415 L 650 545" }, // dac랑 대칭
-  { id: "path-server-dlp", d: "M 500 415 L 790 540" }, // edr이랑 대칭
-  { id: "path-server-ecm", d: "M 500 415 L 900 470" }, // nac랑 대칭
+  { id: "path-server-dac", d: "M 500 415 L 360 545" },
+  { id: "path-server-drm", d: "M 500 415 L 650 545" },
+  { id: "path-server-dlp", d: "M 500 415 L 790 540" },
+  { id: "path-server-ecm", d: "M 500 415 L 900 470" },
   { id: "path-server-client", d: "M 500 415 L 500 600" },
 ];
 
 // 1. activeNode ID -> 문의 페이지 SOLUTIONS ID 매핑
 const NODE_TO_SOLUTION_MAP = {
   firewall: 'FW',
-  ips: 'ETC',    
-  vpn: 'ETC',      
+  ips: 'ETC',
+  vpn: 'ETC',
   network: 'NETWORK',
   server: 'SERVER',
   nac: 'NAC',
   dac: 'DAC',
   drm: 'DRM',
   dlp: 'DLP',
-  edr: 'ETC',      
+  edr: 'ETC',
   ecm: 'ECM'
 };
 
 function Home() {
+  const { t } = useTranslation();
   const [activeNode, setActiveNode] = useState(null);
   const isMobile = useIsMobile(700);
 
@@ -140,8 +142,18 @@ function Home() {
   const activeNodes = getActiveNodes();
   const activePaths = getActivePaths();
 
-  // 패널에 표시할 데이터 (기본값은 원본 HTML 초기 마크업과 동일하게 Firewall)
-  const panelData = nodeDatabase[activeNode || "firewall"];
+  // 패널에 표시할 데이터 (기본값은 Firewall)
+  // nodeDatabase.js = 구조 정보(아이콘/배지/경로), t()로 가져오는 값 = 실제 텍스트(다국어)
+  const nodeKey = activeNode || "firewall";
+  const panelData = {
+    ...nodeDatabase[nodeKey],
+    title: t(`nodeDatabase.${nodeKey}.title`),
+    subtitle: t(`nodeDatabase.${nodeKey}.subtitle`),
+    features: t(`nodeDatabase.${nodeKey}.features`, { returnObjects: true }),
+    effects: t(`nodeDatabase.${nodeKey}.effects`, { returnObjects: true }),
+    graphicLeftText: t(`nodeDatabase.${nodeKey}.graphicLeftText`),
+    graphicRightText: t(`nodeDatabase.${nodeKey}.graphicRightText`),
+  };
 
   const hideInquiryButton = activeNode === "internet" || activeNode === "client";
   const targetSolutionId = NODE_TO_SOLUTION_MAP[activeNode];
@@ -150,166 +162,167 @@ function Home() {
     <section id="home">
       {/* <HomeNoticePopup /> */}
       <div className="intro-text">
-            <h1>
-              기업 IT 인프라부터 AI까지
-              <br />
-              <span>무솔이 설계하고 구축하고 운영합니다.</span>
-            </h1>
-            <p>
-              기업 규모와 환경에 맞는 최적의 인프라와 보안 체계를 설계합니다.<br />
-              IT 컨설팅 │ 네트워크 구축 │ 서버 구축 │ 보안 솔루션 │ 통합 유지보수 │ AI
-            </p>
-            <div className="hero-hint">
-              <img src="/images/mascot-face.png" alt="가이드 캐릭터" className="hero-hint-mascot" />
-              <span className="hero-hint-bubble">
-                <i className="fas fa-computer-mouse"></i> 무솔이 구축·운영하는 기업 IT 인프라를 클릭하여 서비스를 확인해보세요.
-              </span>
-            </div>
+        <h1>
+          {t("home.heroTitleLine1")}
+          <br />
+          <span>{t("home.heroTitleLine2")}</span>
+        </h1>
+        <p>
+          {t("home.heroDesc1")}<br />
+          {t("home.heroDesc2")}
+        </p>
+        <div className="hero-hint">
+          <img src="/images/mascot-face.png" alt="가이드 캐릭터" className="hero-hint-mascot" />
+          <span className="hero-hint-bubble">
+            <i className="fas fa-computer-mouse"></i> {t("home.hint")}
+          </span>
+        </div>
       </div>
       {isMobile ? (
-            <HomeMobileList />
-          ) : (
-      <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
-        <div className="left-panel">
-          <div className={`topology-tree ${isVisible ? "in-view" : ""}`} ref={treeRef}>
-            <div
-              id="effect-fw"
-              className={`effect-element ${activeNode === "firewall" ? "active-firewall-effect" : ""}`}
-            >
-              <i className="fas fa-skull"></i>
-            </div>
-            <div
-              id="firewall-barrier"
-              className="shield-barrier"
-              style={{ display: activeNode === "firewall" ? "block" : "none" }}
-            ></div>
-
-            <div
-              id="effect-nac"
-              className={`effect-element ${activeNode === "nac" ? "active-nac-effect" : ""}`}
-            >
-              <i className="fas fa-desktop"></i>
-            </div>
-            <div
-              id="nac-barrier"
-              className="shield-barrier"
-              style={{ display: activeNode === "nac" ? "block" : "none" }}
-            ></div>
-
-            <div
-              id="effect-dlp"
-              className={`effect-element ${activeNode === "dlp" ? "active-dlp-effect" : ""}`}
-            >
-              <i className="fas fa-hard-drive"></i>
-            </div>
-            <div
-              id="dlp-barrier"
-              className="shield-barrier"
-              style={{ display: activeNode === "dlp" ? "block" : "none" }}
-            >
-            </div>
-
-            <svg
-              className="connection-svg"
-              viewBox="0 0 1000 650"
-              preserveAspectRatio="none"
-            >
-              {allPaths.map((path) => (
-                <path
-                  key={path.id}
-                  id={path.id}
-                  className={`network-path ${activePaths.includes(path.id) ? "active" : ""}`}
-                  d={path.d}
-                />
-              ))}
-            </svg>
-
-            {Object.keys(nodePositions).map((key, index) => (
+        <HomeMobileList />
+      ) : (
+        <div className={`hero-container ${activeNode ? "panel-active" : ""}`} id="hero-main">
+          <div className="left-panel">
+            <div className={`topology-tree ${isVisible ? "in-view" : ""}`} ref={treeRef}>
               <div
-                key={key}
-                className={`node ${activeNodes.includes(key) ? "active" : ""}`}
-                id={`node-${key}`}
-                style={{
-                  ...nodePositions[key],
-                  "--node-index": index,
-                }}
-                onClick={() => focusNode(key)}
+                id="effect-fw"
+                className={`effect-element ${activeNode === "firewall" ? "active-firewall-effect" : ""}`}
               >
-                <div className="node-platform">
-                  <i className={`fas ${nodeIcons[key]}`}></i>
-                </div>
-                <span>{nodeLabels[key]}</span>
+                <i className="fas fa-skull"></i>
               </div>
-            ))}
-          </div>
-        </div>
+              <div
+                id="firewall-barrier"
+                className="shield-barrier"
+                style={{ display: activeNode === "firewall" ? "block" : "none" }}
+              ></div>
 
-        {/* 우측 상세 정보 패널 */}
-        {!isMobile && (
-          <div className="right-panel-wrapper" id="detail-panel-wrapper">
-          <div className="right-panel">
-            <button className="btn-close-panel" onClick={closePanel}>
-              <i className="fas fa-times"></i>
-            </button>
-            <div className="detail-card">
-              <div className="detail-badge">{panelData.badge}</div>
-              <h2 className="detail-title">{panelData.title}</h2>
-              <p className="detail-subtitle">{panelData.subtitle}</p>
-              <div className="detail-graphic">
-                <div className="graphic-side">
-                  <i
-                    className={`fas ${panelData.graphicLeftIcon}`}
-                    style={{ color: "#ff9100" }}
-                  ></i>
-                  <span>{panelData.graphicLeftText}</span>
-                </div>
-                <div className="graphic-center">
-                  <i className="fas fa-angles-right arrow-flow"></i>
-                  <i className={`fas ${panelData.icon}`}></i>
-                  <i className="fas fa-angles-right arrow-flow"></i>
-                </div>
-                <div className="graphic-side">
-                  <i
-                    className={`fas ${panelData.graphicRightIcon}`}
-                    style={{ color: "var(--primary-green)" }}
-                  ></i>
-                  <span>{panelData.graphicRightText}</span>
-                </div>
+              <div
+                id="effect-nac"
+                className={`effect-element ${activeNode === "nac" ? "active-nac-effect" : ""}`}
+              >
+                <i className="fas fa-desktop"></i>
               </div>
-              <ul className="detail-features">
-                {panelData.features.map((feature, idx) => (
-                  <li className="feature-item" key={idx}>
-                    <i className="fas fa-circle-check"></i> {feature}
-                  </li>
+              <div
+                id="nac-barrier"
+                className="shield-barrier"
+                style={{ display: activeNode === "nac" ? "block" : "none" }}
+              ></div>
+
+              <div
+                id="effect-dlp"
+                className={`effect-element ${activeNode === "dlp" ? "active-dlp-effect" : ""}`}
+              >
+                <i className="fas fa-hard-drive"></i>
+              </div>
+              <div
+                id="dlp-barrier"
+                className="shield-barrier"
+                style={{ display: activeNode === "dlp" ? "block" : "none" }}
+              >
+              </div>
+
+              <svg
+                className="connection-svg"
+                viewBox="0 0 1000 650"
+                preserveAspectRatio="none"
+              >
+                {allPaths.map((path) => (
+                  <path
+                    key={path.id}
+                    id={path.id}
+                    className={`network-path ${activePaths.includes(path.id) ? "active" : ""}`}
+                    d={path.d}
+                  />
                 ))}
-              </ul>
-              <ul className="detail-effects">
-                {panelData?.effects?.length > 0 && (
-                  <p style={{ fontSize: "15px" }}>
-                    <b>[도입 효과]</b>
-                  </p>
-                )}
-                {/* <spn>{panelData.effect}</spn> */}
-                {panelData.effects.map((effect, idx) => (
-                  <li className="effect-item" key={idx}>
-                    <i className="fas fa-bolt-lightning"></i> {effect}
-                  </li>
-                ))}
-              </ul>
+              </svg>
+
+              {Object.keys(nodePositions).map((key, index) => (
+                <div
+                  key={key}
+                  className={`node ${activeNodes.includes(key) ? "active" : ""}`}
+                  id={`node-${key}`}
+                  style={{
+                    ...nodePositions[key],
+                    "--node-index": index,
+                  }}
+                  onClick={() => focusNode(key)}
+                >
+                  <div className="node-platform">
+                    <i className={`fas ${nodeIcons[key]}`}></i>
+                  </div>
+                  <span>{nodeLabels[key]}</span>
+                </div>
+              ))}
             </div>
-            {!hideInquiryButton && (
-              <Link to="/contact-section"
-              state={{ initialSolutionId: targetSolutionId }}
-              className="btn-more" onClick={closePanel}>
-              구축 상담하기 <i className="fas fa-arrow-right"></i>
-              </Link>
-            )}
           </div>
-          </div>
-        )}
-      </div>
+
+          {/* 우측 상세 정보 패널 */}
+          {!isMobile && (
+            <div className="right-panel-wrapper" id="detail-panel-wrapper">
+              <div className="right-panel">
+                <button className="btn-close-panel" onClick={closePanel}>
+                  <i className="fas fa-times"></i>
+                </button>
+                <div className="detail-card">
+                  <div className="detail-badge">{panelData.badge}</div>
+                  <h2 className="detail-title">{panelData.title}</h2>
+                  <p className="detail-subtitle">{panelData.subtitle}</p>
+                  <div className="detail-graphic">
+                    <div className="graphic-side">
+                      <i
+                        className={`fas ${panelData.graphicLeftIcon}`}
+                        style={{ color: "#ff9100" }}
+                      ></i>
+                      <span>{panelData.graphicLeftText}</span>
+                    </div>
+                    <div className="graphic-center">
+                      <i className="fas fa-angles-right arrow-flow"></i>
+                      <i className={`fas ${panelData.icon}`}></i>
+                      <i className="fas fa-angles-right arrow-flow"></i>
+                    </div>
+                    <div className="graphic-side">
+                      <i
+                        className={`fas ${panelData.graphicRightIcon}`}
+                        style={{ color: "var(--primary-green)" }}
+                      ></i>
+                      <span>{panelData.graphicRightText}</span>
+                    </div>
+                  </div>
+                  <ul className="detail-features">
+                    {panelData.features.map((feature, idx) => (
+                      <li className="feature-item" key={idx}>
+                        <i className="fas fa-circle-check"></i> {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="detail-effects">
+                    {panelData?.effects?.length > 0 && (
+                      <p style={{ fontSize: "15px" }}>
+                        <b>{t("home.effectLabel")}</b>
+                      </p>
+                    )}
+                    {panelData.effects.map((effect, idx) => (
+                      <li className="effect-item" key={idx}>
+                        <i className="fas fa-bolt-lightning"></i> {effect}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {!hideInquiryButton && (
+                  <Link
+                    to="/contact-section"
+                    state={{ initialSolutionId: targetSolutionId }}
+                    className="btn-more"
+                    onClick={closePanel}
+                  >
+                    {t("home.consultBtn")} <i className="fas fa-arrow-right"></i>
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       )}
-      
     </section>
   );
 }

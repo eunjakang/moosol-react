@@ -1,0 +1,364 @@
+{
+  "header": {
+    "clovine": "Clovine",
+    "nav": {
+      "about": "About Us",
+      "aboutInfo": "Company Info",
+      "aboutHistory": "History",
+      "certified": "Certifications",
+      "partners": "Partners",
+      "consulting": "IT Consulting",
+      "system": "System Build",
+      "server": "Server Supply & Rental",
+      "ai": "LLM · RAG Solutions"
+    },
+    "contact": "Contact Us"
+  },
+  "home": {
+    "heroTitleLine1": "From Enterprise IT Infrastructure to AI",
+    "heroTitleLine2": "MOOSOL designs, builds, and operates it all.",
+    "heroDesc1": "We design the optimal infrastructure and security system for your company's scale and environment.",
+    "heroDesc2": "IT Consulting │ Network Build │ Server Build │ Security Solutions │ Integrated Maintenance │ AI",
+    "hint": "Click on the enterprise IT infrastructure MOOSOL builds and operates to see our services.",
+    "consultBtn": "Request a Consultation",
+    "effectLabel": "[Benefits]"
+  },
+  "nodeDatabase": {
+    "internet": {
+      "title": "Internet",
+      "subtitle": "The gateway to the world and the starting point of security",
+      "features": [
+        "Stable integration with external public cloud infrastructure",
+        "Secured bandwidth and optimized packet routing",
+        "Connection to the global internet backbone and traffic interworking"
+      ],
+      "effects": [],
+      "graphicLeftText": "Public Network",
+      "graphicRightText": "Security Gateway"
+    },
+    "firewall": {
+      "title": "Firewall",
+      "subtitle": "Next-generation firewall that responds to evolving cyber threats",
+      "features": [
+        "Real-time blocking of external threats and abnormal traffic",
+        "Precise intrusion detection powered by an IPS engine",
+        "Accurate packet filtering based on L4-L7 session state"
+      ],
+      "effects": [
+        "Policy control at the application/user level",
+        "Proactive response to the latest cyberattacks and unauthorized traffic",
+        "Unified perimeter security monitoring for maximum operational efficiency"
+      ],
+      "graphicLeftText": "Malicious Attack",
+      "graphicRightText": "Secure Internal Network"
+    },
+    "ips": {
+      "title": "IPS (Intrusion Prevention System)",
+      "subtitle": "In-depth packet analysis and defense for the network",
+      "features": [
+        "Real-time blocking of zero-day attacks and targeted exploits",
+        "Real-time updates of the latest global threat signatures",
+        "Deep packet inspection (DPI) via in-line deployment"
+      ],
+      "effects": [],
+      "graphicLeftText": "Vulnerability Threat",
+      "graphicRightText": "Safe Zone"
+    },
+    "vpn": {
+      "title": "VPN (Virtual Private Network)",
+      "subtitle": "Ultra-secure remote transmission network based on tunneling technology",
+      "features": [
+        "Robust AES-256 bit data encryption design",
+        "Device/user verification with multi-factor authentication (MFA)",
+        "Efficient data transmission via split tunneling"
+      ],
+      "effects": [
+        "Secure access to the internal network for remote/work-from-home environments",
+        "Granular session control based on individual user access rights"
+      ],
+      "graphicLeftText": "Remote Workforce",
+      "graphicRightText": "Encrypted Bridge"
+    },
+    "network": {
+      "title": "Network (Switching & Segmentation)",
+      "subtitle": "Internal network securely restructured with high-speed switching and physical network segmentation",
+      "features": [
+        "Zero-latency, high-speed internal communication via L2/L3 switching",
+        "Complete separation of business/security networks via VLANs and physical segmentation",
+        "Communication between segmented networks allowed only through controlled paths"
+      ],
+      "effects": [
+        "Eliminates the risk of malware spreading between business and security networks",
+        "Full compliance with legal/regulatory network segmentation standards"
+      ],
+      "graphicLeftText": "Incoming Traffic",
+      "graphicRightText": "Segmented Internal Network"
+    },
+    "server": {
+      "title": "Secure Server Zone",
+      "subtitle": "A secure repository for data assets and business applications",
+      "features": [
+        "Encryption and full isolation of core databases",
+        "Strict control of unauthorized communication based on network segmentation",
+        "An integrated hub for NAC, DAC, DRM, DLP, and EDR security solutions"
+      ],
+      "effects": [],
+      "graphicLeftText": "Main Infrastructure",
+      "graphicRightText": "Security Archive"
+    },
+    "nac": {
+      "title": "NAC (Network Access Control)",
+      "subtitle": "Connects only authorized users and devices",
+      "features": [
+        "Network access control based on user/device identity",
+        "Real-time inspection of security status (antivirus, patches, etc.) before and after connection",
+        "Automatic detection and isolation of unauthorized devices based on IP/MAC"
+      ],
+      "effects": [
+        "Completely blocks unauthorized device access",
+        "Ensures compliance with internal security policy and automates management",
+        "Achieves 100% visibility into all devices connected to the network"
+      ],
+      "graphicLeftText": "Unauthorized Device",
+      "graphicRightText": "Secure Isolation Control"
+    },
+    "dac": {
+      "title": "DAC (Database Access Control)",
+      "subtitle": "Database security that controls and protects access to critical data",
+      "features": [
+        "Control of DB access rights and SQL execution",
+        "Sensitive data masking with real-time control and alerts",
+        "100% logging and auditing of login accounts and query history"
+      ],
+      "effects": [
+        "Prevents unauthorized access to and tampering of core databases",
+        "Full compliance with financial/public sector regulations via SQL audit trails",
+        "Prevents personal data leaks and misuse by insiders"
+      ],
+      "graphicLeftText": "Unauthorized Access Attempt",
+      "graphicRightText": "Controlled Database"
+    },
+    "drm": {
+      "title": "DRM (Document Encryption)",
+      "subtitle": "Document security that protects files from creation to disposal",
+      "features": [
+        "Automatic encryption of important documents with permission-based access control",
+        "Real-time tracking of document usage history (viewing, editing, printing)",
+        "Separate approval process and expiration settings for external document transfer"
+      ],
+      "effects": [
+        "Documents remain unreadable even if leaked externally",
+        "Minimizes insider leaks through capture/print/copy prevention (linked with DLP)",
+        "Maintains security in collaborative environments through document-level permissions"
+      ],
+      "graphicLeftText": "Encryption Process",
+      "graphicRightText": "Authorized Device"
+    },
+    "dlp": {
+      "title": "DLP (Data Loss Prevention)",
+      "subtitle": "Prevents the leakage of sensitive information in advance",
+      "features": [
+        "Real-time control of critical data leakage paths",
+        "Policy enforcement by medium, including USB, external drives, email, and messengers",
+        "Automatic detection and blocking of personal data and confidential keywords"
+      ],
+      "effects": [
+        "Prevents the illegal leakage of confidential corporate and personal information",
+        "Completely controls the use of unauthorized external storage devices",
+        "Secures post-incident audit trails and evidence by tracking leak attempts"
+      ],
+      "graphicLeftText": "Leak Attempt",
+      "graphicRightText": "Confidential Safe Zone"
+    },
+    "edr": {
+      "title": "EDR (Endpoint Detection & Response)",
+      "subtitle": "Detects endpoint threats in real time and responds swiftly",
+      "features": [
+        "Real-time detection and response to endpoint threats",
+        "Behavior-based analysis of ransomware and malware",
+        "Tracing attack entry paths through endpoint timeline analysis"
+      ],
+      "effects": [
+        "Early detection and blocking of unknown ransomware variants and emerging threats",
+        "Immediate isolation of affected devices in the event of a security incident",
+        "Reduced mean time to respond (MTTR) through root-cause analysis of breaches"
+      ],
+      "graphicLeftText": "Unknown Variant Threat",
+      "graphicRightText": "Endpoint Protection"
+    },
+    "ecm": {
+      "title": "ECM (Enterprise Content Management)",
+      "subtitle": "Manages corporate documents centrally, securely, and efficiently",
+      "features": [
+        "Centralized storage and integrated management of corporate documents",
+        "Protects document assets by blocking local storage",
+        "Supports document version control and recovery of previous states"
+      ],
+      "effects": [
+        "Prevents ransomware damage and data loss",
+        "Boosts collaboration productivity through efficient document sharing across teams and projects",
+        "Systematically preserves all intellectual assets with centralized, integrated security"
+      ],
+      "graphicLeftText": "Unknown Variant Threat",
+      "graphicRightText": "Endpoint Protection"
+    },
+    "client": {
+      "title": "Secure User PC",
+      "subtitle": "The final end-user device used by on-site staff",
+      "features": [
+        "Blocks malicious distribution sites using virtual web isolation",
+        "Enforces mandatory synchronization of NAC, DLP, DRM, and EDR agents",
+        "Automated management of vulnerability patches and OS security settings"
+      ],
+      "effects": [],
+      "graphicLeftText": "Local Agent",
+      "graphicRightText": "Security-Compliant Device"
+    }
+  },
+
+    "footer": {
+    "company": "MOOSOL Co., Ltd.",
+    "hqLine": "Headquarters: 442 Yi Sun-sin-daero, Tangjeong-myeon, Asan-si, Chungcheongnam-do, Rm. 305, Republic of Korea",
+    "labLine": "R&D Center: 25 Deokcheon-ro 152beon-gil, Manan-gu, Anyang-si, Gyeonggi-do, B1706, Republic of Korea",
+    "privacy": "Privacy Policy"
+  },
+  "about": {
+    "eyebrowMain": "Company · About Us",
+    "heroTitle": "We look at enterprises, and face security head-on.",
+    "heroDesc1": "MOOSOL delivers optimal network environments and integrated security solutions,",
+    "heroDesc2": "taking full responsibility from consulting to design, build, and operation.",
+    "companyInfoTitle": "Company Information",
+    "historyTitle": "MOOSOL's Journey",
+    "historyDesc": "In the short time since our founding, we have rapidly built up certifications, partnerships, and a strong implementation track record.",
+    "certTitle": "Certifications & Credentials",
+    "partnersTitle": "Partners",
+    "partnersDesc": "We collaborate with partners offering technologically outstanding solutions to deliver security solutions tailored to each client's environment.",
+    "clientsTitle": "Our Clients",
+    "clientsDesc": "MOOSOL stands closest to our clients, growing together with their businesses."
+  },
+
+  "consulting": {
+    "eyebrow": "IT Consulting",
+    "heroTitle1": "Network Segmentation to",
+    "heroTitle2": "Full Solution Deployment.",
+    "heroDesc1": "A one-stop partner for network segmentation and tailored security solutions.",
+    "heroDesc2": "Secure infrastructure, built for today's threats and regulations.",
+    "landingBrowseTitle": "Browse",
+    "landingBrowseDesc": "See all our solutions at a glance",
+    "landingQuizTitle": "🔒 3-Step Security Assessment",
+    "landingQuizDesc1": "Answer 3 simple questions to",
+    "landingQuizDesc2": "find the security solutions your company needs.",
+    "back": "Back",
+    "browseTitle": "Browse Solutions",
+    "browseDesc": "See every solution MOOSOL offers at a glance.",
+    "prev": "Previous",
+    "next": "Next",
+    "done": "Done",
+    "recommendTitle": "Solutions Your Company Needs",
+    "recommendDesc": "Based on your answers, here are our recommended solutions.",
+    "recommendCta": "Request Consultation",
+    "requestTitle": "Request a Consultation",
+    "requestDesc": "Leave your name and email, and our team will review and contact you.",
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. John Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "e.g. moosol@company.com",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "e.g. Enter any additional questions or requests here.",
+    "sending": "Sending...",
+    "submitBtn": "Send Request",
+    "successTitle": "Your request has been received!",
+    "successMsg": "Our engineer will contact you shortly!"
+  },
+
+    "system": {
+    "eyebrowMain": "System · System Build",
+    "heroTitle1": "Building the backbone of your business,",
+    "heroTitle2": "designed for future growth.",
+    "heroDesc1": "Beyond installation — we build the foundation for your growth and stability.",
+    "heroDesc2": "From infrastructure design to custom integration, we deliver it all.",
+    "siTitle": "SI System Build",
+    "siDesc1": "We provide comprehensive implementation and systematic, integrated operation services for your IT infrastructure.",
+    "siDesc2Line1": "The exact build method and architecture vary by site environment and requirements,",
+    "siDesc2Line2": "and are customized through prior consulting and separate discussion.",
+    "maintenanceTitle": "Integrated Maintenance",
+    "maintenanceDesc1": "From servers and storage to backup and security solutions —",
+    "maintenanceDesc2": "we manage a wide range of IT assets through a single point of contact, boosting efficiency and minimizing downtime risk.",
+    "value1Title": "Single Point of Contact",
+    "value1Desc": "Consolidates inquiries across multiple manufacturers into one channel for faster root-cause analysis and one-stop resolution.",
+    "value2Title": "24/7 Support & Emergency Response",
+    "value2Desc": "Real-time monitoring and remote support from expert engineers, with rapid on-site visits when needed.",
+    "value3Title": "Regular Inspection & Preventive Maintenance",
+    "value3Desc": "Prevents failures in advance through periodic system checks, OS/component patch management, and technical reports.",
+    "wheelCenter": "Maintenance"
+  },
+
+    "contact": {
+    "title": "Technical Consultation / Quote Request",
+    "desc1": "Our team will contact you within 1–2 business days,",
+    "desc2": "and can provide prompt technical consultation and quotes based on your inquiry.",
+    "telLabel": "Tel (Contact: Kim Ji-hyung, Team Lead)",
+    "officeHours": "Weekdays 09:00–18:00",
+    "companyLabel": "Company / Organization",
+    "companyPlaceholder": "e.g. MOOSOL",
+    "nameLabel": "Contact Name",
+    "namePlaceholder": "e.g. John Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "e.g. info@moosol.co.kr",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "e.g. 010-1234-5678",
+    "interestLabel": "Area of Interest",
+    "interestMulti": "(multiple selection allowed)",
+    "messageLabel": "Inquiry Details",
+    "messagePlaceholder": "Please describe your current setup, requirements, and inquiry in detail for a more accurate consultation.",
+    "privacyAgree": "I agree to the collection and use of my personal information.",
+    "submitBtn": "Submit Request",
+    "successTitle": "Your inquiry has been received!",
+    "successMsg": "Thank you for your inquiry. Our engineer will contact you shortly!",
+    "invalidEmail": "Please enter a valid email address.",
+    "sendFail": "Failed to send. Please try again in a moment."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "MOOSOL Co., Ltd. values the privacy of its users and complies with the Personal Information Protection Act, the Act on Promotion of Information and Communications Network Utilization and Information Protection, and other applicable laws.",
+    "a1Title": "Article 1 (Purpose of Processing Personal Information)",
+    "a1Desc": "The Company collects the minimum personal information necessary for the following purposes and does not use it for any other purpose.",
+    "a1List": [
+      "Receiving applications for security assessments and solution consulting",
+      "Responding to consultation requests and arranging contact from the assigned engineer",
+      "Handling service inquiries and responding with results"
+    ],
+    "a2Title": "Article 2 (Items of Personal Information Processed)",
+    "a2Desc": "The Company collects the following personal information for consultation requests and service inquiries.",
+    "a2ItemsLabel": "Items Collected:",
+    "a2Items": "Name, email address, phone number, company name, and notes/inquiry details",
+    "a3Title": "Article 3 (Retention and Use Period of Personal Information)",
+    "a3Desc": "As a general rule, the Company destroys personal information without delay once the purpose of its collection and use has been achieved. However, where retention is required by applicable laws, the information is kept for a specified period.",
+    "a3Item1Label": "Consultation and inquiry records:",
+    "a3Item1Desc": "Retained for 1 year after the consultation is completed (deleted immediately upon the customer's request)",
+    "a3Item2Label": "Retention under applicable laws:",
+    "a3Item2Desc": "Records related to consumer complaints or dispute resolution (3 years)",
+    "a4Title": "Article 4 (Procedures and Methods for Destroying Personal Information)",
+    "a4Desc": "Once the purpose of processing personal information has been achieved, the information is destroyed without delay.",
+    "a4Item1Label": "Electronic files:",
+    "a4Item1Desc": "Destroyed using technical methods that prevent the records from being reproduced",
+    "a4Item2Label": "Paper documents:",
+    "a4Item2Desc": "Destroyed by shredding or incineration",
+    "a5Title": "Article 5 (Personal Information Protection Officer and Manager)",
+    "a5Desc": "For any inquiries related to personal information that may arise when submitting a consultation request, please contact the Personal Information Protection Officer below.",
+    "a5ColCategory": "Category",
+    "a5ColOfficer": "Personal Information Protection Officer",
+    "a5ColManager": "Personal Information Manager",
+    "a5RowNameTitle": "Name / Title",
+    "a5RowEmail": "Email",
+    "officerName": "Kim Ji-hyung, Team Lead",
+    "managerName": "Jeong Han-byeol, Associate",
+    "a6Title": "Article 6 (Remedies for Infringement of Rights)",
+    "a6Desc": "If you need to report or consult about any other infringement of your personal information, please contact the organizations below.",
+    "a6List": [
+      "Personal Information Infringement Report Center (privacy.kisa.or.kr / Tel. 118, no area code)",
+      "Supreme Prosecutors' Office, Cyber Investigation Division (www.spo.go.kr / Tel. 1301, no area code)",
+      "National Police Agency Cyber Crime Report System (ecrm.police.go.kr / Tel. 182, no area code)"
+    ]
+  }
+}
