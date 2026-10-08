@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { gpuPackages } from "../data/gpuPackages";
 import { gpuServer } from "../data/gpuServer";
 import { SERVER_PRODUCTS } from "../data/serverProducts";
@@ -11,49 +12,53 @@ import { ETC_PRODUCTS } from "../data/etcProducts";
 import usePagination from "../hooks/usePagination";
 import Pagination from "./Pagination";
 
+// 데이터 필드가 문자열이든 { ko, en } 객체든 상관없이 안전하게 현재 언어 값을 꺼내는 헬퍼
+// (배열/원시값은 그대로 반환, { ko, en } 형태의 객체만 lang에 맞게 골라줌)
+function pick(field, lang) {
+  if (field && typeof field === "object" && !Array.isArray(field)) {
+    return field[lang] ?? field.ko;
+  }
+  return field;
+}
+
 // 상단 탭
-const TABS = [
-  { key: "gpu-ai", label: "GPU/AI" },
-  { key: "server", label: "서버" },
-  { key: "storage", label: "스토리지" },
-  { key: "etc", label: "기타" },
+const TABS_KEYS = [
+  { key: "gpu-ai", labelKey: "server.tabs.gpuAi" },
+  { key: "server", labelKey: "server.tabs.server" },
+  { key: "storage", labelKey: "server.tabs.storage" },
+  { key: "etc", labelKey: "server.tabs.etc" },
 ];
 
 // 하단 GPU 필터 탭 (전체 + GPU별)
 const GPU_FILTER_TABS = [
-  { key: "ALL", label: "전체" },
-  { key: "ENTRY", label: "2 GPU" },
-  { key: "DEV", label: "4 GPU" },
-  { key: "RESEARCH", label: "8 GPU" },
-  { key: "ENTERPRISE", label: "10 GPU+" },
+  { key: "ALL", labelKey: "server.gpuFilter.all" },
+  { key: "ENTRY", labelKey: "server.gpuFilter.entry2" },
+  { key: "DEV", labelKey: "server.gpuFilter.dev4" },
+  { key: "RESEARCH", labelKey: "server.gpuFilter.research8" },
+  { key: "ENTERPRISE", labelKey: "server.gpuFilter.enterprise10" },
 ];
 
 // 하단 서버 필터 탭
-const SERVER_FILTER_TABS = [
-  { key: "ALL", label: "전체" },
-  // { key: "OS_MGMT", label: "OS/관리형" },
-  // { key: "SMALL_SOL", label: "소형 솔루션형" },
-  // { key: "LARGE_STOR", label: "대용량 스토리지형" },
-  // { key: "MID_LARGE", label: "중대형 서버형" },
-];
+const SERVER_FILTER_TABS = [{ key: "ALL", labelKey: "server.serverFilter.all" }];
 
-// 하단 스토리지 필터 탭 
+// 하단 스토리지 필터 탭
 const STORAGE_FILTER_TABS = [
-  // { key: "ALL", label: "전체" },
-  { key: "SYN", label: "SYNOLOGY NAS" },
-  { key: "QNAP", label: "QNAP NAS" },
-  { key: "HPE", label: "HPE Storage" },
+  { key: "SYN", labelKey: "server.storageFilter.syn" },
+  { key: "QNAP", labelKey: "server.storageFilter.qnap" },
+  { key: "HPE", labelKey: "server.storageFilter.hpe" },
 ];
 
-// 하단 기타 필터 탭 
+// 하단 기타 필터 탭
 const ETC_FILTER_TABS = [
-  // { key: "ALL", label: "전체" },
-  { key: "RACK", label: "RACK(서버랙)" },
-  { key: "UPS", label: "UPS" },
+  { key: "RACK", labelKey: "server.etcFilter.rack" },
+  { key: "UPS", labelKey: "server.etcFilter.ups" },
 ];
 
 // GPU/AI 탭 컴포넌트
 function GpuAiTab() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+
   const [selectedGpuFilter, setSelectedGpuFilter] = useState("ALL");
   const listRef = useRef(null);
 
@@ -79,15 +84,12 @@ function GpuAiTab() {
     resetPage();
   };
 
-  
-
   return (
-    
     <div className="gpu-section">
       <div className="gpu-header">
-        <span className="gpu-eyebrow">GPU 패키지</span>
-        <h2 className="gpu-title">목적에 맞는 GPU 서버 구성</h2>
-        <p className="gpu-subtitle">GPU 탑재 수량 및 용도별 최적 패키지를 선택하세요</p>
+        <span className="gpu-eyebrow">{t("server.gpuEyebrow")}</span>
+        <h2 className="gpu-title">{t("server.gpuTitle")}</h2>
+        <p className="gpu-subtitle">{t("server.gpuSubtitle")}</p>
       </div>
 
       <div className="gpu-grid">
@@ -96,33 +98,30 @@ function GpuAiTab() {
             key={pkg.tag}
             className={`gpu-card ${pkg.recommended ? "gpu-card-featured" : ""}`}
           >
-            {pkg.recommended && <span className="gpu-card-badge">추천</span>}
+            {pkg.recommended && <span className="gpu-card-badge">{t("server.recommended")}</span>}
 
             <span className="gpu-card-tag">{pkg.tag}</span>
             <h3 className="gpu-card-title">{pkg.title}</h3>
-            <p className="gpu-card-desc">{pkg.desc}</p>
+            <p className="gpu-card-desc">{pick(pkg.desc, lang)}</p>
 
-            <div className="gpu-spec">{pkg.spec}</div>
+            <div className="gpu-spec">{pick(pkg.spec, lang)}</div>
 
             <ul className="gpu-features">
-              {pkg.features.map((f) => (
+              {pkg.features.map((f, idx) => (
                 <li
-                  key={f.text}
+                  key={idx}
                   className={`gpu-feature ${f.included ? "" : "gpu-feature-excluded"}`}
                 >
                   <span className="gpu-feature-mark">
                     {f.included ? <i className="fas fa-check"></i> : "―"}
                   </span>
-                  {f.text}
+                  {pick(f.text, lang)}
                 </li>
               ))}
             </ul>
 
-            <button
-              className="gpu-cta-btn"
-              onClick={() => handleDetailClick(pkg.tag)}
-            >
-              상품 보기
+            <button className="gpu-cta-btn" onClick={() => handleDetailClick(pkg.tag)}>
+              {t("server.gpuViewBtn")}
             </button>
           </div>
         ))}
@@ -138,55 +137,59 @@ function GpuAiTab() {
                 className={`gpu-filter-tab ${selectedGpuFilter === tab.key ? "active" : ""}`}
                 onClick={() => handleFilterTabChange(tab.key)}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
 
-          <div style={{ fontSize: "12px", fontWeight: "bold" }}> 
-            <p>※ 완제품 서버 임대뿐만 아니라 GPU 단품 대여 및 맞춤 구성도 가능합니다. <br />
+          <div style={{ fontSize: "12px", fontWeight: "bold" }}>
+            <p>
+              {t("server.gpuRentNote")} <br />
             </p>
           </div>
 
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
-            전체상품 <strong>{filteredProducts.length}</strong>개
+            {t("server.totalProducts", { count: filteredProducts.length })}
           </div>
         </div>
 
         {/* 제품 리스트 */}
         <div className="product-list">
           {currentItems.length > 0 ? (
-            currentItems.map((prod) => (
-              <div key={prod.id} className="product-card">
-                <div className="product-info-group">
-                  <img src={prod.image} alt={prod.name} className="product-img" />
-                  <div className="product-details">
-                    <h4 className="product-name">{prod.name}</h4>
-                    <p className="product-specs">
-                      {Array.isArray(prod.specs)
-                        ? prod.specs.map((line, idx) => (
-                            <span className="product-spec-line" key={idx}>
-                              {line}
-                            </span>
-                          ))
-                        : prod.specs}
-                    </p>
+            currentItems.map((prod) => {
+              const specs = pick(prod.specs, lang);
+              return (
+                <div key={prod.id} className="product-card">
+                  <div className="product-info-group">
+                    <img src={prod.image} alt={prod.name} className="product-img" />
+                    <div className="product-details">
+                      <h4 className="product-name">{prod.name}</h4>
+                      <p className="product-specs">
+                        {Array.isArray(specs)
+                          ? specs.map((line, idx) => (
+                              <span className="product-spec-line" key={idx}>
+                                {line}
+                              </span>
+                            ))
+                          : specs}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="product-action-group">
+                    <div className="product-price">{pick(prod.price, lang)}</div>
+                    <Link
+                      to="/contact-section"
+                      state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                      className="quote-btn finder-result-cta"
+                    >
+                      {t("server.quoteBtn")}
+                    </Link>
                   </div>
                 </div>
-                <div className="product-action-group">
-                  <div className="product-price">{prod.price}</div>
-                  <Link
-                    to="/contact-section"
-                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
-                    className="quote-btn finder-result-cta"
-                  >
-                    견적요청
-                  </Link>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <div className="no-product">해당하는 서버 상품이 없습니다.</div>
+            <div className="no-product">{t("server.noServerProduct")}</div>
           )}
         </div>
 
@@ -204,12 +207,14 @@ function GpuAiTab() {
 
 // 서버 탭 컴포넌트
 export function ServerTab() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+
   const [selectedFilter, setSelectedFilter] = useState("ALL");
   const [guideTab, setGuideTab] = useState("scale");
 
   const listRef = useRef(null);
 
-  // 필터링 목록
   const filteredProducts =
     selectedFilter === "ALL"
       ? SERVER_PRODUCTS
@@ -218,17 +223,6 @@ export function ServerTab() {
   const { currentPage, totalPages, currentItems, goToPage, goPrev, goNext, resetPage } =
     usePagination(filteredProducts, 4);
 
-  // 상단 카드 [자세히 보기] 클릭 핸들러
-  const handleDetailClick = (tag) => {
-    setSelectedFilter(tag);
-    resetPage();
-
-    if (listRef.current) {
-      listRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // 필터 탭 클릭 핸들러
   const handleFilterChange = (key) => {
     setSelectedFilter(key);
     resetPage();
@@ -240,8 +234,10 @@ export function ServerTab() {
       <div className="selection-guide-section">
         <div className="gpu-header">
           <span className="gpu-eyebrow">SELECTION GUIDE</span>
-          <h2 className="gpu-title">서버 <span className="highlight">선택 가이드</span></h2>
-          <p className="gpu-subtitle">규모와 용도에 따라 최적의 서버 구성을 안내해 드립니다.</p>
+          <h2 className="gpu-title">
+            {t("server.guideTitle1")} <span className="highlight">{t("server.guideTitle2")}</span>
+          </h2>
+          <p className="gpu-subtitle">{t("server.guideSubtitle")}</p>
         </div>
 
         {/* 규모별 / 솔루션별 탭 스위치 */}
@@ -250,13 +246,13 @@ export function ServerTab() {
             className={`guide-toggle-btn ${guideTab === "scale" ? "active" : ""}`}
             onClick={() => setGuideTab("scale")}
           >
-            규모별
+            {t("server.tabScale")}
           </button>
           <button
             className={`guide-toggle-btn ${guideTab === "usage" ? "active" : ""}`}
             onClick={() => setGuideTab("usage")}
           >
-            솔루션별
+            {t("server.tabUsage")}
           </button>
         </div>
 
@@ -265,16 +261,15 @@ export function ServerTab() {
           <table className="guide-table">
             <thead>
               <tr>
-                <th>{guideTab === "scale" ? "규모" : "솔루션"}</th>
-                <th>추천 서버</th>
-                {/* <th>추천 스토리지</th> */}
-                <th>설명</th>
+                <th>{guideTab === "scale" ? t("server.colScale") : t("server.colSolution")}</th>
+                <th>{t("server.colServer")}</th>
+                <th>{t("server.colDesc")}</th>
               </tr>
             </thead>
             <tbody>
               {GUIDE_DATA[guideTab].map((item, index) => (
                 <tr key={index}>
-                  <td className="guide-type-cell">{item.type}</td>
+                  <td className="guide-type-cell">{pick(item.type, lang)}</td>
                   <td>
                     <span
                       className="guide-pill-badge"
@@ -283,21 +278,10 @@ export function ServerTab() {
                         color: item.serverTextColor,
                       }}
                     >
-                      {item.server}
+                      {pick(item.server, lang)}
                     </span>
                   </td>
-                  {/* <td>
-                    <span
-                      className="guide-pill-badge"
-                      style={{
-                        backgroundColor: item.storageBadgeColor,
-                        color: item.storageTextColor,
-                      }}
-                    >
-                      {item.storage}
-                    </span>
-                  </td> */}
-                  <td className="guide-desc-cell">{item.desc}</td>
+                  <td className="guide-desc-cell">{pick(item.desc, lang)}</td>
                 </tr>
               ))}
             </tbody>
@@ -319,42 +303,58 @@ export function ServerTab() {
                 className={`gpu-filter-tab ${selectedFilter === tab.key ? "active" : ""}`}
                 onClick={() => handleFilterChange(tab.key)}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
 
           <div className="product-count">
-            전체상품 <strong>{filteredProducts.length}</strong>개
+            {t("server.totalProducts", { count: filteredProducts.length })}
           </div>
         </div>
 
         {/* 제품 리스트 */}
         <div className="product-list">
           {currentItems.length > 0 ? (
-            currentItems.map((prod) => (
-              <div key={prod.id} className="product-card">
-                <div className="product-info-group">
-                  <img src={prod.image} alt={prod.name} className="product-img" />
-                  <div className="product-details">
-                    <h4 className="product-name">{prod.name}</h4>
-                    <p className="product-specs">{prod.specs}</p>
+            currentItems.map((prod) => {
+              const specs = pick(prod.specs, lang);
+              return (
+                <div key={prod.id} className="product-card">
+                  <div className="product-info-group">
+                    <img src={prod.image} alt={prod.name} className="product-img" />
+                    <div className="product-details">
+                      <h4 className="product-name">{prod.name}</h4>
+                      <p className="product-specs">
+                        {Array.isArray(specs)
+                          ? specs.map((line, idx) => (
+                              <span className="product-spec-line" key={idx}>
+                                {line}
+                              </span>
+                            ))
+                          : specs}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="product-action-group">
+                    <div className="product-price">
+                      {pick(prod.price, lang)}{" "}
+                      <span style={{ fontSize: "12px", color: "#888", fontWeight: "normal" }}>
+                        {t("server.vatNote")}
+                      </span>
+                    </div>
+                    <Link
+                      to="/contact-section"
+                      state={{ initialSolutionId: "SERVER", productName: prod.name }}
+                      className="quote-btn finder-result-cta"
+                    >
+                      {t("server.quoteBtn")}
+                    </Link>
                   </div>
                 </div>
-                <div className="product-action-group">
-                  <div className="product-price">{prod.price} <span style={{ fontSize: "12px", color: "#888", fontWeight: "normal" }}>(VAT별도)</span></div>
-                  <Link
-                    to="/contact-section"
-                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
-                    className="quote-btn finder-result-cta"
-                  >
-                    견적요청
-                  </Link>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <div className="no-product">해당하는 서버 상품이 없습니다.</div>
+            <div className="no-product">{t("server.noServerProduct")}</div>
           )}
         </div>
 
@@ -370,9 +370,11 @@ export function ServerTab() {
   );
 }
 
-
 // 스토리지 탭 컴포넌트
 export function StorageTab() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+
   const [selectedFilter, setSelectedFilter] = useState("SYN");
   const listRef = useRef(null);
 
@@ -402,47 +404,59 @@ export function StorageTab() {
                 className={`gpu-filter-tab ${selectedFilter === tab.key ? "active" : ""}`}
                 onClick={() => handleFilterChange(tab.key)}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
-          <div style={{ fontSize: "12px", fontWeight: "bold" }}> 
-            <p>※ 표시된 가격은 NAS 본체 기준 시작가입니다. <br />
-              HDD 용량, RAID 구성 및 설치 환경에 따라 가격이 달라질 수 있으며, <br />고객 환경에 맞는 최적의 구성으로 견적을 제공합니다.
+          <div style={{ fontSize: "12px", fontWeight: "bold" }}>
+            <p>
+              {t("server.storageNote1")} <br />
+              {t("server.storageNote2")} <br />
+              {t("server.storageNote3")}
             </p>
           </div>
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
-            전체상품 <strong>{filteredProducts.length}</strong>개
+            {t("server.totalProducts", { count: filteredProducts.length })}
           </div>
-          
         </div>
 
         {/* 제품 리스트 */}
         <div className="product-list">
           {currentItems.length > 0 ? (
-            currentItems.map((prod) => (
-              <div key={prod.id} className="product-card">
-                <div className="product-info-group">
-                  <img src={prod.image} alt={prod.name} className="product-img" />
-                  <div className="product-details">
-                    <h4 className="product-name">{prod.name}</h4>
-                    <p className="product-specs">{prod.specs}</p>
+            currentItems.map((prod) => {
+              const specs = pick(prod.specs, lang);
+              return (
+                <div key={prod.id} className="product-card">
+                  <div className="product-info-group">
+                    <img src={prod.image} alt={prod.name} className="product-img" />
+                    <div className="product-details">
+                      <h4 className="product-name">{pick(prod.name, lang)}</h4>
+                      <p className="product-specs">
+                        {Array.isArray(specs)
+                          ? specs.map((line, idx) => (
+                              <span className="product-spec-line" key={idx}>
+                                {line}
+                              </span>
+                            ))
+                          : specs}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="product-action-group">
+                    <div className="product-price">{pick(prod.price, lang)}</div>
+                    <Link
+                      to="/contact-section"
+                      state={{ initialSolutionId: "SERVER", productName: pick(prod.name, lang) }}
+                      className="quote-btn finder-result-cta"
+                    >
+                      {t("server.quoteBtn")}
+                    </Link>
                   </div>
                 </div>
-                <div className="product-action-group">
-                  <div className="product-price">{prod.price}</div>
-                  <Link
-                    to="/contact-section"
-                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
-                    className="quote-btn finder-result-cta"
-                  >
-                    견적요청
-                  </Link>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <div className="no-product">해당하는 스토리지 상품이 없습니다.</div>
+            <div className="no-product">{t("server.noStorageProduct")}</div>
           )}
         </div>
 
@@ -460,6 +474,9 @@ export function StorageTab() {
 
 // 기타 탭 컴포넌트
 export function EtcTab() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+
   const [selectedFilter, setSelectedFilter] = useState("RACK");
   const listRef = useRef(null);
 
@@ -485,45 +502,56 @@ export function EtcTab() {
                 className={`gpu-filter-tab ${selectedFilter === tab.key ? "active" : ""}`}
                 onClick={() => handleFilterChange(tab.key)}
               >
-                {tab.label}
+                {t(tab.labelKey)}
               </button>
             ))}
           </div>
           <div className="product-count" style={{ fontSize: "14px", color: "#666" }}>
-            전체상품 <strong>{filteredProducts.length}</strong>개
+            {t("server.totalProducts", { count: filteredProducts.length })}
           </div>
-          
         </div>
 
         {/* 제품 리스트 */}
         <div className="product-list">
           {currentItems.length > 0 ? (
-            currentItems.map((prod) => (
-              <div key={prod.id} className="product-card">
-                <div className="product-info-group">
-                  <img src={prod.image} alt={prod.name} className="product-img" />
-                  <div className="product-details">
-                    {/* <span className="guide-pill-badge" style={{ width: "90px", backgroundColor: "#29A640", color: "#f7faf8", fontSize: "12px", padding: "2px 6px", borderRadius: "4px" }}>
-                      {prod.unitBadge}
-                    </span> */}
-                    <h4 className="product-name">{prod.name}</h4>
-                    <p className="product-specs">{prod.specs}</p>
+            currentItems.map((prod) => {
+              const specs = pick(prod.specs, lang);
+              const name = pick(prod.name, lang);
+              return (
+                <div key={prod.id} className="product-card">
+                  <div className="product-info-group">
+                    <img src={prod.image} alt={name} className="product-img" />
+                    <div className="product-details">
+                      {/* <span className="guide-pill-badge" style={{ width: "90px", backgroundColor: "#29A640", color: "#f7faf8", fontSize: "12px", padding: "2px 6px", borderRadius: "4px" }}>
+                        {pick(prod.unitBadge, lang)}
+                      </span> */}
+                      <h4 className="product-name">{name}</h4>
+                      <p className="product-specs">
+                        {Array.isArray(specs)
+                          ? specs.map((line, idx) => (
+                              <span className="product-spec-line" key={idx}>
+                                {line}
+                              </span>
+                            ))
+                          : specs}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="product-action-group">
+                    <div className="product-price">{pick(prod.price, lang)}</div>
+                    <Link
+                      to="/contact-section"
+                      state={{ initialSolutionId: "SERVER", productName: name }}
+                      className="quote-btn finder-result-cta"
+                    >
+                      {t("server.quoteBtn")}
+                    </Link>
                   </div>
                 </div>
-                <div className="product-action-group">
-                  <div className="product-price">{prod.price}</div>
-                  <Link
-                    to="/contact-section"
-                    state={{ initialSolutionId: "SERVER", productName: prod.name }}
-                    className="quote-btn finder-result-cta"
-                  >
-                    견적요청
-                  </Link>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
-            <div className="no-product">해당하는 상품이 없습니다.</div>
+            <div className="no-product">{t("server.noProduct")}</div>
           )}
         </div>
 
@@ -541,38 +569,43 @@ export function EtcTab() {
 
 // 아직 틀만 잡아둔 탭
 function PlaceholderTab({ label }) {
+  const { t } = useTranslation();
   return (
     <div className="server-tab-placeholder">
       <i className="fas fa-server"></i>
-      <p>{label} 탭은 준비중입니다.</p>
+      <p>{t("server.placeholderNotice", { label })}</p>
     </div>
   );
 }
 
 function Server() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("gpu-ai");
 
   return (
     <section id="server">
       <div className="section-title">
         <div className="about-hero-inner">
-          <div className="about-eyebrow">GPU & Memory & Server · 유통 & 임대</div>
-          <h1>AI와 IT인프라의 핵심, <br />무솔이 가장 확실하게 공급합니다.</h1>
+          <div className="about-eyebrow">{t("server.heroEyebrow")}</div>
+          <h1>
+            {t("server.heroTitle1")} <br />
+            {t("server.heroTitle2")}
+          </h1>
           <p>
-            급변하는 IT·AI 수요에 맞춰 최신 GPU, 메모리, 정품 서버를 신속하게 공급합니다. <br />
-            LLM, AI 딥러닝, 렌더링에 최적화된 최신 GPU 인프라를 월/년 단위로 제공합니다.
+            {t("server.heroDesc1")} <br />
+            {t("server.heroDesc2")}
           </p>
         </div>
       </div>
 
       <div className="server-tabs">
-        {TABS.map((tab) => (
+        {TABS_KEYS.map((tab) => (
           <button
             key={tab.key}
             className={`server-tab ${activeTab === tab.key ? "active" : ""}`}
             onClick={() => setActiveTab(tab.key)}
           >
-            {tab.label}
+            {t(tab.labelKey)}
           </button>
         ))}
       </div>

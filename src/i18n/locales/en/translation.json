@@ -316,7 +316,10 @@
     "successTitle": "Your inquiry has been received!",
     "successMsg": "Thank you for your inquiry. Our engineer will contact you shortly!",
     "invalidEmail": "Please enter a valid email address.",
-    "sendFail": "Failed to send. Please try again in a moment."
+    "sendFail": "Failed to send. Please try again in a moment.",
+    "specInfoLabel": "[Selected Specifications]",
+    "additionalInquiryLabel": "[Additional Inquiry]",
+    "productTagLabel": "[Quote Request for Product]"
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -360,5 +363,92 @@
       "Supreme Prosecutors' Office, Cyber Investigation Division (www.spo.go.kr / Tel. 1301, no area code)",
       "National Police Agency Cyber Crime Report System (ecrm.police.go.kr / Tel. 182, no area code)"
     ]
+  },
+
+    "ai": {
+    "eyebrow": "LLM · RAG · AI Solutions",
+    "heroTitle1": "New Business Possibilities,",
+    "heroTitle2": "Connected Through AI",
+    "heroDesc1": "We support building dedicated, secure LLMs and connecting enterprise data through RAG technology.",
+    "heroDesc2": "Beyond simple technology adoption, we maximize productivity and deliver real business innovation.",
+    "value1Title": "Robust Security",
+    "value1Desc": "Supports on-premise and secure cloud environments with no risk of internal data leaks.",
+    "value2Title": "Accurate Data Retrieval",
+    "value2Desc": "RAG-based technology prevents hallucinations and provides only clearly sourced answers.",
+    "value3Title": "Custom Workflows",
+    "value3Desc": "Builds automation agents that integrate seamlessly with your existing ERP/CRM and internal systems.",
+    "guideTitle1": "AI Adoption",
+    "guideTitle2": "Selection Guide",
+    "guideSubtitle": "We guide you to the optimal AI model and implementation approach based on your company's size, data security needs, and budget.",
+    "tabScale": "By Scale / Security",
+    "tabUsage": "By Purpose",
+    "colCategory": "Category",
+    "colPurpose": "Purpose",
+    "colModel": "Recommended Model",
+    "colDesc": "Description",
+    "ctaTitle": "Curious about the AI solution that fits your business?",
+    "ctaDesc": "MOOSOL will propose the optimal implementation plan and a custom scenario for you.",
+    "ctaBtn": "Request an AI Consultation"
+  },
+
+    "finder": {
+    "title": "Find the Right Server for You",
+    "subtitle": "Select your desired specs and we'll find the optimal server.",
+    "resultTitle": "Your Selected Specs",
+    "resultCta": "Request a Quote with These Specs",
+    "noMatch": "Can't find what you're looking for?",
+    "bottomBtn": "Server Quote Inquiry"
+  },
+  "storageGuide": {
+    "title1": "Storage",
+    "title2": "Selection Guide",
+    "subtitle": "We guide you to the optimal storage configuration based on brand and scale.",
+    "colScale": "Scale",
+    "colRecommended": "Recommended Storage",
+    "colDesc": "Description"
+  },
+
+    "server": {
+    "tabs": { "gpuAi": "GPU/AI", "server": "Server", "storage": "Storage", "etc": "Other" },
+    "gpuFilter": {
+      "all": "All",
+      "entry2": "2 GPU",
+      "dev4": "4 GPU",
+      "research8": "8 GPU",
+      "enterprise10": "10 GPU+"
+    },
+    "serverFilter": { "all": "All" },
+    "storageFilter": { "syn": "Synology NAS", "qnap": "QNAP NAS", "hpe": "HPE Storage" },
+    "etcFilter": { "rack": "Rack (Server Rack)", "ups": "UPS" },
+    "recommended": "Recommended",
+    "gpuEyebrow": "GPU Packages",
+    "gpuTitle": "Build the Right GPU Server for Your Needs",
+    "gpuSubtitle": "Choose the optimal package by GPU count and use case",
+    "gpuViewBtn": "View Products",
+    "gpuRentNote": "※ Beyond complete server rentals, we also offer individual GPU rentals and custom configurations.",
+    "totalProducts": "{{count}} products total",
+    "noServerProduct": "No matching server products found.",
+    "noStorageProduct": "No matching storage products found.",
+    "noProduct": "No matching products found.",
+    "quoteBtn": "Request Quote",
+    "guideTitle1": "Server",
+    "guideTitle2": "Selection Guide",
+    "guideSubtitle": "We guide you to the optimal server configuration based on scale and use case.",
+    "tabScale": "By Scale",
+    "tabUsage": "By Solution",
+    "colScale": "Scale",
+    "colSolution": "Solution",
+    "colServer": "Recommended Server",
+    "colDesc": "Description",
+    "vatNote": "(VAT excluded)",
+    "storageNote1": "※ Prices shown are starting prices for the NAS unit itself.",
+    "storageNote2": "Pricing may vary depending on HDD capacity, RAID configuration, and installation environment,",
+    "storageNote3": "and we provide a quote based on the optimal setup for your environment.",
+    "heroEyebrow": "GPU & Memory & Server · Supply & Rental",
+    "heroTitle1": "The Core of AI and IT Infrastructure,",
+    "heroTitle2": "Reliably Supplied by MOOSOL.",
+    "heroDesc1": "We rapidly supply the latest GPUs, memory, and genuine servers to meet fast-changing IT/AI demands.",
+    "heroDesc2": "We provide the latest GPU infrastructure optimized for LLM, AI deep learning, and rendering — on a monthly or yearly basis.",
+    "placeholderNotice": "The {{label}} tab is coming soon."
   }
 }

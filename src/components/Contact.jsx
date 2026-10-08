@@ -43,7 +43,7 @@ function Contact() {
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    if (initialSolutionId || initialMessage) {
+   if (initialSolutionId || initialMessage) {
       setForm((prevForm) => {
         const currentServices = prevForm.service || [];
 
@@ -57,7 +57,7 @@ function Contact() {
           initialMessage && !prevForm.message.includes(initialMessage);
 
         const updatedMessage = shouldUpdateMessage
-          ? `[선택한 사양 정보]\n${initialMessage}\n\n[추가 문의 사항]\n${prevForm.message}`
+          ? `${t("contact.specInfoLabel")}\n${initialMessage}\n\n${t("contact.additionalInquiryLabel")}\n${prevForm.message}`
           : prevForm.message;
 
         return {
