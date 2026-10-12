@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import useLang from "../hooks/useLang";
 
 // 브랜드별 스토리지 데이터 (다국어)
 const storageGuideData = {
@@ -77,8 +78,8 @@ const storageGuideData = {
 };
 
 const StorageGuide = () => {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [activeBrand, setActiveBrand] = useState("synology");
 

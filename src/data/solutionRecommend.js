@@ -5,48 +5,48 @@
 
 export const solutionCatalog = {
   DRM: {
-    name: { ko: "DRM", en: "DRM" },
-    desc: { ko: "문서 암호화 및 권한관리", en: "Document encryption and permission management" },
+    name: { ko: "DRM", en: "DRM", zh: "DRM" },
+    desc: { ko: "문서 암호화 및 권한관리", en: "Document encryption and permission management", zh: "文档加密与权限管理" },
   },
   ECM: {
-    name: { ko: "문서중앙화", en: "Document Centralization" },
-    desc: { ko: "중요 문서 중앙 저장", en: "Centralized storage of important documents" },
+    name: { ko: "문서중앙화", en: "Document Centralization", zh: "文档集中化" },
+    desc: { ko: "중요 문서 중앙 저장", en: "Centralized storage of important documents", zh: "集中存储重要文档" },
   },
   DLP: {
-    name: { ko: "DLP", en: "DLP" },
-    desc: { ko: "정보 유출 방지", en: "Prevents information leaks" },
+    name: { ko: "DLP", en: "DLP", zh: "DLP" },
+    desc: { ko: "정보 유출 방지", en: "Prevents information leaks", zh: "防止信息泄露" },
   },
   NETCONN: {
-    name: { ko: "망연계", en: "Network Interconnection" },
-    desc: { ko: "외부 반출 관리", en: "Manages data transfer to external networks" },
+    name: { ko: "망연계", en: "Network Interconnection", zh: "网络互联(网闸)" },
+    desc: { ko: "외부 반출 관리", en: "Manages data transfer to external networks", zh: "管理数据对外传输" },
   },
   NETSEP: {
-    name: { ko: "망분리", en: "Network Segmentation" },
-    desc: { ko: "물리적/논리적 망 분리", en: "Physical/logical network separation" },
+    name: { ko: "망분리", en: "Network Segmentation", zh: "网络隔离" },
+    desc: { ko: "물리적/논리적 망 분리", en: "Physical/logical network separation", zh: "物理/逻辑网络隔离" },
   },
   SAC: {
-    name: { ko: "SAC", en: "SAC" },
-    desc: { ko: "서버 접근 통제", en: "Server access control" },
+    name: { ko: "SAC", en: "SAC", zh: "SAC" },
+    desc: { ko: "서버 접근 통제", en: "Server access control", zh: "服务器访问控制" },
   },
   DAC: {
-    name: { ko: "DAC", en: "DAC" },
-    desc: { ko: "DB 접근 통제", en: "Database access control" },
+    name: { ko: "DAC", en: "DAC", zh: "DAC" },
+    desc: { ko: "DB 접근 통제", en: "Database access control", zh: "数据库访问控制" },
   },
   NAC: {
-    name: { ko: "NAC", en: "NAC" },
-    desc: { ko: "네트워크 접근 통제", en: "Network access control" },
+    name: { ko: "NAC", en: "NAC", zh: "NAC" },
+    desc: { ko: "네트워크 접근 통제", en: "Network access control", zh: "网络准入控制" },
   },
   EDR: {
-    name: { ko: "EDR", en: "EDR" },
-    desc: { ko: "엔드포인트 위협 탐지·대응", en: "Endpoint threat detection & response" },
+    name: { ko: "EDR", en: "EDR", zh: "EDR" },
+    desc: { ko: "엔드포인트 위협 탐지·대응", en: "Endpoint threat detection & response", zh: "终端威胁检测与响应" },
   },
   FW: {
-    name: { ko: "방화벽", en: "Firewall" },
-    desc: { ko: "네트워크 경계 보안", en: "Network perimeter security" },
+    name: { ko: "방화벽", en: "Firewall", zh: "防火墙" },
+    desc: { ko: "네트워크 경계 보안", en: "Network perimeter security", zh: "网络边界安全" },
   },
   SW: {
-    name: { ko: "L2 · L3 스위치", en: "L2 · L3 Switch" },
-    desc: { ko: "네트워크 장비 연결", en: "Connects network equipment" },
+    name: { ko: "L2 · L3 스위치", en: "L2 · L3 Switch", zh: "L2 · L3 交换机" },
+    desc: { ko: "네트워크 장비 연결", en: "Connects network equipment", zh: "连接网络设备" },
   },
 };
 

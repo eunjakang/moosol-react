@@ -5,6 +5,7 @@ import { quizSteps } from "../data/ConsultingData";
 import { solutions } from "../data/solutionsData";
 import { getRecommendation } from "../data/solutionRecommend";
 import SubmitSuccessModal from "./SubmitModal";
+import useLang from "../hooks/useLang";
 
 // 별점 렌더링 (5개 중 채워진 개수만큼 ★)
 function Stars({ count }) {
@@ -183,8 +184,8 @@ function ConsultRequestModal({ onClose, onSuccess, recommendation, answers }) {
 }
 
 function Consulting() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [mode, setMode] = useState("landing");
   const [currentIndex, setCurrentIndex] = useState(0);

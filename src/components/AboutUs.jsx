@@ -7,10 +7,11 @@ import {
   partners,
   clients,
 } from "../data/aboutData";
+import useLang from "../hooks/useLang";
 
 function AboutUs() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   return (
     <section id="about-us">

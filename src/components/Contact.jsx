@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import SubmitSuccessModal from "./SubmitModal";
+import useLang from "../hooks/useLang";
 
 // 초기값 설정
 const initialForm = {
@@ -16,22 +17,22 @@ const initialForm = {
 
 // 관심 영역 옵션 (id는 고정, label만 다국어)
 const SOLUTIONS = [
-  { id: "FW", label: { ko: "방화벽", en: "Firewall" } },
-  { id: "SW", label: { ko: "스위치", en: "Switch" } },
-  { id: "NAC", label: { ko: "NAC", en: "NAC" } },
-  { id: "DAC", label: { ko: "DAC", en: "DAC" } },
-  { id: "DLP", label: { ko: "DLP", en: "DLP" } },
-  { id: "DRM", label: { ko: "DRM (문서보안)", en: "DRM (Document Security)" } },
-  { id: "ECM", label: { ko: "문서중앙화", en: "Document Centralization" } },
-  { id: "NETWORK", label: { ko: "망분리·망연계", en: "Network Segmentation / Interconnection" } },
-  { id: "SERVER", label: { ko: "서버견적", en: "Server Quote" } },
-  { id: "AI", label: { ko: "AI", en: "AI" } },
-  { id: "ETC", label: { ko: "기타", en: "Other" } },
+  { id: "FW", label: { ko: "방화벽", en: "Firewall", zh: "防火墙" } },
+  { id: "SW", label: { ko: "스위치", en: "Switch", zh: "交换机" } },
+  { id: "NAC", label: { ko: "NAC", en: "NAC", zh: "NAC" } },
+  { id: "DAC", label: { ko: "DAC", en: "DAC", zh: "DAC" } },
+  { id: "DLP", label: { ko: "DLP", en: "DLP", zh: "DLP" } },
+  { id: "DRM", label: { ko: "DRM (문서보안)", en: "DRM (Document Security)", zh: "DRM (文档安全)" } },
+  { id: "ECM", label: { ko: "문서중앙화", en: "Document Centralization", zh: "文档集中化" } },
+  { id: "NETWORK", label: { ko: "망분리·망연계", en: "Network Segmentation / Interconnection", zh: "网络隔离·网络互联" } },
+  { id: "SERVER", label: { ko: "서버견적", en: "Server Quote", zh: "服务器报价" } },
+  { id: "AI", label: { ko: "AI", en: "AI", zh: "AI" } },
+  { id: "ETC", label: { ko: "기타", en: "Other", zh: "其他" } },
 ];
 
 function Contact() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
   const location = useLocation();
 
   const initialSolutionId = location.state?.initialSolutionId;
@@ -69,7 +70,7 @@ function Contact() {
     }
 
     if (productName) {
-      const productTag = `[견적 문의 상품] ${productName}`;
+      const productTag = `${t("contact.productTagLabel")} ${productName}`;
 
       setForm((prevForm) => {
         if (prevForm.message.includes(productTag)) {

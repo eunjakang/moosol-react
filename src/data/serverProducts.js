@@ -8,7 +8,7 @@ export const SERVER_PRODUCTS = [
     category: "OS_MGMT",
     name: "HPE ProLiant DL320 Gen11",
     specs: ["CPU : Xeon Silver 4110Y / Xeon E-2124"],
-    price: { ko: "문의", en: "Inquire" },
+    price: { ko: "문의", en: "Inquire", zh: "咨询" },
     image: "/images/server/DL320.png",
   },
   {
@@ -17,7 +17,7 @@ export const SERVER_PRODUCTS = [
     category: "OS_MGMT",
     name: "HPE ProLiant DL360 Gen11",
     specs: ["CPU : Xeon Silver 4410Y"],
-    price: { ko: "문의", en: "Inquire" },
+    price: { ko: "문의", en: "Inquire", zh: "咨询" },
     image: "/images/server/DL360.png",
   },
   {
@@ -26,7 +26,7 @@ export const SERVER_PRODUCTS = [
     category: "SMALL_SOL",
     name: "HPE ProLiant DL380 Gen11",
     specs: ["CPU : Xeon Silver 4208"],
-    price: { ko: "문의", en: "Inquire" },
+    price: { ko: "문의", en: "Inquire", zh: "咨询" },
     image: "/images/server/DL380.png",
   },
   //   {

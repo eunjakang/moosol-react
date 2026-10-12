@@ -1,0 +1,390 @@
+{
+  "header": {
+    "clovine": "Clovine",
+    "nav": {
+      "about": "公司介绍",
+      "aboutInfo": "公司信息",
+      "aboutHistory": "公司沿革",
+      "certified": "认证/资质",
+      "partners": "合作伙伴",
+      "consulting": "IT咨询",
+      "system": "系统建设",
+      "server": "服务器供应 · 租赁",
+      "ai": "LLM · RAG 解决方案"
+    },
+    "contact": "联系我们"
+  },
+  "home": {
+    "heroTitleLine1": "从企业IT基础设施到AI",
+    "heroTitleLine2": "MOOSOL 负责设计、建设与运营。",
+    "heroDesc1": "根据企业规模与环境，设计最优的基础设施与安全体系。",
+    "heroDesc2": "IT咨询 │ 网络建设 │ 服务器建设 │ 安全解决方案 │ 综合运维 │ AI",
+    "hint": "点击 MOOSOL 建设并运营的企业IT基础设施，了解我们的服务。",
+    "consultBtn": "咨询建设方案",
+    "effectLabel": "[引入效果]"
+  },
+  "nodeDatabase": {
+    "internet": {
+      "title": "Internet",
+      "subtitle": "通向世界的门户，安全的起点",
+      "features": [
+        "稳定整合外部公有云基础设施",
+        "保障带宽并优化数据包路由",
+        "连接全球互联网骨干网并实现流量互通"
+      ],
+      "effects": [],
+      "graphicLeftText": "公共网络",
+      "graphicRightText": "安全网关"
+    },
+    "firewall": {
+      "title": "Firewall (防火墙)",
+      "subtitle": "应对不断演进的网络威胁的下一代防火墙",
+      "features": [
+        "实时阻断外部威胁与异常流量",
+        "基于IPS引擎的精准入侵检测",
+        "基于L4-L7会话状态的精细数据包过滤"
+      ],
+      "effects": [
+        "按应用/用户进行策略管控",
+        "主动应对最新网络攻击与未授权流量",
+        "统一边界安全监控，最大化运营效率"
+      ],
+      "graphicLeftText": "恶意攻击",
+      "graphicRightText": "安全的内部网络"
+    },
+    "ips": {
+      "title": "IPS (入侵防御系统)",
+      "subtitle": "对网络进行深度数据包分析与防御",
+      "features": [
+        "实时阻断零日攻击与定向Exploit",
+        "实时更新全球最新威胁特征库",
+        "基于串联(In-line)部署的深度包检测(DPI)"
+      ],
+      "effects": [],
+      "graphicLeftText": "漏洞威胁",
+      "graphicRightText": "安全区域"
+    },
+    "vpn": {
+      "title": "VPN (虚拟专用网络)",
+      "subtitle": "基于隧道技术的超安全远程传输网络",
+      "features": [
+        "AES-256位高强度数据加密设计",
+        "应用多因素认证(MFA)验证设备/用户",
+        "通过Split Tunneling实现高效数据传输"
+      ],
+      "effects": [
+        "远程/居家办公时安全接入内部网络",
+        "基于用户访问权限的精细化会话管控"
+      ],
+      "graphicLeftText": "远程办公端",
+      "graphicRightText": "加密桥梁"
+    },
+    "network": {
+      "title": "Network (交换 · 网络隔离)",
+      "subtitle": "以高速交换与物理网络隔离安全重构的内部网络",
+      "features": [
+        "通过L2/L3交换实现无延迟的超高速内部通信",
+        "通过VLAN与物理隔离完全分离业务网与安全网",
+        "隔离网络之间仅允许通过受控路径通信"
+      ],
+      "effects": [
+        "从根本上杜绝恶意代码在业务网与安全网间传播",
+        "完美满足网络隔离的法律/制度合规标准"
+      ],
+      "graphicLeftText": "流入流量",
+      "graphicRightText": "隔离后的内部网络"
+    },
+    "server": {
+      "title": "Secure Server Zone",
+      "subtitle": "数据资产与业务应用的安全保管库",
+      "features": [
+        "核心数据库加密与完全隔离运行",
+        "基于网络隔离分段严格管控未授权通信",
+        "NAC·DAC·DRM·DLP·EDR安全方案的整合枢纽"
+      ],
+      "effects": [],
+      "graphicLeftText": "核心基础设施",
+      "graphicRightText": "安全归档"
+    },
+    "nac": {
+      "title": "NAC (网络准入控制)",
+      "subtitle": "仅允许授权用户与终端接入",
+      "features": [
+        "基于用户/终端的网络准入控制",
+        "接入前后实时检查安全状态(杀毒·补丁等)",
+        "基于IP/MAC自动检测并隔离未授权终端"
+      ],
+      "effects": [
+        "从根本上阻断未授权终端接入",
+        "遵守内部安全策略并实现管理自动化",
+        "100%掌握网络内接入设备状况"
+      ],
+      "graphicLeftText": "未授权终端",
+      "graphicRightText": "安全隔离管控"
+    },
+    "dac": {
+      "title": "DAC (数据库访问控制)",
+      "subtitle": "管控并安全保护重要数据访问的数据库安全",
+      "features": [
+        "管控数据库访问权限与SQL执行",
+        "敏感数据脱敏处理及实时管控/告警",
+        "100%记录并审计登录账号与查询历史"
+      ],
+      "effects": [
+        "事先阻断对核心数据库的未授权访问与擅自修改",
+        "通过SQL审计记录完美满足金融/公共领域合规要求",
+        "防止个人信息泄露及内部人员滥用"
+      ],
+      "graphicLeftText": "未授权访问尝试",
+      "graphicRightText": "受控数据库"
+    },
+    "drm": {
+      "title": "DRM (文档加密)",
+      "subtitle": "从文档创建到销毁全程保护的文档安全",
+      "features": [
+        "自动加密重要文档并基于权限控制访问",
+        "实时追踪管理文档使用记录(查看·编辑·打印)",
+        "外发时需单独审批并可设置到期日"
+      ],
+      "effects": [
+        "即使文档外泄也无法查看",
+        "通过防截屏·打印·复制(联动DLP)将内部泄密降至最低",
+        "按文档级权限控制，保障协作环境安全"
+      ],
+      "graphicLeftText": "加密处理",
+      "graphicRightText": "已授权终端"
+    },
+    "dlp": {
+      "title": "DLP (数据防泄漏)",
+      "subtitle": "提前阻断重要信息的泄露",
+      "features": [
+        "实时管控重要数据泄露途径",
+        "按USB·移动硬盘·邮件·即时通讯等介质应用策略",
+        "自动检测并阻断个人信息及机密关键词"
+      ],
+      "effects": [
+        "事先预防企业机密与个人信息的非法泄露",
+        "从根本上管控未授权外部存储介质的使用",
+        "通过追踪泄露企图行为，留存事后审计与证据"
+      ],
+      "graphicLeftText": "泄露企图",
+      "graphicRightText": "机密安全区"
+    },
+    "edr": {
+      "title": "EDR (终端实时检测与响应)",
+      "subtitle": "实时检测终端威胁并快速响应",
+      "features": [
+        "实时检测并响应终端威胁",
+        "基于行为分析勒索软件·恶意代码",
+        "通过终端时间线分析追踪攻击入侵路径"
+      ],
+      "effects": [
+        "及早发现并阻断未知变种勒索软件与新型威胁",
+        "发生安全事件时立即隔离相关终端",
+        "分析入侵事件成因，缩短响应时间(MTTR)"
+      ],
+      "graphicLeftText": "未知变种威胁",
+      "graphicRightText": "终端防护"
+    },
+    "ecm": {
+      "title": "ECM (文档集中化)",
+      "subtitle": "集中、安全、高效地管理企业文档",
+      "features": [
+        "企业文档集中存储与统一管理",
+        "阻断本地存储，保护文档资产",
+        "支持文档版本管理与历史版本恢复"
+      ],
+      "effects": [
+        "预防勒索软件与数据丢失",
+        "提升部门与项目间文档共享及协作效率",
+        "系统化保存企业全部知识资产并统一应用安全防护"
+      ],
+      "graphicLeftText": "未知变种威胁",
+      "graphicRightText": "终端防护"
+    },
+    "client": {
+      "title": "Secure User PC",
+      "subtitle": "办公人员实际使用的最终业务终端",
+      "features": [
+        "利用虚拟网页隔离技术阻断恶意传播站点",
+        "强制同步应用NAC、DLP、DRM、EDR代理",
+        "自动化管理漏洞补丁与操作系统安全设置"
+      ],
+      "effects": [],
+      "graphicLeftText": "本地代理",
+      "graphicRightText": "符合安全要求的设备"
+    }
+  },
+
+    "footer": {
+    "company": "MOOSOL Co., Ltd.",
+    "hqLine": "总部：忠清南道牙山市汤井面李舜臣大路442，305室",
+    "labLine": "研究所：京畿道安养市万安区德川路152番街25 B1706",
+    "privacy": "隐私政策"
+  },
+  "about": {
+    "eyebrowMain": "Company · 公司介绍",
+    "heroTitle": "审视企业，直面安全。",
+    "heroDesc1": "MOOSOL 提供最优网络环境与整合安全解决方案，",
+    "heroDesc2": "从咨询、设计、建设到运营全程负责。",
+    "companyInfoTitle": "公司信息",
+    "historyTitle": "MOOSOL 的足迹",
+    "historyDesc": "成立以来的短时间内，我们快速积累了认证、合作伙伴关系与建设业绩。",
+    "certTitle": "认证与资质",
+    "partnersTitle": "合作伙伴",
+    "partnersDesc": "与拥有卓越技术的多家合作伙伴协作，提供贴合客户环境的安全解决方案。",
+    "clientsTitle": "主要客户",
+    "clientsDesc": "在客户业务成长的道路上，MOOSOL 始终陪伴在最近处。"
+  },
+
+    "consulting": {
+    "eyebrow": "IT Consulting · IT咨询",
+    "heroTitle1": "从网络隔离",
+    "heroTitle2": "到解决方案全面落地。",
+    "heroDesc1": "从网络隔离到定制安全方案，一站式提供。",
+    "heroDesc2": "构建满足严格法规与最新威胁的安全基础设施。",
+    "landingBrowseTitle": "浏览方案",
+    "landingBrowseDesc": "一览所有解决方案",
+    "landingQuizTitle": "🔒 3步安全诊断",
+    "landingQuizDesc1": "回答3个简单问题，",
+    "landingQuizDesc2": "了解贵公司所需的安全解决方案。",
+    "back": "返回",
+    "browseTitle": "浏览解决方案",
+    "browseDesc": "一览 MOOSOL 提供的所有解决方案。",
+    "prev": "上一步",
+    "next": "下一步",
+    "done": "完成",
+    "recommendTitle": "贵公司所需的解决方案",
+    "recommendDesc": "根据您的回答，我们整理了推荐方案。",
+    "recommendCta": "申请咨询",
+    "requestTitle": "申请咨询",
+    "requestDesc": "请留下姓名与邮箱，负责人确认后会与您联系。",
+    "nameLabel": "姓名",
+    "namePlaceholder": "例：张三",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "例：moosol@company.com",
+    "notesLabel": "备注",
+    "notesPlaceholder": "例：如有其他想咨询的内容，请在此填写。",
+    "sending": "发送中...",
+    "submitBtn": "发送咨询请求",
+    "successTitle": "咨询申请已受理！",
+    "successMsg": "负责工程师将尽快与您联系！"
+  },
+    "system": {
+    "eyebrowMain": "System · 系统建设",
+    "heroTitle1": "构建业务的骨架，",
+    "heroTitle2": "为未来扩张而设计。",
+    "heroDesc1": "不止于安装软件，更为企业的成长与稳定奠定基础。",
+    "heroDesc2": "从基础设施设计到定制化方案集成，一站式交付。",
+    "siTitle": "SI系统建设",
+    "siDesc1": "为客户IT基础设施提供全面建设与系统化的综合运营服务。",
+    "siDesc2Line1": "具体建设方式与架构因各场所环境及需求而异，",
+    "siDesc2Line2": "将通过前期咨询与另行协商定制进行。",
+    "maintenanceTitle": "综合运维",
+    "maintenanceDesc1": "从服务器、存储到备份、安全方案——",
+    "maintenanceDesc2": "通过单一窗口统一管理各类IT资产，提升运营效率，将故障风险降至最低。",
+    "value1Title": "单一窗口统一管理",
+    "value1Desc": "整合各厂商分散的咨询入口，故障时快速定位原因并一站式处理",
+    "value2Title": "24/7 支持与紧急故障响应",
+    "value2Desc": "专业工程师实时监控、远程支持，必要时快速上门服务",
+    "value3Title": "定期巡检与预防性维护",
+    "value3Desc": "定期系统巡检、OS/部件补丁管理、发布技术报告，提前预防故障",
+    "wheelCenter": "综合运维"
+  },
+    "contact": {
+    "title": "技术咨询 / 报价咨询",
+    "desc1": "负责人将在1~2个工作日内与您联系，",
+    "desc2": "并根据咨询内容快速提供技术咨询与报价说明。",
+    "telLabel": "Tel (负责人：Kim Ji-hyung 组长)",
+    "officeHours": "工作日 09:00 ~ 18:00",
+    "companyLabel": "公司/机构名称",
+    "companyPlaceholder": "例：MOOSOL",
+    "nameLabel": "联系人姓名",
+    "namePlaceholder": "例：张三",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "例：info@moosol.co.kr",
+    "phoneLabel": "联系电话",
+    "phonePlaceholder": "例：010-1234-5678",
+    "interestLabel": "关注领域",
+    "interestMulti": "(可多选)",
+    "messageLabel": "咨询内容",
+    "messagePlaceholder": "请详细填写建设现状、需求及咨询内容，以便我们提供更准确的咨询。",
+    "privacyAgree": "我同意收集并使用个人信息。",
+    "submitBtn": "提交技术咨询 / 报价申请",
+    "successTitle": "咨询已受理！",
+    "successMsg": "您的宝贵咨询已成功受理。负责工程师将尽快与您联系！",
+    "invalidEmail": "请输入有效的邮箱地址。",
+    "sendFail": "发送失败，请稍后再试。",
+    "specInfoLabel": "[所选规格信息]",
+    "additionalInquiryLabel": "[补充咨询事项]",
+    "productTagLabel": "[报价咨询产品]"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "intro": "MOOSOL Co., Ltd. 重视用户的个人信息，并遵守《个人信息保护法》及《信息通信网络利用促进及信息保护等相关法律》。",
+    "a1Title": "第1条 (个人信息的处理目的)",
+    "a1Desc": "公司为以下目的收集最少限度的个人信息，且不会用于目的以外的用途。",
+    "a1List": [
+      "受理安全诊断及解决方案咨询申请",
+      "答复咨询请求、确认负责工程师并联系告知",
+      "处理服务咨询并回复结果"
+    ],
+    "a2Title": "第2条 (处理的个人信息项目)",
+    "a2Desc": "公司为咨询申请及服务咨询，收集以下个人信息。",
+    "a2ItemsLabel": "收集项目：",
+    "a2Items": "姓名、邮箱地址、联系电话、公司名称(公司信息)、备注/咨询内容",
+    "a3Title": "第3条 (个人信息的处理及保存期限)",
+    "a3Desc": "原则上，个人信息的收集及使用目的达成后，公司将立即销毁相关信息。但依据相关法律规定需要保存的，将在一定期限内保管。",
+    "a3Item1Label": "咨询申请及咨询记录：",
+    "a3Item1Desc": "咨询完成后保存1年 (客户要求销毁时立即删除)",
+    "a3Item2Label": "依据相关法律保存：",
+    "a3Item2Desc": "有关消费者投诉或纠纷处理的记录 (3年)",
+    "a4Title": "第4条 (个人信息销毁程序及方法)",
+    "a4Desc": "个人信息处理目的达成后，将立即销毁。",
+    "a4Item1Label": "电子文件形式：",
+    "a4Item1Desc": "采用无法再现记录的技术方法销毁",
+    "a4Item2Label": "纸质文件：",
+    "a4Item2Desc": "使用粉碎机粉碎或焚烧销毁",
+    "a5Title": "第5条 (个人信息管理负责人及管理人员)",
+    "a5Desc": "提交咨询申请时如有个人信息相关疑问，请联系以下管理负责人。",
+    "a5ColCategory": "类别",
+    "a5ColOfficer": "个人信息管理负责人",
+    "a5ColManager": "个人信息管理人员",
+    "a5RowNameTitle": "姓名 / 职位",
+    "a5RowEmail": "邮箱",
+    "officerName": "金志炯 组长",
+    "managerName": "鄭 Han-byeol 专员",
+    "a6Title": "第6条 (权益侵害救济方法)",
+    "a6Desc": "如需就其他个人信息侵害事项申报或咨询，请联系以下机构。",
+    "a6List": [
+      "个人信息侵害申报中心 (privacy.kisa.or.kr / 无需区号 118)",
+      "最高检察厅网络犯罪搜查科 (www.spo.go.kr / 无需区号 1301)",
+      "警察厅网络犯罪申报系统 (ecrm.police.go.kr / 无需区号 182)"
+    ]
+  },
+    "ai": {
+    "eyebrow": "LLM · RAG · AI 解决方案",
+    "heroTitle1": "以AI连接，",
+    "heroTitle2": "开启业务新可能",
+    "heroDesc1": "支持构建无需担心安全的专属LLM，并基于RAG技术对接企业数据。",
+    "heroDesc2": "不止于引入技术，更要最大化工作效率，实现切实的业务创新。",
+    "value1Title": "安全可靠的防护体系",
+    "value1Desc": "支持本地部署与安全云环境，无需担心企业内部数据泄露。",
+    "value2Title": "精准的数据检索",
+    "value2Desc": "基于RAG技术防止幻觉，仅提供出处明确的回答。",
+    "value3Title": "定制化工作流",
+    "value3Desc": "构建可与现有ERP/CRM及内部系统完美对接的自动化智能体。",
+    "guideTitle1": "AI引入",
+    "guideTitle2": "选择指南",
+    "guideSubtitle": "根据企业规模、数据安全与预算环境，为您推荐最合适的AI模型与建设方式。",
+    "tabScale": "按规模/安全环境",
+    "tabUsage": "按引入目的",
+    "colCategory": "类别",
+    "colPurpose": "引入目的",
+    "colModel": "推荐模型",
+    "colDesc": "说明",
+    "ctaTitle": "想了解最适合贵公司环境的AI解决方案吗？",
+    "ctaDesc": "MOOSOL 将为您提供最优的引入方案与定制场景。",
+    "ctaBtn": "申请AI引入咨询"
+  }
+}

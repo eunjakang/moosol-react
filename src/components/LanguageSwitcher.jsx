@@ -1,14 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import useLang from "../hooks/useLang";
 
 const LANGS = [
   { code: "ko", img: "/images/lang/ko.png", label: "한국어" },
   { code: "en", img: "/images/lang/en.png", label: "English" },
+  { code: "zh", img: "/images/lang/zh.png", label: "中文" },
 ];
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const currentLang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const currentLang = useLang(); // "ko" | "en" | "zh"
 
   return (
     <div className="lang-switcher">
