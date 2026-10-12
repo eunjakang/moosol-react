@@ -21,7 +21,9 @@
     "heroDesc2": "IT咨询 │ 网络建设 │ 服务器建设 │ 安全解决方案 │ 综合运维 │ AI",
     "hint": "点击 MOOSOL 建设并运营的企业IT基础设施，了解我们的服务。",
     "consultBtn": "咨询建设方案",
-    "effectLabel": "[引入效果]"
+    "effectLabel": "[引入效果]",
+    "mobileSecurityGroup": "安全解决方案",
+    "mobileQuoteBtn": "咨询报价"
   },
   "nodeDatabase": {
     "internet": {
@@ -386,5 +388,64 @@
     "ctaTitle": "想了解最适合贵公司环境的AI解决方案吗？",
     "ctaDesc": "MOOSOL 将为您提供最优的引入方案与定制场景。",
     "ctaBtn": "申请AI引入咨询"
+  },
+    "finder": {
+    "title": "轻松找到适合我的服务器",
+    "subtitle": "选择所需配置，我们为您找到最合适的服务器。",
+    "resultTitle": "您选择的配置",
+    "resultCta": "以此配置申请报价咨询",
+    "noMatch": "没有找到您想要的配置？",
+    "bottomBtn": "服务器报价咨询"
+  },
+  "storageGuide": {
+    "title1": "存储",
+    "title2": "选择指南",
+    "subtitle": "根据品牌与规模，为您推荐最合适的存储配置。",
+    "colScale": "规模",
+    "colRecommended": "推荐存储",
+    "colDesc": "说明"
+  },
+  "server": {
+    "tabs": { "gpuAi": "GPU/AI", "server": "服务器", "storage": "存储", "etc": "其他" },
+    "gpuFilter": {
+      "all": "全部",
+      "entry2": "2 GPU",
+      "dev4": "4 GPU",
+      "research8": "8 GPU",
+      "enterprise10": "10 GPU+"
+    },
+    "serverFilter": { "all": "全部" },
+    "storageFilter": { "syn": "Synology NAS", "qnap": "QNAP NAS", "hpe": "HPE 存储" },
+    "etcFilter": { "rack": "机柜(服务器机柜)", "ups": "UPS" },
+    "recommended": "推荐",
+    "gpuEyebrow": "GPU 套餐",
+    "gpuTitle": "按需求选择GPU服务器配置",
+    "gpuSubtitle": "按GPU数量与用途选择最优套餐",
+    "gpuViewBtn": "查看产品",
+    "gpuRentNote": "※ 除整机服务器租赁外，也可提供GPU单品租赁及定制配置。",
+    "totalProducts": "共 {{count}} 件产品",
+    "noServerProduct": "没有符合条件的服务器产品。",
+    "noStorageProduct": "没有符合条件的存储产品。",
+    "noProduct": "没有符合条件的产品。",
+    "quoteBtn": "申请报价",
+    "guideTitle1": "服务器",
+    "guideTitle2": "选择指南",
+    "guideSubtitle": "根据规模与用途，为您推荐最合适的服务器配置。",
+    "tabScale": "按规模",
+    "tabUsage": "按解决方案",
+    "colScale": "规模",
+    "colSolution": "解决方案",
+    "colServer": "推荐服务器",
+    "colDesc": "说明",
+    "vatNote": "(不含VAT)",
+    "storageNote1": "※ 标示价格为NAS主机的起始价。",
+    "storageNote2": "价格可能因HDD容量、RAID配置及安装环境而异，",
+    "storageNote3": "我们将根据客户环境提供最优配置的报价。",
+    "heroEyebrow": "GPU & Memory & Server · 流通 & 租赁",
+    "heroTitle1": "AI与IT基础设施的核心，",
+    "heroTitle2": "MOOSOL 最可靠地为您供应。",
+    "heroDesc1": "顺应瞬息万变的IT·AI需求，快速供应最新GPU、内存及正品服务器。",
+    "heroDesc2": "按月/按年提供针对LLM、AI深度学习、渲染优化的最新GPU基础设施。",
+    "placeholderNotice": "{{label}} 标签页准备中。"
   }
 }

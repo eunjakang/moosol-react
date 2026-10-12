@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FINDER_STEPS } from "../data/serverFinder";
+import useLang from "../hooks/useLang";
 
 const STEP_ICONS = ["fa-microchip", "fa-memory", "fa-database", "fa-compact-disc"];
 
 function ServerFinder() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { cpu: "8core", memory: "64gb", ... }

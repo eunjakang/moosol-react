@@ -11,12 +11,11 @@ import { STORAGE_PRODUCTS } from "../data/storageProducts";
 import { ETC_PRODUCTS } from "../data/etcProducts";
 import usePagination from "../hooks/usePagination";
 import Pagination from "./Pagination";
+import useLang from "../hooks/useLang";
 
-// 데이터 필드가 문자열이든 { ko, en } 객체든 상관없이 안전하게 현재 언어 값을 꺼내는 헬퍼
-// (배열/원시값은 그대로 반환, { ko, en } 형태의 객체만 lang에 맞게 골라줌)
 function pick(field, lang) {
   if (field && typeof field === "object" && !Array.isArray(field)) {
-    return field[lang] ?? field.ko;
+    return field[lang] ?? field.en ?? field.ko;
   }
   return field;
 }
@@ -56,8 +55,8 @@ const ETC_FILTER_TABS = [
 
 // GPU/AI 탭 컴포넌트
 function GpuAiTab() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [selectedGpuFilter, setSelectedGpuFilter] = useState("ALL");
   const listRef = useRef(null);
@@ -207,8 +206,8 @@ function GpuAiTab() {
 
 // 서버 탭 컴포넌트
 export function ServerTab() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [selectedFilter, setSelectedFilter] = useState("ALL");
   const [guideTab, setGuideTab] = useState("scale");
@@ -372,8 +371,8 @@ export function ServerTab() {
 
 // 스토리지 탭 컴포넌트
 export function StorageTab() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [selectedFilter, setSelectedFilter] = useState("SYN");
   const listRef = useRef(null);
@@ -474,8 +473,8 @@ export function StorageTab() {
 
 // 기타 탭 컴포넌트
 export function EtcTab() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language?.startsWith("en") ? "en" : "ko";
+  const { t } = useTranslation();
+  const lang = useLang();
 
   const [selectedFilter, setSelectedFilter] = useState("RACK");
   const listRef = useRef(null);

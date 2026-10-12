@@ -21,7 +21,9 @@
     "heroDesc2": "IT Consulting │ Network Build │ Server Build │ Security Solutions │ Integrated Maintenance │ AI",
     "hint": "Click on the enterprise IT infrastructure MOOSOL builds and operates to see our services.",
     "consultBtn": "Request a Consultation",
-    "effectLabel": "[Benefits]"
+    "effectLabel": "[Benefits]",
+    "mobileSecurityGroup": "Security Solutions",
+    "mobileQuoteBtn": "Request a Quote"
   },
   "nodeDatabase": {
     "internet": {
