@@ -96,6 +96,12 @@ function AboutUs() {
           <div className="about-gallery-card">
             <img src="/images/c4.png" alt="" />
           </div>
+          <div className="about-gallery-card">
+            <img src="/images/c5.jpg" alt="" />
+          </div>
+          <div className="about-gallery-card">
+            <img src="/images/c6.png" alt="" />
+          </div>
         </div>
       </div>
 

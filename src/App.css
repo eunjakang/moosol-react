@@ -513,6 +513,122 @@ section {
 @media (max-width: 500px) {
     .notice-popup { max-width: 100%; }
 }
+/* 텍스트 공지 팝업 */
+.notice-popup.notice-popup--text {
+  width: min(440px, calc(100vw - 32px));
+  max-width: 440px;
+  height: auto;
+  padding: 0;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.notice-text-head {
+  position: relative;
+  text-align: center;
+  padding: 36px 24px 22px;
+  background: linear-gradient(180deg, #f7faf8 0%, #ffffff 100%);
+}
+
+.notice-text-badge {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #29a640;
+  background: rgba(41, 166, 64, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.notice-text-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #29a640;
+  color: #fff;
+  font-size: 24px;
+}
+
+.notice-text-title {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  color: #1f2a24;
+  word-break: keep-all;
+}
+
+.notice-text-body {
+  padding: 4px 28px 22px;
+  text-align: center;
+}
+
+.notice-text-intro {
+  margin: 0 0 18px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #4a5750;
+  word-break: keep-all;
+}
+
+.notice-text-box {
+  text-align: left;
+  background: #f7faf8;
+  border: 1px solid #dfeee3;
+  border-radius: 14px;
+  padding: 6px 16px;
+}
+
+.notice-text-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+}
+
+.notice-text-row + .notice-text-row {
+  border-top: 1px dashed #cfe3d4;
+}
+
+.notice-text-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #29a640;
+}
+
+.notice-text-label i {
+  margin-right: 4px;
+}
+
+.notice-text-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2a24;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.notice-text-thanks {
+  margin: 18px 0 0;
+  font-size: 13.5px;
+  color: #6b7a72;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+@media (max-width: 480px) {
+  .notice-text-head { padding: 32px 18px 18px; }
+  .notice-text-body { padding: 4px 20px 18px; }
+  .notice-text-title { font-size: 19px; }
+}
 
 /* ----------------------------------
    [1] 홈 (인터랙티브 대형 메인 트리)
@@ -1023,7 +1139,7 @@ section {
     margin: 24px auto 0;
     padding: 0 40px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
 }
 .about-gallery-card {

@@ -27,9 +27,9 @@ export const companyInfo = [
   {
     k: { ko: "연구소", en: "R&D Center", zh: "研究所" },
     v: {
-      ko: "안양시 만안구 덕천로152번길 25, B1706",
-      en: "25 Deokcheon-ro 152beon-gil, Manan-gu, Anyang-si, Gyeonggi-do, B1706, Republic of Korea",
-      zh: "韩国京畿道安养市万安区德川路152番街25，B1706",
+      ko: "서울 금천구 가산동 60-26 퍼블릭가산 A동 830 ~ 831호",
+      en: "Rm. 830–831, Building A, Public Gasan, 60-26 Gasan-dong, Geumcheon-gu, Seoul, Republic of Korea",
+      zh: "韩国首尔市衿川区加山洞60-26 Public Gasan A栋830~831号",
     },
   },
 ];
@@ -145,8 +145,16 @@ export const certifications = [
     d: { ko: "자체 연구개발 조직 보유", en: "Operates its own dedicated R&D organization", zh: "拥有自主研发组织" },
   },
   {
-    t: { ko: "창업·여성기업 인증", en: "Startup & Women-Owned Business Certification", zh: "创业·女性企业认证" },
-    d: { ko: "창업 인증 기업 · 여성기업 인증", en: "Certified Startup · Certified Women-Owned Business", zh: "创业企业认证 · 女性企业认证" },
+    t: {
+      ko: "창업·여성·벤처기업 인증",
+      en: "Startup, Women-Owned & Venture Business Certification",
+      zh: "创业·女性·风险企业认证",
+    },
+    d: {
+      ko: "창업 인증 기업 · 여성 · 벤처 기업 인증",
+      en: "Certified Startup · Certified Women-Owned Business · Certified Venture Business",
+      zh: "创业企业认证 · 女性企业认证 · 风险企业认证",
+    },
   },
   {
     t: { ko: "직무발명보상 우수기업", en: "Excellent Employee Invention Compensation Company", zh: "职务发明补偿优秀企业" },
@@ -156,6 +164,10 @@ export const certifications = [
       zh: "忠南风险企业协会正式会员·理事单位 · 荣获天安市市长奖",
     },
   },
+  // {
+  //   t: { ko: "KB Star기업", en: "KB Star Company", zh: "KB Star企业" },
+  //   d: { ko: "자체 연구개발 조직 보유", en: "Operates its own dedicated R&D organization", zh: "拥有自主研发组织" },
+  // },
 ];
 
 export const partners = [

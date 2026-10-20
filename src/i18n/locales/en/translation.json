@@ -452,5 +452,15 @@
     "heroDesc1": "We rapidly supply the latest GPUs, memory, and genuine servers to meet fast-changing IT/AI demands.",
     "heroDesc2": "We provide the latest GPU infrastructure optimized for LLM, AI deep learning, and rendering — on a monthly or yearly basis.",
     "placeholderNotice": "The {{label}} tab is coming soon."
+  },
+    "notice": {
+    "title": "Notice of Research Institute Expansion & Relocation",
+    "intro1": "MOOSOL is relocating its research institute as our business expands.",
+    "addressLabel": "New Address",
+    "address": "Rm. 830–831, Building A, Public Gasan, 178 Digital-ro, Geumcheon-gu, Seoul, Republic of Korea",
+    "thanks": "Thank you for your continued interest and support.",
+    "hideToday": "Don't show again today",
+    "close": "Close",
+    "closeAria": "Close popup"
   }
 }

@@ -160,7 +160,7 @@ function Home() {
 
   return (
     <section id="home">
-      {/* <HomeNoticePopup /> */}
+      <HomeNoticePopup />
       <div className="intro-text">
         <h1>
           {t("home.heroTitleLine1")}

@@ -447,5 +447,15 @@
     "heroDesc1": "顺应瞬息万变的IT·AI需求，快速供应最新GPU、内存及正品服务器。",
     "heroDesc2": "按月/按年提供针对LLM、AI深度学习、渲染优化的最新GPU基础设施。",
     "placeholderNotice": "{{label}} 标签页准备中。"
+  },
+    "notice": {
+    "title": "研究所扩建迁址通知",
+    "intro1": "随着业务扩展，MOOSOL 将迁移研究所。",
+    "addressLabel": "新地址",
+    "address": "韩国首尔市衿川区数码路178号 Public Gasan A栋830~831号 (加山洞)",
+    "thanks": "感谢您一直以来的关注与支持。",
+    "hideToday": "今日不再显示",
+    "close": "关闭",
+    "closeAria": "关闭弹窗"
   }
 }
